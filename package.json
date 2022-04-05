@@ -1,0 +1,25 @@
+{
+  "name": "JainX",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ntegral/react-owl-carousel": "^1.0.1",
+    "aos": "^2.3.4",
+    "bootstrap": "^5.1.3",
+    "jquery": "^3.6.0",
+    "next": "^12.1.4",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-owl-carousel": "^2.3.3"
+  }
+}
