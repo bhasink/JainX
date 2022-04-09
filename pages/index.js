@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState,useEffect } from "react";
 import AOS from 'aos';
 import Nav from "../components/header/Nav";
 import Footer from "../components/footer/Footer";
@@ -14,6 +14,94 @@ const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
   });
 
 const Home = () => {
+
+const state ={
+    responsive: {
+        0: {
+          items: 1,
+          nav: true,
+          dots: false,
+          loop: true
+        },
+        300: {
+          items: 2,
+          nav: true,
+         dots: false,
+             margin: 10,
+          loop: true
+        },
+  
+        766: {
+          items: 2,
+          nav: true,
+          dots: false,
+          loop: true
+        },
+  
+        1200: {
+          items: 4,
+          nav: true,
+          dots: false,
+          loop: true
+        }
+      },
+      responsive_top_cat: {
+        0: {
+          items: 1,
+          nav: false,
+          dots: true,
+          loop: true
+        },
+        300: {
+          items: 1,
+          nav: true,
+         dots: false,
+          loop: true
+        },
+  
+        766: {
+          items:3,
+          nav: true,
+          dots: false,
+          loop: true
+        },
+  
+        1200: {
+          items: 3,
+          nav: false,
+          dots: true
+        }
+      },
+      responsive_trust_comp: {
+        0: {
+          items: 1,
+          nav: false,
+          dots: true,
+          loop: true
+        },
+        300: {
+          items: 3,
+          nav: false,
+         dots: true,
+          loop: true
+        },
+  
+        766: {
+          items: 3,
+          nav: false,
+          dots: false,
+          loop: true
+        },
+  
+        1200: {
+          items: 5,
+          nav: false,
+          dots: true,
+          center: true,
+        }
+      }
+};
+
 
 useEffect(() => {
     
@@ -118,9 +206,11 @@ return (
       <OwlCarousel
     className="featuredslide owl-theme owl-carousel"
     loop
-    margin={10}
+    margin={15}
     nav
->
+    items={4}
+    responsive={state.responsive}
+    >
 <div className="item">
             <div className="panelcards">
               <img src="./images/ftcourses/1.jpg" className="fllimg" />
@@ -214,7 +304,9 @@ return (
       <OwlCarousel
     className="categchecks userreview owl-theme owl-carousel"
     loop
-    margin={10}
+    margin={20}
+    responsive={state.responsive_top_cat}
+
 >
 
 <div className="item">
@@ -268,6 +360,8 @@ return (
     margin={40}
     nav
     center
+    responsive={state.responsive_top_cat}
+
 >
 <div className="item">
             <div className="testipnlpts">
@@ -332,6 +426,7 @@ return (
     margin={10}
     center
     items={5}
+    responsive={state.responsive_trust_comp}
 >
 
 <div className="item">
@@ -382,6 +477,7 @@ return (
     loop
     margin={10}
     nav
+    responsive={state.responsive_top_cat}
 >
 <div className="item">
           <img src="./images/jnadicon/1.png" />
