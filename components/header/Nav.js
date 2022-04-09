@@ -179,12 +179,12 @@ const Nav = () => {
                     </div>
                   </li>
                   <li className="nav-item nosublnk">
-                    <a
-                      className="nav-link bidevices nosublnk subarrs"
-                      href="contactus.html"
-                    >
-                      Contact
-                    </a>
+                    <Link href="/contact-us">
+                      <a className="nav-link bidevices nosublnk subarrs">
+                        Contact
+                      </a>
+                    </Link>
+
                     <h3
                       data-toggle="collapse"
                       data-target="#collapsemenusFive"

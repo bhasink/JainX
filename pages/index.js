@@ -2,10 +2,22 @@ import { useEffect } from "react";
 import AOS from 'aos';
 import Nav from "../components/header/Nav";
 import Footer from "../components/footer/Footer";
+var $ = require("jquery");
+    if (typeof window !== "undefined") {
+    window.$ = window.jQuery = require("jquery");
+}
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
+import dynamic from "next/dynamic";
+const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
+    ssr: false,
+  });
 
 const Home = () => {
 
 useEffect(() => {
+    
+    
     AOS.init({
     duration : 2000
     });
@@ -102,8 +114,14 @@ return (
       </div>
       <div className="coursespanels">
 
-        <div className="featuredslide owl-theme owl-carousel">
-          <div className="item">
+
+      <OwlCarousel
+    className="featuredslide owl-theme owl-carousel"
+    loop
+    margin={10}
+    nav
+>
+<div className="item">
             <div className="panelcards">
               <img src="./images/ftcourses/1.jpg" className="fllimg" />
               <h5 className="csnms">Accounting &amp; Taxation</h5>
@@ -181,7 +199,9 @@ return (
               <a href="#" className="aplcta">Apply Now</a>
             </div>
           </div>
-        </div>
+</OwlCarousel>
+
+       
       </div>
     </div>
   </section>
@@ -190,8 +210,14 @@ return (
       <div className="text-center hdingst whtxt">
         <h2 className="mainhds">Top Categories</h2>
       </div>
-      <div className="categchecks userreview owl-theme owl-carousel">
-        <div className="item">
+
+      <OwlCarousel
+    className="categchecks userreview owl-theme owl-carousel"
+    loop
+    margin={10}
+>
+
+<div className="item">
           <button className="catcheck">Digital Marketing</button>
           <a href="#" className="catcheck">Digital Marketing</a>
         </div>
@@ -223,7 +249,10 @@ return (
           <button className="catcheck">Digital Marketing</button>
           <a href="#" className="catcheck">Digital Marketing</a>
         </div>
-      </div>
+
+    </OwlCarousel>
+
+ 
     </div>
   </section>
   <section className="testimoniapn">
@@ -232,8 +261,15 @@ return (
         <h2 className="mainhds">Testimonials</h2>
       </div>
       <div className="testimparts">
-        <div className="reviewtestim owl-carousel owl-theme">
-          <div className="item">
+      
+        <OwlCarousel
+    className="reviewtestim owl-carousel owl-theme"
+    loop
+    margin={40}
+    nav
+    center
+>
+<div className="item">
             <div className="testipnlpts">
               <p>Neque porro quisquam est qui dolorem
                 ipsum quia dolor sit amet, consectetur
@@ -277,7 +313,8 @@ return (
               <p className="usrnmtst">Neque porro quisquam</p>
             </div>
           </div>
-        </div>
+    </OwlCarousel>
+     
       </div>
     </div>
   </section>
@@ -287,8 +324,17 @@ return (
         <h2 className="mainhds">Trust by Companies</h2>
       </div>
       <div className="cpmslide">
-        <div className="trustcmpcarso owl-theme owl-carousel">
-          <div className="item">
+
+              
+    <OwlCarousel
+    className="trustcmpcarso owl-carousel owl-theme"
+    loop
+    margin={10}
+    center
+    items={5}
+>
+
+<div className="item">
             <div className="lgocirc">
               <img src="./images/client/1.png" />
             </div>
@@ -318,7 +364,10 @@ return (
               <img src="./images/client/5.png" />
             </div>
           </div>
-        </div>
+
+</OwlCarousel>
+       
+       
       </div>
     </div>
   </section>
@@ -327,8 +376,14 @@ return (
       <div className="text-center hdingst">
         <h2 className="mainhds">Jain<span className="ogx">x</span> Advantage</h2>
       </div>
-      <div className="advantfeat owl-carousel owl-theme text-center pt-5">
-        <div className="item">
+       
+      <OwlCarousel
+    className="advantfeat owl-carousel owl-theme text-center pt-5"
+    loop
+    margin={10}
+    nav
+>
+<div className="item">
           <img src="./images/jnadicon/1.png" />
           <h4>Crafted Carefully</h4>
           <p>Each course handpicked to enhance
@@ -364,7 +419,9 @@ return (
           <p>Gain practical experience and skills
             through industry/in-house projects.</p>
         </div>
-      </div>
+</OwlCarousel>
+       
+      
     </div>
   </section>
 
