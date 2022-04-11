@@ -12,7 +12,7 @@ const Nav = () => {
             <Link href="/">
               <a className="navbar-brand">
                 <img
-                  src="./images/logo.jpg"
+                  src="/images/logo.jpg"
                   className="navbar-brand-img"
                   alt="logo"
                 />
@@ -58,7 +58,7 @@ const Nav = () => {
                     </Link>
                   </li>
                   <li className="nav-item nosublnk">
-                    <Link href="/listing">
+                    <Link href="/courses">
                       <a className="nav-link  bidevices subarrs">
                         Find a Course
                       </a>
