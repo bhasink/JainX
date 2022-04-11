@@ -1,15 +1,47 @@
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import AOS from 'aos';
 import Nav from "../components/header/Nav";
 import Footer from "../components/footer/Footer";
+import axios from 'axios';
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const Listing = () => {
+
+const [courses, setCourses] = useState([]);
+const [hasMore, setHasMore] = useState(true);
+const [currentPage, setCurrentPage] = useState(1);
+const [lastPage, setLastPage] = useState(0);
 
 useEffect(() => {
     AOS.init({
     duration : 2000
     });
+    getAllCourses();
 }, []);
+
+const getAllCourses = async () => {
+    try {
+      const { data } = await axios.get(`https://phplaravel-709751-2547471.cloudwaysapps.com/api/listing?page=${currentPage}`)
+      const getCourses = data.get_courses.data;
+      setLastPage(data.get_courses.last_page);
+       
+      
+      console.log(lastPage);
+      console.log(currentPage);
+      console.log(hasMore);
+
+      if(lastPage != currentPage){
+        setCurrentPage(currentPage = currentPage+1);
+      }else{
+        setHasMore(false);
+      }
+
+      setCourses((get_course) => [...get_course, ...getCourses]);
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
 return (
         <>
@@ -339,26 +371,36 @@ return (
           </div>
           <div className="dtabasedcateg">
             <div className="row">
-              <div className="col-md-6 col-lg-6">
+
+            <InfiniteScroll
+                dataLength={courses.length}
+                next={getAllCourses}
+                hasMore={hasMore}
+                loader={<h3> Loading...</h3>}
+                endMessage={<h4>Nothing more to show</h4>}
+                className="row"
+            >
+            {courses &&
+              courses.map((course,key) => (
+              <div className="col-md-6 col-lg-6"  key={key}>
                 <div className="coursepanel">
                   <div className="twycol">
                     <div className="scllogoswr">
-                      <img src="./images/courseslogo/1.jpg" />
+                      <img src={`/images/courseslogo/`+course.logo} />
                       <a href="compare.html" className="cmprs">Compare</a>
                     </div>
                     <div className="coursecontens">
-                      <h4>Sports Management</h4>
-                      <p>Master the Trends and Technologies in the Business Side of Sports Management <a href="#">Read more..</a>
+                      <h4>{course.name}</h4>
+                      <p>{course.short_desc} <a href="#">Read more..</a>
                       </p></div>
                   </div>
                   <div className="coursedurtime">
-                    <span><img src="./images/scheduleicon.png" /> 12 Months</span>
+                    <span><img src="./images/scheduleicon.png" /> {course.duration} Months</span>
                     <span><img src="./images/ppp.png" /> pgp-courses</span>
                   </div>
                   <div className="keydts">
                     <img src="./images/keychain.png" />
-                    <p><span>Key Learnings:</span> Basic to Advanced level ready. 
-                      250 hours of wisdom by industry experts</p>
+                    <p><span>Key Learnings:</span> {course.key_learnings}</p>
                   </div>
                   <div className="dtlsctaviews">
                     <a href="coursedetail.html" className="grylghtcta">View Details</a>
@@ -366,7 +408,13 @@ return (
                   </div>
                 </div>
               </div>
-              <div className="col-md-6 col-lg-6">
+
+              ))}
+
+</InfiniteScroll>
+
+
+              {/* <div className="col-md-6 col-lg-6">
                 <div className="coursepanel">
                   <div className="twycol">
                     <div className="scllogoswr">
@@ -449,7 +497,7 @@ return (
                     <a href="#" className="blulghtcta">Enquire</a>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
