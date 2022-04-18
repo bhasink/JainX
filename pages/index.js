@@ -1,7 +1,9 @@
 import { useState,useEffect } from "react";
+import axios from 'axios'
 import AOS from 'aos';
 import Nav from "../components/header/Nav";
 import Footer from "../components/footer/Footer";
+import Select from 'react-select';
 var $ = require("jquery");
     if (typeof window !== "undefined") {
     window.$ = window.jQuery = require("jquery");
@@ -14,6 +16,57 @@ const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
   });
 
 const Home = () => {
+
+const [cities, setCities] = useState([]);
+const [selectedCity, setSelectedCity] = useState(null);
+
+
+useEffect(() => {
+    
+    
+  AOS.init({
+  duration : 2000
+  });
+
+  getCities();
+
+}, []);
+
+const getCities = async () => {
+  try {
+    const { data } = await axios.get(`https://phplaravel-709751-2547471.cloudwaysapps.com/api/get-cities`)
+    const get_cities = data.get_cities;
+    setCities(get_cities.map(opt => ({ label: opt.name, value: opt.id })));
+
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+const handleCity = (selectedOptions ) => {
+  setSelectedCity(selectedOptions);
+}
+
+
+const styles = {
+  menuList: (base) => ({
+    ...base,
+
+    "::-webkit-scrollbar": {
+      width: "4px",
+      height: "0px",
+    },
+    "::-webkit-scrollbar-track": {
+      background: "#f1f1f1"
+    },
+    "::-webkit-scrollbar-thumb": {
+      background: "#888"
+    },
+    "::-webkit-scrollbar-thumb:hover": {
+      background: "#555"
+    }
+  })
+}
 
 const state ={
     responsive: {
@@ -103,14 +156,6 @@ const state ={
 };
 
 
-useEffect(() => {
-    
-    
-    AOS.init({
-    duration : 2000
-    });
-}, []);
-
 return (
     <>
  
@@ -136,24 +181,37 @@ return (
               </li>
             </ul>
             <div className="srchbar">
-              <select className="form-control">
-                <option>Select Course</option>
-                <option>Course 1</option>
-                <option>Course 2</option>
-                <option>Course 3</option>
-              </select>
+              {/* <select className="form-control">
+                <option>Course Type</option>
+                <option>Diploma</option>
+                <option>PGP</option>
+                <option>UGP</option>
+              </select> */}
+
+              <Select
+                className="form-control"
+                options={cities}
+                placeholder="City"
+                onChange={handleCity}
+                styles={styles}
+              />
+
               <input className="form-control" placeholder="Find the perfect course for you....." />
               <button><i className="far fa-search" /></button>
             </div>
           </div>
         </div>
         <div className="col-md-6 col-lg-5 text-center">
-          <select className="form-control locationslcts">
+          {/* <select className="form-control locationslcts">
             <option>Delhi</option>
             <option>Mumbai</option>
             <option>Chennai</option>
             <option>Kolkata</option>
-          </select>
+          </select> */}
+
+    
+
+
           <img src="./images/rightviewmain.png" className="rgtmds" data-aos="fade-up" data-aos-duration={3000} />
         </div>
       </div>

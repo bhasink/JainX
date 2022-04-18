@@ -271,6 +271,7 @@ header.site-header.topmain.mobexheight.navfixed nav.navbar{
     border-radius: 0px;
     padding: 9px 16px;
     height: auto;
+    width: 182px;
 }
 
 .srchbar input.form-control {

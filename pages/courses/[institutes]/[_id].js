@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import AOS from 'aos'
-import Nav from "../../components/header/Nav";
-import Footer from '../../components/footer/Footer';
+import Nav from "../../../components/header/Nav";
+import Footer from '../../../components/footer/Footer';
 var $ = require("jquery");
     if (typeof window !== "undefined") {
     window.$ = window.jQuery = require("jquery");
