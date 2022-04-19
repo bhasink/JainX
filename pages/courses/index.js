@@ -12,6 +12,7 @@ const MobileContent = dynamic(() => import('../../components/MobFilter'))
 
 import { useUserAgent } from 'next-useragent'
 
+
 const Listing = (props) => {
   const [courses, setCourses] = useState([])
   const [courseName, setCourseName] = useState([])
@@ -19,7 +20,7 @@ const Listing = (props) => {
 
 
   const [hasMore, setHasMore] = useState(true)
-  const [currentPage, setCurrentPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState(2)
   const [lastPage, setLastPage] = useState(0)
 
   const [checkDevice, setCheckDevice] = useState({})
@@ -43,34 +44,116 @@ const Listing = (props) => {
   const getAllCourses = async () => {
     try {
       const { data } = await axios.get(
-        `https://phplaravel-709751-2547471.cloudwaysapps.com/api/listing?page=${currentPage}`,
+        `https://phplaravel-709751-2547471.cloudwaysapps.com/api/listing`,
       )
       const getCourses = data.get_courses.data
-      setLastPage(data.get_courses.last_page)
+      // const l_page = data.get_courses.last_page;
+      // setLastPage(data.get_courses.last_page)
+      setCourses(getCourses)
 
-      console.log(lastPage)
-      console.log(currentPage)
-      console.log(hasMore)
+      // console.log(lastPage)
+      // console.log(currentPage)
+      // console.log(hasMore)
 
-      if (lastPage != currentPage) {
+      if(getCourses.length == null){
+        setHasMore(false)
+      }
+
+      if (l_page > currentPage) {
         setCurrentPage((currentPage = currentPage + 1))
       } else {
         setHasMore(false)
       }
 
-      setCourses((get_course) => [...get_course, ...getCourses])
-      // setCourses(getCourses)
-
+      
       console.log(data)
     } catch (err) {
       console.log(err)
     }
   }
 
+
+  const getAllCourses2 = async () => {
+    try {
+      const { data } = await axios.get(
+        `https://phplaravel-709751-2547471.cloudwaysapps.com/api/listing?page=${currentPage}`,
+      )
+      const getCourses = data.get_courses.data
+      const l_page = data.get_courses.last_page;
+      setLastPage(data.get_courses.last_page)
+      setCourses((get_course) => [...get_course, ...getCourses])
+
+      // console.log(lastPage)
+      // console.log(currentPage)
+      // console.log(hasMore)
+
+      if(getCourses.length == null){
+        setHasMore(false)
+      }
+
+      if (l_page > currentPage) {
+        setCurrentPage((currentPage = currentPage + 1))
+      } else {
+        setHasMore(false)
+      }
+
+      
+      console.log(data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+
+  const getAllCoursesByFilter = async (value) => {
+    try {
+      // const { data } = await axios.get(
+      //   `https://phplaravel-709751-2547471.cloudwaysapps.com/api/listingbyfilter?filters=${querystring.stringify(filterData)}`,
+      // )
+
+      const newFilterData = JSON.stringify(value)
+     
+      const config = {
+          headers: {'Content-Type': 'application/json'}
+      }
+
+      const {data} = await axios.post(`https://phplaravel-709751-2547471.cloudwaysapps.com/api/listingbyfilter`,{
+        "prod_filters":newFilterData,
+    },config);
+
+
+    const getCourses = data.get_courses.data
+    setLastPage(data.get_courses.last_page)
+
+    // console.log(lastPage)
+    // console.log(currentPage)
+    // console.log(hasMore)
+
+    
+
+    if (lastPage != currentPage) {
+      // setCurrentPage((currentPage = currentPage + 1))
+    } else {
+      setHasMore(false)
+    }
+
+    setCourses(getCourses)
+    // setCourses(getCourses)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   const getData =  (value) => {
-    setfilterData(value);
+    console.log(value );
+    if(value.length > 0) {
+      setfilterData(value);
+      getAllCoursesByFilter(value);
+    }
   }
   
+
+
 
   const styles = {
     menuList: (base) => ({
@@ -98,7 +181,7 @@ const Listing = (props) => {
     <>
       <Nav />
 
-      {JSON.stringify(courses,null,2)}
+      {/* {JSON.stringify(courses,null,2)} */}
 
       <style
         dangerouslySetInnerHTML={{
@@ -171,19 +254,21 @@ const Listing = (props) => {
               </select> */}
                 </div>
               </div>
-              <div className="dtabasedcateg">
+              <div className="dtabasedcateg dvv">
                 <div className="row">
                   <InfiniteScroll
                     dataLength={courses.length}
-                    next={getAllCourses}
+                    next={getAllCourses2}
                     hasMore={hasMore}
-                    // loader={<h3> Loading...</h3>}
+                    loader={<h3> Loading...</h3>}
                     endMessage={<h4>Nothing more to show</h4>}
                     className="row"
+                    // pullDownToRefreshThreshold={50}
+                    scrollableTarget="dvvvvv"
                   >
                     {courses &&
                       courses.map((course, key) => (
-                        <div className="col-md-4 col-lg-4" key={key}>
+                        <div className="col-md-6 col-lg-6" key={key}>
                           <div className="coursepanel">
                             <div className="twycol">
                               <div className="scllogoswr">
@@ -198,7 +283,7 @@ const Listing = (props) => {
                                 <h4>{course.name}</h4>
                                 <p>
                                   {course.short_desc}
-                                  <Link href={`courses/${course.slug}`}>
+                                  <Link href={`courses/institute/${course.slug}`}>
                                     <a>Read more..</a>
                                   </Link>
                                 </p>
@@ -221,7 +306,7 @@ const Listing = (props) => {
                               </p>
                             </div>
                             <div className="dtlsctaviews">
-                              <Link href={`courses/${course.slug}`}>
+                              <Link href={`courses/institute/${course.slug}`}>
                                 <a className="grylghtcta">View Details</a>
                               </Link>
                               <a href="#" className="blulghtcta">
@@ -235,6 +320,9 @@ const Listing = (props) => {
 
                 </div>
               </div>
+
+              <div class="dvvvvv"></div>
+
             </div>
           </div>
         </div>

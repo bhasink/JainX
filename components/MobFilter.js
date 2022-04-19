@@ -13,10 +13,10 @@ useEffect(() => {
     AOS.init({
     duration : 2000
     });
-    getCourseName();
-    getCourseMode();
-    getCities();
-    getInstitutes();
+    // getCourseName();
+    // getCourseMode();
+    // getCities();
+    // getInstitutes();
 
 }, []);
 
