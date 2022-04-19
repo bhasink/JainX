@@ -255,7 +255,7 @@ const Listing = (props) => {
                 </div>
               </div>
               <div className="dtabasedcateg dvv">
-                <div className="row">
+                <div className="">
                   <InfiniteScroll
                     dataLength={courses.length}
                     next={getAllCourses2}
@@ -268,7 +268,7 @@ const Listing = (props) => {
                   >
                     {courses &&
                       courses.map((course, key) => (
-                        <div className="col-md-6 col-lg-6" key={key}>
+                        <div className="col-md-6 col-lg-4" key={key}>
                           <div className="coursepanel">
                             <div className="twycol">
                               <div className="scllogoswr">

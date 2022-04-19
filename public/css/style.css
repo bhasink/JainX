@@ -274,9 +274,26 @@ header.site-header.topmain.mobexheight.navfixed nav.navbar{
     width: 182px;
 }
 
+.srchbar .css-1s2u09g-control {border: none;}
+
+.css-1pahdxg-control:hover {border: none !important;box-shadow: none !important;}
+
+.srchbar .css-1okebmr-indicatorSeparator {background-color: #fff;}
+
+.srchbar .form-control {padding: 3px 6px;}
+
 .srchbar input.form-control {
     width: 289px;
 }
+
+.deskserachflls .css-1s2u09g-control, .css-1pahdxg-control:hover {background-color: #303056;color: #fff;}
+
+.deskserachflls .css-14el2xx-placeholder {color: #fff;}
+
+.deskserachflls .css-tj5bde-Svg {color: #fff;}
+
+.deskserachflls .css-1pahdxg-control .css-qc6sy-singleValue {color: #000;}
+.deskserachflls  .css-qc6sy-singleValue {color: #fff;}
 
 .srchbar button {
     background: #f89b36;
@@ -1124,7 +1141,7 @@ footer.stfooter .collapse:not(.show) {
 }
 
 .tgselectdata {
-	    display: flex;
+    display: block;
     flex-direction: row;
 	    width: 100%;
 }
@@ -1144,7 +1161,8 @@ footer.stfooter .collapse:not(.show) {
 .ttpattrib {
     padding: 5px 8px;
     background: #ddd;
-    margin: auto 3px;
+    margin: 3px 6px 3px 0;
+    display: inline-block;
 }
 
 
@@ -1214,6 +1232,7 @@ footer.stfooter .collapse:not(.show) {
     width: 100%;
     font-weight: 600;
     color: #676d76;
+    font-size: 14px;
 }
 
 .keydts {
@@ -1227,15 +1246,15 @@ footer.stfooter .collapse:not(.show) {
     margin-top: 6px;
     width: 26px;
     margin-right: 5px;
+    margin-left: 0px;
 }
 
 .keydts span {
     font-weight: 600;
     color: #676d76;
-    font-size: 16px;
+    font-size: 14px;
 }
 
-.dtlsctaviews {}
 
 .grylghtcta {
     display: block;
@@ -1308,7 +1327,7 @@ footer.stfooter .collapse:not(.show) {
 }
 
 .deskserachflls:after {
-    content: "";
+    content: none;
     position: absolute;
     right: 6px;
     width: 0;
@@ -1649,6 +1668,18 @@ footer.stfooter .collapse:not(.show) {
     display: none;
 }
 
+.container {
+    max-width: 1242px;
+}
+
+.tpcateg  .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {background: #f69d34;}
+
+.tpcateg .owl-theme .owl-dots .owl-dot span {background: #ffffff;}
+
+section .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span{
+    background: #f69d34;
+}
+
 /* Responsive css */
 
 @media screen and (max-width: 767px) and (min-width: 320px){
@@ -1893,9 +1924,9 @@ footer.stfooter .collapse:not(.show) {
     width: 100%;
     left: 0;
     padding: 20px;
-    height: 100vh;
+    /*height: 100vh;
     transform: translateX(-630px);
-    transition: all ease 0.5s;
+    transition: all ease 0.5s;*/
     display: block;
     opacity: 0;
     visibility: hidden;
@@ -2467,4 +2498,17 @@ h3.mobclick {
 }
 
 
+}
+
+
+@media screen and (max-width: 1290px) and (min-width: 1200px){
+.container {
+    max-width: 1140px;
+}
+}
+
+@media screen and (max-width: 1920px) and (min-width: 1600px){
+.container {
+    max-width: 1450px;
+}
 }
