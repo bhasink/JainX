@@ -286,7 +286,7 @@ header.site-header.topmain.mobexheight.navfixed nav.navbar{
     width: 289px;
 }
 
-.deskserachflls .css-1s2u09g-control, .css-1pahdxg-control:hover {color: #fff; border: none;}
+.deskserachflls .css-1s2u09g-control, .css-1pahdxg-control:hover {color: #fff; border: none;     background: #303056;}
 
 .deskserachflls .css-14el2xx-placeholder {color: #fff;}
 
@@ -1750,6 +1750,15 @@ section .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot
 .srchbar div#react-autowhatever-1 ul li:hover, .srchbar div#react-autowhatever-1 ul li:hover p {background: #f89b36;color: #ffffff;}
 
 .srchbar div#react-autowhatever-1 ul li p {color: #000; margin: 0;}
+
+.react-autosuggest__suggestion--highlighted {
+    background-color: #f89b36;
+    color:#fff;
+  }
+  
+  .srchbar div#react-autowhatever-1 ul li.react-autosuggest__suggestion--highlighted p{
+    color:#fff;
+  }
 
 /* Responsive css */
 
