@@ -271,7 +271,7 @@ header.site-header.topmain.mobexheight.navfixed nav.navbar{
     border-radius: 0px;
     padding: 9px 16px;
     height: auto;
-    width: 182px;
+    width: 142px;
 }
 
 .srchbar .css-1s2u09g-control {border: none;}
@@ -286,7 +286,7 @@ header.site-header.topmain.mobexheight.navfixed nav.navbar{
     width: 289px;
 }
 
-.deskserachflls .css-1s2u09g-control, .css-1pahdxg-control:hover {background-color: #303056;color: #fff;}
+.deskserachflls .css-1s2u09g-control, .css-1pahdxg-control:hover {color: #fff; border: none;}
 
 .deskserachflls .css-14el2xx-placeholder {color: #fff;}
 
@@ -1688,6 +1688,8 @@ section .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot
     border: 1.2px solid #302e59;
     box-shadow: none;
     outline: none;
+    height: auto;
+    padding: 2px 0;
 }
 
 .basicenqforms  h3 {font-weight: bold;color: #303158;text-align: center;margin: 29px 0;}
@@ -1729,9 +1731,25 @@ section .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot
 }
 
 .basicenqforms .form-groupsets {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
 }
 
+.srchbar div#react-autowhatever-1 {   
+     position: absolute;
+    width: 100%;
+}
+
+.srchbar input.react-autosuggest__input {padding: 10px;width: 330px;height: 46px;}
+
+.react-autosuggest__container {position: relative;}
+
+.srchbar div#react-autowhatever-1 ul {background: #fff; padding: 0;list-style-type: none;margin: 0;box-shadow: #a59292 0px 0px 2px 0px;}
+
+.srchbar div#react-autowhatever-1 ul li {text-align: left;color: #000;padding: 5px 12px;}
+
+.srchbar div#react-autowhatever-1 ul li:hover, .srchbar div#react-autowhatever-1 ul li:hover p {background: #f89b36;color: #ffffff;}
+
+.srchbar div#react-autowhatever-1 ul li p {color: #000; margin: 0;}
 
 /* Responsive css */
 
