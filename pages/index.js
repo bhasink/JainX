@@ -11,6 +11,7 @@ var $ = require("jquery");
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import dynamic from "next/dynamic";
+import Autosuggest from 'react-autosuggest';
 const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
     ssr: false,
   });
@@ -19,7 +20,6 @@ const Home = () => {
 
 const [cities, setCities] = useState([]);
 const [selectedCity, setSelectedCity] = useState(null);
-
 
 useEffect(() => {
     
@@ -31,6 +31,93 @@ useEffect(() => {
   getCities();
 
 }, []);
+
+
+// const classes = useStyles()
+
+const languages = [
+  {
+    name: 'C',
+    year: 1972
+  },
+  {
+    name: 'Elrcm',
+    year: 2012
+  },
+  {
+    name: 'Ecl',
+    year: 2012
+  },
+  {
+    name: 'Emrf',
+    year: 2012
+  },
+  {
+    name: 'Elmfffr',
+    year: 2012
+  },
+  {
+    name: 'fEl',
+    year: 2012
+  },
+  {
+    name: 'Emf',
+    year: 2012
+  },
+  {
+    name: 'Elfffm',
+    year: 2012
+  },
+  {
+    name: 'Effl',
+    year: 2012
+  },
+  {
+    name: 'Efm',
+    year: 2012
+  },
+];
+
+const [value, setValue] = useState('')
+const [suggestions, setSuggestions] = useState([])
+
+const onChange = (event, { newValue, method }) => {
+  setValue(newValue)
+};
+
+const onSuggestionsFetchRequested = ({ value }) => {
+
+  setSuggestions(getSuggestions(value))
+};
+
+const  onSuggestionsClearRequested = () => {
+  setSuggestions([])
+};
+
+const inputProps = {
+  placeholder: "Find the perfect course for you.....",
+  value,
+  onChange: onChange,    
+};
+
+const getSuggestionValue = suggestion => suggestion.name;
+
+const renderSuggestion = suggestion => (
+  <p>
+    {suggestion.name}
+  </p>
+);
+
+const getSuggestions = value => {
+  const inputValue = value.trim().toLowerCase();
+  const inputLength = inputValue.length;
+
+ // Here I get data from cities.json
+  return inputLength === 0 ? [] : languages.filter(lang =>
+    lang.name.toLowerCase().slice(0, inputLength) === inputValue
+  ).slice(0,5);
+};
+
 
 const getCities = async () => {
   try {
@@ -168,6 +255,9 @@ return (
           <h1 className="bnrhd" data-aos="fade-down" data-aos-easing="linear" data-aos-duration={1500}><span>YOUR GATEWAY TO A</span>
             Successful Career</h1>
           <p>Our handpicked, high demand industry programs transform you to be global leaders</p>
+
+         
+
           <div className="cusjnbar">
             <ul className="nav nav-tabs" id="myTab" role="tablist">
               <li className="nav-item">
@@ -196,7 +286,19 @@ return (
                 styles={styles}
               />
 
-              <input className="form-control" placeholder="Find the perfect course for you....." />
+              {/* <input className="form-control" placeholder="Find the perfect course for you....." /> */}
+
+
+              <Autosuggest
+              className="form-control"
+              suggestions={suggestions}
+              onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+              onSuggestionsClearRequested={onSuggestionsClearRequested}
+              getSuggestionValue={getSuggestionValue}
+              renderSuggestion={renderSuggestion}
+              inputProps={inputProps}
+          />
+
               <button><i className="far fa-search" /></button>
             </div>
           </div>
