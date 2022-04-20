@@ -103,10 +103,10 @@ const Footer = () => {
   </footer>
   <section className="mobileiconpanel">
     <ul>
-      <li><a href="#"><img src="./images/homeic.png" /><span>Home<span /></span></a></li>
-      <li><a href="#"><img src="./images/allcourses.png" /><span>All Courses<span /></span></a></li>
-      <li><a href="#"><img src="./images/becomept.png" /><span>Become a partners<span /></span></a></li>
-      <li><a href="#"><img src="./images/contico.png" /><span>Contact<span /></span></a></li>
+      <li><a href="#"><img src="/images/homeic.png" /><span>Home<span /></span></a></li>
+      <li><a href="#"><img src="/images/allcourses.png" /><span>All Courses<span /></span></a></li>
+      <li><a href="#"><img src="/images/becomept.png" /><span>Become a partners<span /></span></a></li>
+      <li><a href="#"><img src="/images/contico.png" /><span>Contact<span /></span></a></li>
     </ul>
   </section>
         </>

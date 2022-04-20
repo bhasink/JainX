@@ -309,11 +309,77 @@ const Listing = (props) => {
                               <Link href={`courses/institute/${course.slug}`}>
                                 <a className="grylghtcta">View Details</a>
                               </Link>
-                              <a href="#" className="blulghtcta">
-                                Enquire
-                              </a>
+                              <a href="javascript:void(0);" data-toggle="modal" data-target="#exampleModalEnquirenow" className="blulghtcta">Enquire</a>
                             </div>
                           </div>
+
+                          {/* Modal */}
+					<div className="modal fade" id="exampleModalEnquirenow" tabindex="-1" role="dialog" aria-labelledby="exampleModalEnquirenowTitle3" aria-hidden="true">
+					  <div className="modal-dialog modal-dialog-centered   jncustm trasntypes" role="document">
+						<div className="modal-content">
+						  
+						  <div className="modal-body">
+						  
+						  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+							  <span aria-hidden="true">&times;</span>
+							</button>
+							
+							<div className="basicenqforms">
+								<div className="row">
+									<div className="col-lg-12 mx-auto">
+										<h3>Enquire Now !</h3>
+										<div className="form-groupsets">
+										<label>Name</label>
+										<input type="text" className="form-control" placeholder=""/>
+										</div>
+										
+										<div className="form-groupsets">
+										<label>Email id</label>
+										<input type="email" className="form-control" placeholder=""/>
+										</div>
+										
+										
+										<div className="form-groupsets">
+										<label>Phone No.</label>
+										<input type="text" className="form-control" placeholder=""/>
+										</div>
+										
+										<div className="form-groupsets">
+											<label>Course</label>
+											<select className="selectpicker" data-show-subtext="true" data-live-search="true" data-live-search-placeholder="Sort By Tag">
+												<option value="hide">---</option>
+												<option value="2010">Course 1</option>
+												<option value="2011">Course 2</option>
+												<option value="2012">Course 3</option>
+												<option value="2013">Course 4</option>
+												<option value="2014">Course 5</option>
+												
+											</select>
+										</div>
+										
+										<div className="form-groupsets">
+										<label>How We can Help</label>
+										<textarea type="text" className="form-control" placeholder=""></textarea>
+										</div>
+										
+										
+										
+									</div>
+									
+									
+									<div className="col-lg-12 text-center roundbotms">
+										<button className="orangectadms">Submit</button>
+									</div>
+							
+								</div>
+							</div>
+						
+						  </div>
+						 
+						</div>
+					  </div>
+					</div>
+                          
                         </div>
                       ))}
                   </InfiniteScroll>
