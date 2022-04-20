@@ -1,29 +1,69 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
 import AOS from 'aos'
-import Nav from "../../../components/header/Nav";
-import Footer from '../../../components/footer/Footer';
-var $ = require("jquery");
-    if (typeof window !== "undefined") {
-    window.$ = window.jQuery = require("jquery");
+import Nav from '../../../components/header/Nav'
+import Footer from '../../../components/footer/Footer'
+var $ = require('jquery')
+if (typeof window !== 'undefined') {
+  window.$ = window.jQuery = require('jquery')
 }
-import 'owl.carousel/dist/assets/owl.carousel.css';
-import 'owl.carousel/dist/assets/owl.theme.default.css';
-import dynamic from "next/dynamic";
-const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
-    ssr: false,
-});
+import 'owl.carousel/dist/assets/owl.carousel.css'
+import 'owl.carousel/dist/assets/owl.theme.default.css'
+import dynamic from 'next/dynamic'
+const OwlCarousel = dynamic(() => import('react-owl-carousel'), {
+  ssr: false,
+})
 
 const CourseDetails = () => {
+  const [courseDetails, setCourseDetails] = useState({})
+  const [keyHighlights, setKeyHighlightss] = useState([])
+
+  const router = useRouter()
+  const _id = router.query._id
+
   useEffect(() => {
+    if(!router.isReady) return;
+
+    getCourseDetails()
+
     AOS.init({
       duration: 2000,
     })
-  }, [])
+  }, [router.isReady])
+
+  const getCourseDetails = async (value) => {
+    try {
+      const config = {
+        headers: { 'Content-Type': 'application/json' },
+      }
+
+      const { data } = await axios.post(
+        `https://phplaravel-709751-2547471.cloudwaysapps.com/api/get-course-details`,
+        {
+          slug: _id,
+        },
+        config,
+      )
+
+      const getCoursesDetails = data.get_course_details
+      const keyHlits = getCoursesDetails.key_highlights.split(',');
+
+
+      setKeyHighlightss(keyHlits)
+
+      setCourseDetails(getCoursesDetails)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   return (
     <>
-  
-    <Nav />
+      <Nav />
+
+      {/* {JSON.stringify(keyHighlights, null, 2)} */}
 
       <section className="pageinforhd pt-5 pb-5 nohdleftbrdcm">
         <div className="container">
@@ -42,17 +82,15 @@ const CourseDetails = () => {
           </nav>
         </div>
       </section>
+      
       <section className="coursedetailmain">
         <div className="container">
           <div className="row">
             <div className="col-md-6 col-lg-6">
               <div className="coursepls">
-                <h1 className="mainhds">Sports Management</h1>
-                <h4 className="insnames">Deakin Business School</h4>
-                <p>
-                  Master the Trends and Technologies in the Business Side of
-                  Sports Management.
-                </p>
+                <h1 className="mainhds">{courseDetails && courseDetails.name}</h1>
+                <h4 className="insnames">{courseDetails && courseDetails.institute && courseDetails.institute.name}</h4>
+                <p>{courseDetails && courseDetails.short_desc}</p>
                 <div className="dtlsctaviews desktopcopy">
                   <a href="#" className="grylghtcta">
                     Apply Now
@@ -64,7 +102,11 @@ const CourseDetails = () => {
               </div>
             </div>
             <div className="col-md-6 col-lg-6 text-center">
-              <img src="/images/courseslogo/deake.png" className="ms" />
+
+              {courseDetails && courseDetails.logo && (
+              <img src={`/images/courseslogo/` + courseDetails.logo} className="ms" />
+              )}
+
             </div>
             {/*<div class="col-md-6 col-lg-6">
 				<div class="dtlsctaviews">
@@ -83,27 +125,27 @@ const CourseDetails = () => {
               <div className="col-6 col-lg-2 col-md-3 mx-auto ctypeinl">
                 <img src="/images/courseslogo/courseinf/2.png" />
                 <h6 className="mainhds">Start Date</h6>
-                <h4 className="insnames">July 2021</h4>
+                <h4 className="insnames">{courseDetails && courseDetails.start_date}</h4>
               </div>
               <div className="col-6 col-lg-2 col-md-3 mx-auto ctypeinl">
                 <img src="/images/courseslogo/courseinf/3.png" />
                 <h6 className="mainhds">Duration</h6>
-                <h4 className="insnames">12 Months</h4>
+                <h4 className="insnames">{courseDetails && courseDetails.duration} Months</h4>
               </div>
               <div className="col-6 col-lg-2 col-md-3 mx-auto ctypeinl">
                 <img src="/images/courseslogo/courseinf/4.png" />
                 <h6 className="mainhds">Projects</h6>
-                <h4 className="insnames">2 Months Live Projects</h4>
+                <h4 className="insnames">{courseDetails && courseDetails.projects}</h4>
               </div>
               <div className="col-6 col-lg-2 col-md-3 mx-auto ctypeinl">
                 <img src="/images/courseslogo/courseinf/5.png" />
                 <h6 className="mainhds">Enrolled</h6>
-                <h4 className="insnames">+ Students</h4>
+                <h4 className="insnames">{courseDetails && courseDetails.students_enrolled}+ Students</h4>
               </div>
               <div className="col-6 col-lg-2 col-md-3 mx-auto ctypeinl">
                 <img src="/images/courseslogo/courseinf/6.png" />
                 <h6 className="mainhds">Fee</h6>
-                <h4 className="insnames">42,373</h4>
+                <h4 className="insnames">{courseDetails && courseDetails.fees}</h4>
               </div>
               <div className="dtlsctaviews mobilecopy">
                 <a href="#" className="grylghtcta">
@@ -151,18 +193,7 @@ const CourseDetails = () => {
                 role="tabpanel"
                 aria-labelledby="home-tab"
               >
-                <p>
-                  This new Program is designed to learn how to make a business
-                  desirable for customers, financially viable for stakeholders,
-                  and feasible to build and deliver to the world. Instead of
-                  writing a static business plan, the learner will learn to
-                  design rapid prototypes to test and iterate business concepts.
-                  Whether for new initiatives and ventures inside an existing
-                  business or organization, or for an entrepreneur ready to
-                  bring a startup to life, this course will help them de-risk
-                  your business ideas and craft a sustainable business model
-                  that is rooted in the people they wish to serve.
-                </p>
+                <p>{courseDetails && courseDetails.overview}</p>
               </div>
               <div
                 className="tab-pane fade"
@@ -170,15 +201,7 @@ const CourseDetails = () => {
                 role="tabpanel"
                 aria-labelledby="profile-tab"
               >
-                <p>
-                  Instead of writing a static business plan, the learner will
-                  learn to design rapid prototypes to test and iterate business
-                  concepts. Whether for new initiatives and ventures inside an
-                  existing business or organization, or for an entrepreneur
-                  ready to bring a startup to life, this course will help them
-                  de-risk your business ideas and craft a sustainable business
-                  model that is rooted in the people they wish to serve.
-                </p>
+                <p>{courseDetails && courseDetails.curriculum}</p>
               </div>
             </div>
           </div>
@@ -187,12 +210,13 @@ const CourseDetails = () => {
               <span className="ogx">Key</span> Highlights
             </h4>
             <ul>
-              <li>Neque porro quisquam est qui dolorem ipsum quia dolor</li>
-              <li>Neque porro quisquam est qui dolorem ipsum quia dolor</li>
-              <li>Neque porro quisquam est qui dolorem ipsum quia dolor</li>
-              <li>Neque porro quisquam est qui dolorem ipsum quia dolor</li>
-              <li>Neque porro quisquam est qui dolorem ipsum quia dolor</li>
-              <li>Neque porro quisquam est qui dolorem ipsum quia dolor</li>
+
+            {keyHighlights &&
+                      keyHighlights.map((hilts, key) => (
+              <li>{hilts}</li>
+
+            ))}
+
             </ul>
           </div>
         </div>
@@ -224,17 +248,16 @@ const CourseDetails = () => {
               <h4 className="mainhds">
                 <span className="ogx">About</span> the institute
               </h4>
-              <p>
-                Ranked among the top universities in India and considered a
-                cerebral destination forstudents across the world and Bangalore
-                in particular, for its illustrious history of developing
-                talent,Jain (Deemed-to-be University) is a hub for learning in
-                every sense of the word.
-              </p>
-              <a href="#" className="orangejncta">
-                Know More
-              </a>
-            </div>
+              <p>{courseDetails && courseDetails.institute && courseDetails.institute.about}</p>
+
+              {courseDetails && courseDetails.institute && 
+                <Link href={'/courses/'+courseDetails.institute.slug}>
+                <a className="orangejncta">
+                  Know More
+                </a>
+              </Link> 
+              }
+            </div> 
             <div className="col-lg-6 col-md-6">
               <img src="/images/aboutinst.jpg" className="fllimg" />
             </div>
@@ -247,16 +270,15 @@ const CourseDetails = () => {
             <h2 className="mainhds">What Our Learners Say</h2>
           </div>
           <div className="testimparts">
-
             <OwlCarousel
-    className="reviewtestim owl-theme owl-carousel"
-    loop
-    margin={40}
-    nav
-    items={3}
-    center
-    // responsive={state.responsive}
-    >
+              className="reviewtestim owl-theme owl-carousel"
+              loop
+              margin={40}
+              nav
+              items={3}
+              center
+              // responsive={state.responsive}
+            >
               <div className="item">
                 <div className="testipnlpts">
                   <p>
@@ -269,10 +291,8 @@ const CourseDetails = () => {
                   <p className="usrnmtst">Neque porro quisquam</p>
                 </div>
               </div>
-
-</OwlCarousel>
-
-            </div>
+            </OwlCarousel>
+          </div>
         </div>
       </section>
       <section className="whtsects trustbycoms roundicon">
@@ -283,15 +303,14 @@ const CourseDetails = () => {
             </h2>
           </div>
           <div className="cpmslide">
-
             <OwlCarousel
-    className="trustcmpcarso owl-theme owl-carousel"
-    loop
-    margin={40}
-    items={5}
-    center
-    // responsive={state.responsive}
-    >
+              className="trustcmpcarso owl-theme owl-carousel"
+              loop
+              margin={40}
+              items={5}
+              center
+              // responsive={state.responsive}
+            >
               <div className="item">
                 <div className="lgocirc">
                   <img src="/images/client/1.png" />
@@ -322,8 +341,7 @@ const CourseDetails = () => {
                   <img src="/images/client/5.png" />
                 </div>
               </div>
-
-              </OwlCarousel>
+            </OwlCarousel>
           </div>
         </div>
       </section>
@@ -663,9 +681,8 @@ const CourseDetails = () => {
           </div>
         </div>
       </section>
-     
-     <Footer/>
 
+      <Footer />
     </>
   )
 }
