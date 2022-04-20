@@ -9,8 +9,8 @@ import Link from 'next/link'
 import dynamic from 'next/dynamic'
 const DesktopContent = dynamic(() => import('../../components/DeskFilter'))
 const MobileContent = dynamic(() => import('../../components/MobFilter'))
-
 import { useUserAgent } from 'next-useragent'
+import { Puff } from 'react-loading-icons'
 
 
 const Listing = (props) => {
@@ -256,12 +256,25 @@ const Listing = (props) => {
               </div>
               <div className="dtabasedcateg dvv">
                 <div className="">
+
                   <InfiniteScroll
                     dataLength={courses.length}
                     next={getAllCourses2}
                     hasMore={hasMore}
-                    loader={<h3> Loading...</h3>}
-                    endMessage={<h4>Nothing more to show</h4>}
+                    loader={
+                      <>
+                        <div style={{textAlign: "center",margin: "5em",width:"100%"}}>
+                          <Puff stroke="#302e59" strokeOpacity={1} speed={.75} />
+                        </div>
+                      </>
+                    }
+                    endMessage={
+                      <>
+                      <div className="col-md-12" style={{ textAlign: 'center', padding: "0em 0em 2em 0em", color: "#676d76" }}>
+                        <b>Yay! You have seen it all.</b>
+                      </div>
+                      </>
+                    }
                     className="row"
                     // pullDownToRefreshThreshold={50}
                     scrollableTarget="dvvvvv"
@@ -283,7 +296,7 @@ const Listing = (props) => {
                                 <h4>{course.name}</h4>
                                 <p>
                                   {course.short_desc}
-                                  <Link href={`courses/institute/${course.slug}`}>
+                                  <Link href={`courses/${course.institute.slug}/${course.slug}`}>
                                     <a>Read more..</a>
                                   </Link>
                                 </p>
@@ -306,7 +319,7 @@ const Listing = (props) => {
                               </p>
                             </div>
                             <div className="dtlsctaviews">
-                              <Link href={`courses/institute/${course.slug}`}>
+                              <Link href={`courses/${course.institute.slug}/${course.slug}`}>
                                 <a className="grylghtcta">View Details</a>
                               </Link>
                               <a href="javascript:void(0);" data-toggle="modal" data-target="#exampleModalEnquirenow" className="blulghtcta">Enquire</a>
