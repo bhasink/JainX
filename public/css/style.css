@@ -1788,9 +1788,57 @@ section .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot
 
 .coursespanels .owl-carousel .owl-item img.fllimg {margin: auto;width: 100%;max-width: 170px;}
 
+
+/* become partner page */
+
+.becomeskillpt {padding-bottom: 40px;}
+
+.becomeskillpt .blulghtcta {display: inline-block;padding: 8px 26px;}
+
+.becomeskillpt .pgbanners {padding-top: 42px;}
+
+.partnercontsft .mainhds {font-size: 28px;}
+
+.partsetsdipl {padding-bottom: 70px;}
+
+.testnorflow .testipnlpts {box-shadow: #cfcfcf2e 0px 0px 6px 4px;width: 47%;display: flex;min-height: 190px; margin-bottom: 35px;     border-radius: 5px;}
+
+.testnorflow .testipnlpts:nth-child(even) {margin-left: auto;}
+
+.testnorflow .testipnlpts:nth-child(even) .usrthmbs {order: 2;}
+
+.testnorflow .testipnlpts:nth-child(even) .usrrightinfos {text-align: right;}
+
+.testnorflow {display: flex;flex-direction: column;     padding-top: 40px;}
+
+.testnorflow .testipnlpts .usrthmbs {text-align: left;display: inline-block;margin: auto;margin-bottom: 10px;}
+
+.usrrightinfos {display: inline-block;padding: 0px 26px;width: 100%;margin: auto;}
+
+.usrrightinfos p {margin: 0;font-size: 15px;}
+
+.usrrightinfos .mainhds {font-size: 21px;margin: 0; margin: 25px 0 0 0;     position: relative;}
+
+.testnorflow .testipnlpts .usrnmtst {font-size: 17px;}
+
+.testnorflow .testipnlpts:nth-child(odd) .usrrightinfos .mainhds:after {content: "";position: absolute;right: 16px;width: 35%;height: 3px;border-top: 1px solid #ddd;bottom: 9px;}
+
+.testnorflow .testipnlpts:nth-child(even) .usrrightinfos .mainhds:after {content: "";
+    position: absolute;
+    left: 16px;
+    width: 35%;
+    height: 3px;
+    border-top: 1px solid #ddd;
+    bottom: 9px;
+}
+
 /* Responsive css */
 
 @media screen and (max-width: 767px) and (min-width: 320px){
+
+    .partsetsdipl .fllimg {margin-bottom: 40px;}
+
+.becomeskillpt .mainhds {font-size: 22px;}
 
     .srchbar input.react-autosuggest__input{
         width: 205px;
