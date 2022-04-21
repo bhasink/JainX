@@ -15,10 +15,14 @@ import Autosuggest from 'react-autosuggest';
 const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
     ssr: false,
   });
+import { BsSearch } from 'react-icons/bs';
+
 
 const Home = () => {
 
 const [cities, setCities] = useState([]);
+const [categories, setCategories] = useState({});
+
 const [selectedCity, setSelectedCity] = useState(null);
 
 useEffect(() => {
@@ -29,54 +33,9 @@ useEffect(() => {
   });
 
   getCities();
+  getCourseCategory();
 
 }, []);
-
-
-// const classes = useStyles()
-
-const languages = [
-  {
-    name: 'C',
-    year: 1972
-  },
-  {
-    name: 'Elrcm',
-    year: 2012
-  },
-  {
-    name: 'Ecl',
-    year: 2012
-  },
-  {
-    name: 'Emrf',
-    year: 2012
-  },
-  {
-    name: 'Elmfffr',
-    year: 2012
-  },
-  {
-    name: 'fEl',
-    year: 2012
-  },
-  {
-    name: 'Emf',
-    year: 2012
-  },
-  {
-    name: 'Elfffm',
-    year: 2012
-  },
-  {
-    name: 'Effl',
-    year: 2012
-  },
-  {
-    name: 'Efm',
-    year: 2012
-  },
-];
 
 const [value, setValue] = useState('')
 const [suggestions, setSuggestions] = useState([])
@@ -104,7 +63,7 @@ const getSuggestionValue = suggestion => suggestion.name;
 
 const renderSuggestion = suggestion => (
   <p>
-    {suggestion.name}
+    <BsSearch  size="12px" style={{marginTop:"-0.4em"}} /> {suggestion.name}
   </p>
 );
 
@@ -113,7 +72,7 @@ const getSuggestions = value => {
   const inputLength = inputValue.length;
 
  // Here I get data from cities.json
-  return inputLength === 0 ? [] : languages.filter(lang =>
+  return inputLength === 0 ? [] : categories.filter(lang =>
     lang.name.toLowerCase().slice(0, inputLength) === inputValue
   ).slice(0,5);
 };
@@ -132,6 +91,19 @@ const getCities = async () => {
 
 const handleCity = (selectedOptions ) => {
   setSelectedCity(selectedOptions);
+}
+
+const getCourseCategory = async () => {
+  try {
+    const { data } = await axios.get(
+      `https://phplaravel-709751-2547471.cloudwaysapps.com/api/get-categories`,
+    )
+    const get_categories = data.get_course_category
+    setCategories(get_categories)
+   
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 
@@ -243,10 +215,45 @@ const state ={
 };
 
 
+const handleSubmit = async(e) =>{
+  e.preventDefault();
+
+  alert("test");
+  
+  // if (email == "") {
+  //     openNotificationWithIcon('error','Please enter the email!');
+  //     return false;
+  // }
+
+  try{
+      // const data = await axios.post(`/custom-login`,{
+      //     "email":email,
+      //     "password":password
+      // });
+
+      // window.localStorage.setItem("auth", JSON.stringify(data.data));
+      
+      // setState({
+      //   auth: data.data,
+      // });
+
+      // router.push("/user/dashboard");
+
+  }
+  catch(err){
+      console.log(err);
+    }
+  
+}
+
+
+
 return (
     <>
  
  <Nav />
+
+ {/* {JSON.stringify(categories,null,2)} */}
 
   <section className="homemainbanner">
     <div className="container">
@@ -259,6 +266,9 @@ return (
          
 
           <div className="cusjnbar">
+
+          <form onSubmit={handleSubmit}>
+
             <ul className="nav nav-tabs" id="myTab" role="tablist">
               <li className="nav-item">
                 <a className="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Hybrid</a>
@@ -271,12 +281,6 @@ return (
               </li>
             </ul>
             <div className="srchbar">
-              {/* <select className="form-control">
-                <option>Course Type</option>
-                <option>Diploma</option>
-                <option>PGP</option>
-                <option>UGP</option>
-              </select> */}
 
               <Select
                 className="form-control"
@@ -285,9 +289,6 @@ return (
                 onChange={handleCity}
                 styles={styles}
               />
-
-              {/* <input className="form-control" placeholder="Find the perfect course for you....." /> */}
-
 
               <Autosuggest
               className="form-control"
@@ -299,8 +300,11 @@ return (
               inputProps={inputProps}
           />
 
-              <button><i className="far fa-search" /></button>
+              <button type="submit"><i className="far fa-search" /></button>
             </div>
+
+            </form>
+
           </div>
         </div>
         <div className="col-md-6 col-lg-5 text-center">

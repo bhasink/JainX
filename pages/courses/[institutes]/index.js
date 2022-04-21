@@ -99,7 +99,7 @@ const Institutes = () => {
           <div className="col-6 col-lg-3 col-md-3 mx-auto ctypeinl">
             <img src="/images/courseslogo/courseinf/1.png" />
             <h6 className="mainhds">Courses</h6>
-            <h4 className="insnames">9</h4>
+            <h4 className="insnames">{institute && institute.courses && institute.courses.length}</h4>
           </div>
           <div className="col-6 col-lg-3 col-md-3 mx-auto ctypeinl">
             <img src="/images/courseslogo/courseinf/7.png" />
