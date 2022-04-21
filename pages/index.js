@@ -181,6 +181,33 @@ const state ={
   
         1200: {
           items: 3,
+          nav: true,
+          dots: true
+        }
+      },
+      responsive_top_catnew: {
+        0: {
+          items: 1,
+          nav: false,
+          dots: true,
+          loop: true
+        },
+        300: {
+          items: 1,
+          nav: true,
+         dots: false,
+          loop: true
+        },
+  
+        766: {
+          items:3,
+          nav: true,
+          dots: false,
+          loop: true
+        },
+  
+        1200: {
+          items: 1,
           nav: false,
           dots: true
         }
@@ -369,7 +396,7 @@ return (
     >
 <div className="item">
             <div className="panelcards">
-              <img src="./images/ftcourses/1.jpg" className="fllimg" />
+              <img src="./images/courseslogo/1.jpg" className="fllimg" />
               <h5 className="csnms">Accounting &amp; Taxation</h5>
               <p>Post Graduate Certification in 
                 Accounting &amp; Taxation <a href="#">Read more..</a></p>
@@ -382,7 +409,7 @@ return (
           </div>
           <div className="item">
             <div className="panelcards">
-              <img src="./images/ftcourses/2.jpg" className="fllimg" />
+              <img src="./images/courseslogo/2.jpg" className="fllimg" />
               <h5 className="csnms">Data Analytics</h5>
               <p>Data Analytics refers to the methods
                 used to analyse <a href="#">Read more..</a></p>
@@ -395,7 +422,7 @@ return (
           </div>
           <div className="item">
             <div className="panelcards">
-              <img src="./images/ftcourses/3.jpg" className="fllimg" />
+              <img src="./images/courseslogo/1.jpg" className="fllimg" />
               <h5 className="csnms">Sports Management</h5>
               <p>Post Graduate Certification in 
                 Accounting &amp; Taxation <a href="#">Read more..</a></p>
@@ -408,7 +435,7 @@ return (
           </div>
           <div className="item">
             <div className="panelcards">
-              <img src="./images/ftcourses/4.jpg" className="fllimg" />
+              <img src="./images/courseslogo/2.jpg" className="fllimg" />
               <h5 className="csnms">Health Tech</h5>
               <p>This is a multi-disciplinary program
                 that bridges the <a href="#">Read more..</a></p>
@@ -421,7 +448,7 @@ return (
           </div>
           <div className="item">
             <div className="panelcards">
-              <img src="./images/ftcourses/1.jpg" className="fllimg" />
+              <img src="./images/courseslogo/1.jpg" className="fllimg" />
               <h5 className="csnms">Accounting &amp; Taxation</h5>
               <p>Post Graduate Certification in 
                 Accounting &amp; Taxation <a href="#">Read more..</a></p>
@@ -434,7 +461,7 @@ return (
           </div>
           <div className="item">
             <div className="panelcards">
-              <img src="./images/ftcourses/2.jpg" className="fllimg" />
+              <img src="./images/courseslogo/2.jpg" className="fllimg" />
               <h5 className="csnms">Data Analytics</h5>
               <p>Data Analytics refers to the methods
                 used to analyse <a href="#">Read more..</a></p>
@@ -461,7 +488,7 @@ return (
     className="categchecks userreview owl-theme owl-carousel"
     loop
     margin={20}
-    responsive={state.responsive_top_cat}
+    responsive={state.responsive_top_catnew}
 
 >
 
@@ -471,8 +498,20 @@ return (
 
 
         <div className="item">
+<<<<<<< HEAD
+=======
+          <div className="row">
+          <div className="col-lg-4">
+>>>>>>> de860a544771353ad7b2485ffdc30f9a16bcc608
           <a href="#" className="catcheck">{category.name}</a>
+          </div>
+          </div>
+          
+         
         </div>
+
+        
+        
 
 ))}
 
