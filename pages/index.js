@@ -22,7 +22,7 @@ import { useRouter } from "next/router";
 const Home = () => {
 
 const [cities, setCities] = useState([]);
-const [categories, setCategories] = useState({});
+const [categories, setCategories] = useState([]);
 const [selectedCity, setSelectedCity] = useState(null);
 const router = useRouter();
 
@@ -465,38 +465,17 @@ return (
 
 >
 
-<div className="item">
-          <button className="catcheck">Digital Marketing</button>
-          <a href="#" className="catcheck">Digital Marketing</a>
-        </div>
+
+
+{categories && categories.map((category, key) => (
+
+
         <div className="item">
-          <button className="catcheck">Digital Marketing</button>
-          <a href="#" className="catcheck">Digital Marketing</a>
+          <button className="catcheck">{category.name}</button>
+          <a href="#" className="catcheck">{category.name}</a>
         </div>
-        <div className="item">
-          <button className="catcheck">Digital Marketing</button>
-          <a href="#" className="catcheck">Digital Marketing</a>
-        </div>
-        <div className="item">
-          <button className="catcheck">Digital Marketing</button>
-          <a href="#" className="catcheck">Digital Marketing</a>
-        </div>
-        <div className="item">
-          <button className="catcheck">Digital Marketing</button>
-          <a href="#" className="catcheck">Digital Marketing</a>
-        </div>
-        <div className="item">
-          <button className="catcheck">Digital Marketing</button>
-          <a href="#" className="catcheck">Digital Marketing</a>
-        </div>
-        <div className="item">
-          <button className="catcheck">Digital Marketing</button>
-          <a href="#" className="catcheck">Digital Marketing</a>
-        </div>
-        <div className="item">
-          <button className="catcheck">Digital Marketing</button>
-          <a href="#" className="catcheck">Digital Marketing</a>
-        </div>
+
+))}
 
     </OwlCarousel>
 
