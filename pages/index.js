@@ -269,17 +269,18 @@ return (
 
           <form onSubmit={handleSubmit}>
 
-            <ul className="nav nav-tabs" id="myTab" role="tablist">
-              <li className="nav-item">
-                <a className="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Hybrid</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Online</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Offline</a>
-              </li>
-            </ul>
+            <div className="btn-group btn-group-toggle" data-toggle="buttons">
+              <label className="btn btn-secondary active">
+                <input type="radio" name="options" id="option1" autoComplete="off" checked/> Hybrid
+              </label>
+              <label className="btn btn-secondary">
+                <input type="radio" name="options" id="option2" autoComplete="off"/> Online
+              </label>
+              <label className="btn btn-secondary">
+                <input type="radio" name="options" id="option3" autoComplete="off"/> Offline
+              </label>
+          </div>
+
             <div className="srchbar">
 
               <Select

@@ -1760,9 +1760,30 @@ section .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot
     color:#fff;
   }
 
+
+  .cusjnbar .btn-group.btn-group-toggle {
+    background: #28284c;
+    max-width: 518px;display: block;text-align: left;
+}
+
+.cusjnbar .btn-group.btn-group-toggle label.btn.btn-secondary.active {background: #f89b36;box-shadow: none;}
+
+.cusjnbar .btn-group.btn-group-toggle label.btn.btn-secondary {cursor:pointer; padding: 9px 31px;background: #28284c;border: none;border-bottom-left-radius: 0px;border-bottom-right-radius: 0px;}
+
 /* Responsive css */
 
 @media screen and (max-width: 767px) and (min-width: 320px){
+
+    .srchbar input.react-autosuggest__input{
+        width: 205px;
+        font-size: 13px;
+        padding: 0 6px;
+    }
+
+    .srchbar .form-control{
+        width: 100%;
+    }
+
 .testimparts .owl-theme .owl-nav button.owl-prev, .owl-theme .owl-nav button.owl-prev,
 .owl-theme .owl-nav button.owl-next,
 .testimparts .owl-theme .owl-nav button.owl-next, .owl-theme .owl-nav button.owl-next {
