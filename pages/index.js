@@ -16,14 +16,15 @@ const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
     ssr: false,
   });
 import { BsSearch } from 'react-icons/bs';
+import { useRouter } from "next/router";
 
 
 const Home = () => {
 
 const [cities, setCities] = useState([]);
 const [categories, setCategories] = useState({});
-
 const [selectedCity, setSelectedCity] = useState(null);
+const router = useRouter();
 
 useEffect(() => {
     
@@ -82,7 +83,7 @@ const getCities = async () => {
   try {
     const { data } = await axios.get(`https://phplaravel-709751-2547471.cloudwaysapps.com/api/get-cities`)
     const get_cities = data.get_cities;
-    setCities(get_cities.map(opt => ({ label: opt.name, value: opt.id })));
+    setCities(get_cities.map(opt => ({ label: opt.name, value: opt.id,slug:opt.slug })));
 
   } catch (err) {
     console.log(err);
@@ -218,26 +219,16 @@ const state ={
 const handleSubmit = async(e) =>{
   e.preventDefault();
 
-  alert("test");
-  
-  // if (email == "") {
-  //     openNotificationWithIcon('error','Please enter the email!');
-  //     return false;
-  // }
-
   try{
-      // const data = await axios.post(`/custom-login`,{
-      //     "email":email,
-      //     "password":password
-      // });
 
-      // window.localStorage.setItem("auth", JSON.stringify(data.data));
       
-      // setState({
-      //   auth: data.data,
-      // });
+      if(selectedCity != null){
+        
+      }
 
-      // router.push("/user/dashboard");
+      router.push(
+        { pathname: "/courses", query: { city: selectedCity.slug } }
+      );
 
   }
   catch(err){
@@ -253,7 +244,7 @@ return (
  
  <Nav />
 
- {/* {JSON.stringify(categories,null,2)} */}
+ {/* {JSON.stringify(selectedCity,null,2)} */}
 
   <section className="homemainbanner">
     <div className="container">
