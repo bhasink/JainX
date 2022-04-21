@@ -498,11 +498,8 @@ return (
 
 
         <div className="item">
-<<<<<<< HEAD
-=======
           <div className="row">
           <div className="col-lg-4">
->>>>>>> de860a544771353ad7b2485ffdc30f9a16bcc608
           <a href="#" className="catcheck">{category.name}</a>
           </div>
           </div>
