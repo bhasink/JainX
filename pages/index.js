@@ -471,7 +471,6 @@ return (
 
 
         <div className="item">
-          <button className="catcheck">{category.name}</button>
           <a href="#" className="catcheck">{category.name}</a>
         </div>
 
