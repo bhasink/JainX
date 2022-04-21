@@ -278,6 +278,13 @@ header.site-header.topmain.mobexheight.navfixed nav.navbar{
 
 .css-1pahdxg-control:hover {border: none !important;box-shadow: none !important;}
 
+.css-1pahdxg-control{
+    border-width: 0px !important;
+    border-radius: 0px !important;
+    box-shadow: none !important;
+}
+
+
 .srchbar .css-1okebmr-indicatorSeparator {background-color: #fff;}
 
 .srchbar .form-control {padding: 3px 6px;}
@@ -286,13 +293,22 @@ header.site-header.topmain.mobexheight.navfixed nav.navbar{
     width: 289px;
 }
 
-.deskserachflls .css-1s2u09g-control, .css-1pahdxg-control:hover {color: #fff; border: none;     background: #303056;}
+.deskserachflls .css-1s2u09g-control, .deskserachflls .css-1pahdxg-control:hover {color: #fff; border: none;     background: #303056;}
 
 .deskserachflls .css-14el2xx-placeholder {color: #fff;}
+.deskserachflls .css-1pahdxg-control:hover .css-qc6sy-singleValue {color: #fff;}
 
 .deskserachflls .css-tj5bde-Svg {color: #fff;}
 
-.deskserachflls .css-1pahdxg-control .css-qc6sy-singleValue {color: #000;}
+.deskserachflls .css-1pahdxg-control{
+    border-width: 0px !important;
+    border-radius: 0px !important;
+    box-shadow: none !important;
+    background: #303056;
+    color:#fff;
+}
+
+.deskserachflls .css-1pahdxg-control .css-qc6sy-singleValue {color: #fff;}
 .deskserachflls  .css-qc6sy-singleValue {color: #fff;}
 
 .srchbar button {
@@ -1769,6 +1785,8 @@ section .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot
 .cusjnbar .btn-group.btn-group-toggle label.btn.btn-secondary.active {background: #f89b36;box-shadow: none;}
 
 .cusjnbar .btn-group.btn-group-toggle label.btn.btn-secondary {cursor:pointer; padding: 9px 31px;background: #28284c;border: none;border-bottom-left-radius: 0px;border-bottom-right-radius: 0px;}
+
+.coursespanels .owl-carousel .owl-item img.fllimg {margin: auto;width: 100%;max-width: 170px;}
 
 /* Responsive css */
 
