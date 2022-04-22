@@ -26,8 +26,7 @@ const [cities, setCities] = useState([]);
 const [categories, setCategories] = useState([]);
 const [selectedCity, setSelectedCity] = useState(null);
 const [catSelected, setCatSelected] = useState("");
-const [courseMode, setCourseMode] = useState("Hybrid");
-const [courses, setCourses] = useState([])
+const [courseMode, setCourseMode] = useState("");
 
 const router = useRouter();
 
@@ -40,34 +39,11 @@ useEffect(() => {
 
   getCities();
   getCourseCategory();
-  getFeaturedCourses();
 
 }, []);
 
 const [value, setValue] = useState('')
 const [suggestions, setSuggestions] = useState([])
-
-
-const getFeaturedCourses = async () => {
-  try {
-    const { data } = await axios.get(
-      `https://phplaravel-709751-2547471.cloudwaysapps.com/api/get-featured-course`,
-    )
-    const getCourses = data.get_courses
-    // const l_page = data.get_courses.last_page;
-    // setLastPage(data.get_courses.last_page)
-    setCourses(getCourses)
-
-    // console.log(lastPage)
-    // console.log(currentPage)
-    // console.log(hasMore)
-
-    console.log(data)
-  } catch (err) {
-    console.log(err)
-  }
-}
-
 
 const onChange = (event, { newValue, method }) => {
   setValue(newValue)
@@ -236,7 +212,7 @@ const state ={
         },
   
         1200: {
-          items: 3,
+          items: 1,
           nav: false,
           loop:false,
           dots: true
@@ -286,7 +262,7 @@ const handleSubmit = async(e) =>{
       const slug = convertToSlug(catSelected);
 
       router.push(
-        { pathname: "/courses", query: { city: selectedCity.slug,category: slug,mode:courseMode } }
+        { pathname: "/courses", query: { city: selectedCity.slug,category: slug } }
       );
 
   }
@@ -306,8 +282,10 @@ function convertToSlug(Text) {
 
 const handleMode = (event) => {
 
-  const { value } = event.target;
-  setCourseMode(value)
+  // const { name, value } = e.target;
+
+  alert(event.target.value)
+  // setCourseMode(name)
 }
 
 
@@ -316,7 +294,7 @@ return (
  
  <Nav />
 
-{/* {courseMode} */}
+{courseMode}
  {/* {JSON.stringify(selectedCity,null,2)} */}
 
   <section className="homemainbanner">
@@ -333,7 +311,8 @@ return (
 
           <form onSubmit={handleSubmit}>
 
-            <div className="btn-group btn-group-toggle">
+          
+          <div className="btn-group btn-group-toggle">
               <label className={courseMode == "Hybrid" ? 'btn btn-secondary active': 'btn btn-secondary'}>
                 <input type="radio" name="options" value="Hybrid"   onChange={(e) => handleMode(e)}   /> Hybrid
               </label>
@@ -431,7 +410,7 @@ return (
       </div>
       <div className="coursespanels">
 
-{/* {JSON.stringify(courses,null,2)} */}
+
       <OwlCarousel
     className="featuredslide owl-theme owl-carousel"
     loop
@@ -440,34 +419,84 @@ return (
     items={4}
     responsive={state.responsive}
     >
-
-
-
-{courses && courses.map((coursesData, key) => (
-
-
 <div className="item">
             <div className="panelcards">
-              
-              <img src={`/images/courseslogo/` + coursesData.logo} className="fllimg" />
-              <h5 className="csnms">{coursesData.name}</h5>
-              <p>{coursesData.short_desc} 
-              <Link href={`courses/${coursesData.institute.slug}/${coursesData.slug}`}>
-              <a>Read more..</a>
-              </Link>
-              </p>
+              <img src="./images/courseslogo/1.jpg" className="fllimg" />
+              <h5 className="csnms">Accounting &amp; Taxation</h5>
+              <p>Post Graduate Certification in 
+                Accounting &amp; Taxation <a href="#">Read more..</a></p>
               <div className="tmclcs">
                 <img src="./images/wallclock.png" className="tmicn" />
-                <p>{coursesData.duration} Months</p>
+                <p>12 Months</p>
               </div>
-              <Link href={`courses/${coursesData.institute.slug}/${coursesData.slug}`}>
-                <a className="aplcta">View Details</a>
-              </Link>
+              <a href="#" className="aplcta">Apply Now</a>
             </div>
           </div>
-
-))}
-       
+          <div className="item">
+            <div className="panelcards">
+              <img src="./images/courseslogo/2.jpg" className="fllimg" />
+              <h5 className="csnms">Data Analytics</h5>
+              <p>Data Analytics refers to the methods
+                used to analyse <a href="#">Read more..</a></p>
+              <div className="tmclcs">
+                <img src="./images/wallclock.png" className="tmicn" />
+                <p>12 Months</p>
+              </div>
+              <a href="#" className="aplcta">Apply Now</a>
+            </div>
+          </div>
+          <div className="item">
+            <div className="panelcards">
+              <img src="./images/courseslogo/1.jpg" className="fllimg" />
+              <h5 className="csnms">Sports Management</h5>
+              <p>Post Graduate Certification in 
+                Accounting &amp; Taxation <a href="#">Read more..</a></p>
+              <div className="tmclcs">
+                <img src="./images/wallclock.png" className="tmicn" />
+                <p>12 Months</p>
+              </div>
+              <a href="#" className="aplcta">Apply Now</a>
+            </div>
+          </div>
+          <div className="item">
+            <div className="panelcards">
+              <img src="./images/courseslogo/2.jpg" className="fllimg" />
+              <h5 className="csnms">Health Tech</h5>
+              <p>This is a multi-disciplinary program
+                that bridges the <a href="#">Read more..</a></p>
+              <div className="tmclcs">
+                <img src="./images/wallclock.png" className="tmicn" />
+                <p>12 Months</p>
+              </div>
+              <a href="#" className="aplcta">Apply Now</a>
+            </div>
+          </div>
+          <div className="item">
+            <div className="panelcards">
+              <img src="./images/courseslogo/1.jpg" className="fllimg" />
+              <h5 className="csnms">Accounting &amp; Taxation</h5>
+              <p>Post Graduate Certification in 
+                Accounting &amp; Taxation <a href="#">Read more..</a></p>
+              <div className="tmclcs">
+                <img src="./images/wallclock.png" className="tmicn" />
+                <p>12 Months</p>
+              </div>
+              <a href="#" className="aplcta">Apply Now</a>
+            </div>
+          </div>
+          <div className="item">
+            <div className="panelcards">
+              <img src="./images/courseslogo/2.jpg" className="fllimg" />
+              <h5 className="csnms">Data Analytics</h5>
+              <p>Data Analytics refers to the methods
+                used to analyse <a href="#">Read more..</a></p>
+              <div className="tmclcs">
+                <img src="./images/wallclock.png" className="tmicn" />
+                <p>12 Months</p>
+              </div>
+              <a href="#" className="aplcta">Apply Now</a>
+            </div>
+          </div>
 </OwlCarousel>
 
        
@@ -480,9 +509,6 @@ return (
         <h2 className="mainhds">Top Categories</h2>
       </div>
 
-      {/* {JSON.stringify(categories,null,2)} */}
-
-
       <OwlCarousel
     className="categchecks userreview owl-theme owl-carousel"
     loop
@@ -493,12 +519,14 @@ return (
 
 
 
+{categories && categories.map((category, key) => (
+
         <div className="item">
           <div className="row">
 
         
 
-          <div className="col-lg-12">
+          <div className="col-lg-4">
           
           <Link href={"/courses?category="+category.slug}>
 
