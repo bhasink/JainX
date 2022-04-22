@@ -109,9 +109,14 @@ const Nav = () => {
                     </div>
                   </li>
                   <li className="nav-item nosublnk">
+
+                  <Link href="/partner-with-us">
+
                     <a className="nav-link bidevices subarrs" href="#">
                       Partner With Us{' '}
                     </a>
+
+                    </Link>
                     <h3
                       data-toggle="collapse"
                       data-target="#collapsemenusThree"
@@ -224,14 +229,14 @@ const Nav = () => {
                       </div>
                     </div>
                   </li>
-                  <li className="nav-item nosublnk sgnorg">
+                  {/* <li className="nav-item nosublnk sgnorg">
                     <a className="nav-link bidevices" href="#">
                       Login /
                     </a>
                     <a className="nav-link bidevices" href="#">
                       Sign Up{' '}
                     </a>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>
