@@ -37,7 +37,7 @@ const Home = () => {
     getCities()
     getCourseCategory()
     getFeaturedCourses()
-  }, [])
+  }, [router.pathname])
 
   const [value, setValue] = useState('')
   const [suggestions, setSuggestions] = useState([])
@@ -287,28 +287,27 @@ const Home = () => {
       const slug = convertToSlug(catSelected)
       const mode = convertToSlug(courseMode)
 
-      if(city != "" && slug != ""){
+      if (city != '' && slug != '') {
         router.push({
           pathname: '/courses',
           query: { city: city, category: slug, mode: mode },
         })
-      }else if(city != ""){
+      } else if (city != '') {
         router.push({
           pathname: '/courses',
           query: { city: city, mode: mode },
         })
-      }else if(slug != ""){
+      } else if (slug != '') {
         router.push({
           pathname: '/courses',
           query: { category: slug, mode: mode },
         })
-      }else{
+      } else {
         router.push({
           pathname: '/courses',
           query: { mode: mode },
         })
       }
-
     } catch (err) {
       console.log(err)
     }
@@ -501,23 +500,24 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="featuredcls">
-        <div className="container">
-          <div className="text-center hdingst">
-            <h2 className="mainhds">Featured Courses</h2>
-          </div>
-          <div className="coursespanels">
-            {/* {JSON.stringify(courses,null,2)} */}
-            <OwlCarousel
-              className="featuredslide owl-theme owl-carousel"
-              loop
-              margin={15}
-              nav
-              items={4}
-              responsive={state.responsive}
-            >
-              {courses &&
-                courses.map((coursesData, key) => (
+
+      {courses && (
+        <section className="featuredcls">
+          <div className="container">
+            <div className="text-center hdingst">
+              <h2 className="mainhds">Featured Courses</h2>
+            </div>
+            <div className="coursespanels">
+              {/* {JSON.stringify(courses,null,2)} */}
+              <OwlCarousel
+                className="featuredslide owl-theme owl-carousel"
+                loop
+                margin={15}
+                nav
+                items={4}
+                responsive={state.responsive}
+              >
+                {courses.map((coursesData, key) => (
                   <div className="item">
                     <div className="panelcards">
                       <img
@@ -545,40 +545,43 @@ const Home = () => {
                     </div>
                   </div>
                 ))}
-            </OwlCarousel>
+              </OwlCarousel>
+            </div>
           </div>
-        </div>
-      </section>
-      <section className="tpcateg">
-        <div className="container">
-          <div className="text-center hdingst whtxt">
-            <h2 className="mainhds">Top Categories</h2>
-          </div>
+        </section>
+      )}
 
-          {/* {JSON.stringify(categories,null,2)} */}
+      {categories && (
+        <section className="tpcateg">
+          <div className="container">
+            <div className="text-center hdingst whtxt">
+              <h2 className="mainhds">Top Categories</h2>
+            </div>
 
-          <OwlCarousel
-            className="categchecks userreview owl-theme owl-carousel"
-            loop
-            margin={20}
-            responsive={state.responsive_top_catnew}
-          >
-             {categories &&
-                  categories.map((category, key) => (
-            <div className="item">
-              <div className="row">
+            {/* {JSON.stringify(categories,null,2)} */}
+
+            <OwlCarousel
+              className="categchecks userreview owl-theme owl-carousel"
+              loop
+              margin={20}
+              responsive={state.responsive_top_catnew}
+            >
+              {categories.map((category, key) => (
+                <div className="item">
+                  <div className="row">
                     <div className="col-lg-12">
                       <Link href={'/courses?category=' + category.slug}>
                         <a className="catcheck">{category.name}</a>
                       </Link>
                     </div>
-                
-              </div>
-            </div>
-            ))}
-          </OwlCarousel>
-        </div>
-      </section>
+                  </div>
+                </div>
+              ))}
+            </OwlCarousel>
+          </div>
+        </section>
+      )}
+
       <section className="testimoniapn">
         <div className="container">
           <div className="text-center hdingst">
