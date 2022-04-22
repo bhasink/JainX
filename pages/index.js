@@ -305,10 +305,8 @@ function convertToSlug(Text) {
 
 const handleMode = (event) => {
 
-  // const { name, value } = e.target;
-
-  alert(event.target.value)
-  // setCourseMode(name)
+  const { value } = event.target;
+  setCourseMode(value)
 }
 
 
@@ -334,14 +332,14 @@ return (
 
           <form onSubmit={handleSubmit}>
 
-            <div className="btn-group btn-group-toggle" data-toggle="buttons">
-              <label className="btn btn-secondary active">
+            <div className="btn-group btn-group-toggle">
+              <label className={courseMode == "Hybrid" ? 'btn btn-secondary active': 'btn btn-secondary'}>
                 <input type="radio" name="options" value="Hybrid"   onChange={(e) => handleMode(e)}   /> Hybrid
               </label>
-              <label className="btn btn-secondary">
+              <label className={courseMode == "Online" ? 'btn btn-secondary active': 'btn btn-secondary'}>
                 <input type="radio" name="options" value="Online"   onChange={(e) => handleMode(e)}   /> Online
               </label>
-              <label className="btn btn-secondary">
+              <label className={courseMode == "Offline" ? 'btn btn-secondary active': 'btn btn-secondary'}>
                 <input type="radio" name="options" value="Offline"  onChange={(e) => handleMode(e)}  /> Offline
               </label>
           </div>
