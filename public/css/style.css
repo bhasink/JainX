@@ -481,6 +481,7 @@ header.site-header.topmain.mobexheight.navfixed nav.navbar{
     width: 100%;
     margin-bottom: 38px;
     color: #2e2e57;
+    font-size: 14px;
 }
 
 .catcheck:hover {
