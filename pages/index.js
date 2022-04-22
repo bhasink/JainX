@@ -26,7 +26,7 @@ const [cities, setCities] = useState([]);
 const [categories, setCategories] = useState([]);
 const [selectedCity, setSelectedCity] = useState(null);
 const [catSelected, setCatSelected] = useState("");
-const [courseMode, setCourseMode] = useState("");
+const [courseMode, setCourseMode] = useState("Hybrid");
 const [courses, setCourses] = useState([])
 
 const router = useRouter();
@@ -286,7 +286,7 @@ const handleSubmit = async(e) =>{
       const slug = convertToSlug(catSelected);
 
       router.push(
-        { pathname: "/courses", query: { city: selectedCity.slug,category: slug } }
+        { pathname: "/courses", query: { city: selectedCity.slug,category: slug,mode:courseMode } }
       );
 
   }
@@ -316,7 +316,7 @@ return (
  
  <Nav />
 
-{courseMode}
+{/* {courseMode} */}
  {/* {JSON.stringify(selectedCity,null,2)} */}
 
   <section className="homemainbanner">
