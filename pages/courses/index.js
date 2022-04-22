@@ -218,7 +218,7 @@ const Listing = (props) => {
                 <div className="tgselectdata">
                   {/* {JSON.stringify(filterData)} */}
 
-                  {filterData.map((filter, key) => (
+                  {filterData && filterData.map((filter, key) => (
                     <div className="ttpattrib">
                       <p>
                         {filter.label} <span>x</span>
