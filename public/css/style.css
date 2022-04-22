@@ -473,7 +473,7 @@ header.site-header.topmain.mobexheight.navfixed nav.navbar{
     position: relative;
     border: none;
     background: #fff;
-    border-radius: 20px;
+    border-radius: 25px;
     padding: 14px 30px;
     display: block;
     text-align: center;
@@ -491,7 +491,7 @@ header.site-header.topmain.mobexheight.navfixed nav.navbar{
 .catcheck:after {
     content: "";
     position: absolute;
-    left: 25px;
+    left: 11px;
     top: 16px;
     width: 20px;
     height: 20px;
