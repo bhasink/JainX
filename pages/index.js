@@ -1,5 +1,6 @@
 import { useState,useEffect } from "react";
 import axios from 'axios'
+import Link from 'next/link'
 import AOS from 'aos';
 import Nav from "../components/header/Nav";
 import Footer from "../components/footer/Footer";
@@ -24,6 +25,9 @@ const Home = () => {
 const [cities, setCities] = useState([]);
 const [categories, setCategories] = useState([]);
 const [selectedCity, setSelectedCity] = useState(null);
+const [catSelected, setCatSelected] = useState("");
+const [courseMode, setCourseMode] = useState("");
+
 const router = useRouter();
 
 useEffect(() => {
@@ -43,6 +47,7 @@ const [suggestions, setSuggestions] = useState([])
 
 const onChange = (event, { newValue, method }) => {
   setValue(newValue)
+  setCatSelected(newValue);
 };
 
 const onSuggestionsFetchRequested = ({ value }) => {
@@ -253,8 +258,10 @@ const handleSubmit = async(e) =>{
         
       }
 
+      const slug = convertToSlug(catSelected);
+
       router.push(
-        { pathname: "/courses", query: { city: selectedCity.slug } }
+        { pathname: "/courses", query: { city: selectedCity.slug,category: slug } }
       );
 
   }
@@ -264,6 +271,21 @@ const handleSubmit = async(e) =>{
   
 }
 
+function convertToSlug(Text) {
+  return Text.toLowerCase()
+             .replace(/[^\w ]+/g, '')
+             .replace(/ +/g, '-');
+}
+
+
+
+const handleMode = (event) => {
+
+  // const { name, value } = e.target;
+
+  alert(event.target.value)
+  // setCourseMode(name)
+}
 
 
 return (
@@ -271,6 +293,7 @@ return (
  
  <Nav />
 
+{courseMode}
  {/* {JSON.stringify(selectedCity,null,2)} */}
 
   <section className="homemainbanner">
@@ -289,16 +312,16 @@ return (
 
             <div className="btn-group btn-group-toggle" data-toggle="buttons">
               <label className="btn btn-secondary active">
-                <input type="radio" name="options" id="option1" autoComplete="off" checked/> Hybrid
+                <input type="radio" name="options" value="Hybrid"   onChange={(e) => handleMode(e)}   /> Hybrid
               </label>
               <label className="btn btn-secondary">
-                <input type="radio" name="options" id="option2" autoComplete="off"/> Online
+                <input type="radio" name="options" value="Online"   onChange={(e) => handleMode(e)}   /> Online
               </label>
               <label className="btn btn-secondary">
-                <input type="radio" name="options" id="option3" autoComplete="off"/> Offline
+                <input type="radio" name="options" value="Offline"  onChange={(e) => handleMode(e)}  /> Offline
               </label>
           </div>
-
+          
             <div className="srchbar">
 
               <Select
@@ -494,26 +517,32 @@ return (
 
 
 
-{categories && categories.map((category, key) => (
 
 
         <div className="item">
-<<<<<<< HEAD
-=======
           <div className="row">
+
+          {categories && categories.map((category, key) => (
+
           <div className="col-lg-4">
->>>>>>> de860a544771353ad7b2485ffdc30f9a16bcc608
-          <a href="#" className="catcheck">{category.name}</a>
+          
+          <Link href={"/courses?category="+category.slug}>
+
+          <a className="catcheck">{category.name}</a>
+
+            </Link>
+
           </div>
+                    ))} 
           </div>
           
-         
+
         </div>
 
         
         
 
-))}
+
 
     </OwlCarousel>
 

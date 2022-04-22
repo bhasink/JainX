@@ -12,6 +12,11 @@ const DeskFilter = (props) => {
   const [cities, setCities] = useState([])
   const [courseCategory, setCourseCategory] = useState([])
 
+
+  const [selectedOption, setSelectedOption] = useState([])
+
+  
+
   const [selectedCourseName, setSelectedCourseName] = useState(null)
   const [selectedCourseMode, setSelectedCourseMode] = useState(null)
   const [selectedCity, setSelectedCity] = useState(null)
@@ -46,6 +51,13 @@ const DeskFilter = (props) => {
         `https://phplaravel-709751-2547471.cloudwaysapps.com/api/get-categories`,
       )
       const get_categories = data.get_course_category
+
+      // setSelectedOption({
+      //   label: 'Testing',
+      //   value: '2',
+      //   type: 'course_categories_id',
+      // })
+
       setCourseCategory(
         get_categories.map((opt) => ({
           label: opt.name,
@@ -230,6 +242,7 @@ const DeskFilter = (props) => {
               placeholder="Category"
               onChange={handleChangeCategory}
               styles={styles}
+              value={selectedOption}
             />
           </div>
 
