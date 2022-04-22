@@ -212,8 +212,9 @@ const state ={
         },
   
         1200: {
-          items: 1,
+          items: 3,
           nav: false,
+          loop:false,
           dots: true
         }
       },
@@ -310,7 +311,8 @@ return (
 
           <form onSubmit={handleSubmit}>
 
-            <div className="btn-group btn-group-toggle" data-toggle="buttons">
+          
+            <div className="btn-group btn-group-toggle">
               <label className="btn btn-secondary active">
                 <input type="radio" name="options" value="Hybrid"   onChange={(e) => handleMode(e)}   /> Hybrid
               </label>
@@ -517,14 +519,14 @@ return (
 
 
 
-
+{categories && categories.map((category, key) => (
 
         <div className="item">
           <div className="row">
 
-          {categories && categories.map((category, key) => (
+        
 
-          <div className="col-lg-4">
+          <div className="col-lg-12">
           
           <Link href={"/courses?category="+category.slug}>
 
@@ -533,12 +535,12 @@ return (
             </Link>
 
           </div>
-                    ))} 
+                    
           </div>
           
 
         </div>
-
+))} 
         
         
 
