@@ -12,18 +12,34 @@ const MobileContent = dynamic(() => import('../../components/MobFilter'))
 import { useUserAgent } from 'next-useragent'
 import { Puff } from 'react-loading-icons'
 import ContentLoader from 'react-content-loader'
+import { useToasts } from 'react-toast-notifications'
+import { useRouter } from 'next/router'
 
 const Listing = (props) => {
   const [courses, setCourses] = useState([])
   const [courseName, setCourseName] = useState([])
   const [filterData, setfilterData] = useState([])
   const [loader, setLoader] = useState(false)
+  const [currentProject, setCurrentProject] = useState("")
+  const [backdrop, setBackdrop] = useState("true")
+
+  
 
   const [hasMore, setHasMore] = useState(true)
   const [currentPage, setCurrentPage] = useState(2)
   const [lastPage, setLastPage] = useState(0)
 
   const [checkDevice, setCheckDevice] = useState({})
+
+  const { addToast } = useToasts()
+
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [mobileNo, setMobileNo] = useState('')
+  const [query, setQuery] = useState('')
+
+  const router = useRouter()
+
 
   let ua
 
@@ -173,17 +189,91 @@ const Listing = (props) => {
     }),
   }
 
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    if (name == '') {
+      addToast('Please enter the name!', { appearance: 'error' })
+
+      return false
+    }
+
+    if (email == '') {
+      addToast('Please enter the email!', { appearance: 'error' })
+      return false
+    }
+
+    if (IsEmail(email) == false) {
+      addToast('Incorrect email!', { appearance: 'error' })
+
+      return false
+    }
+
+    if (mobileNo == '') {
+      addToast('Please enter the mobile number!', { appearance: 'error' })
+      return false
+    }
+
+    if (mobileNo.length != 10) {
+      addToast('Mobile number must be of ten digits!', { appearance: 'error' })
+      return false
+    }
+
+    if (query == '') {
+      addToast('Please enter the query!', { appearance: 'error' })
+      return false
+    }
+    
+
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+    $("#exampleModalEnquirenow").hide()
+
+
+    try {
+      const data = await axios.post(`https://phplaravel-709751-2547471.cloudwaysapps.com/api/course-leads`,{
+          "name":name,
+          "email":email,
+          "mobile_no":mobileNo,
+          "query":query,
+          "course_id":currentProject,
+      });
+  
+      if(data.status == 200){
+        addToast("Success!", { appearance: 'success' });
+        router.push("/thanks");
+      }
+
+      //
+    } catch (err) {
+      console.log(err)
+      addToast('Invalid! Please try again.', { appearance: 'error' })
+    }
+  }
+
+  const IsEmail = (email) => {
+    let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
+    if (!regex.test(email)) {
+      return false
+    } else {
+      return true
+    }
+  }
+
   return (
     <>
       <Nav />
 
-      {/* {JSON.stringify(courses,null,2)} */}
+
+      {/* {JSON.stringify(currentProject,null,2)} */}
 
       <style
         dangerouslySetInnerHTML={{
-          __html: '\nbody{\n    background: #e5e8ec;\n}\n',
+          __html:
+            '\n      body{\n  background: #e5e8ec;\n      }\n\n      .css-13q5zx4-ToastContainer {\n        z-index: 9999;\n      }\n      ',
         }}
       />
+
       <section className="pageinforhd pt-5 pb-5">
         <div className="container">
           <div className="hdingst">
@@ -218,13 +308,14 @@ const Listing = (props) => {
                 <div className="tgselectdata">
                   {/* {JSON.stringify(filterData)} */}
 
-                  {filterData && filterData.map((filter, key) => (
-                    <div className="ttpattrib">
-                      <p>
-                        {filter.label} <span>x</span>
-                      </p>
-                    </div>
-                  ))}
+                  {filterData &&
+                    filterData.map((filter, key) => (
+                      <div className="ttpattrib">
+                        <p>
+                          {filter.label} <span>x</span>
+                        </p>
+                      </div>
+                    ))}
                 </div>
                 <div className="sotfllshw" style={{ width: '20%' }}>
                   <Select
@@ -245,11 +336,10 @@ const Listing = (props) => {
               </div>
               <div className="dtabasedcateg dvv">
                 <div className="">
-
                   {loader ? (
                     <ContentLoader
-                    backgroundColor="#f5f5f5"
-                    foregroundColor="#dbdbdb"
+                      backgroundColor="#f5f5f5"
+                      foregroundColor="#dbdbdb"
                       viewBox="0 0 900 400"
                       height={400}
                       width={900}
@@ -373,6 +463,7 @@ const Listing = (props) => {
                                   data-toggle="modal"
                                   data-target="#exampleModalEnquirenow"
                                   className="blulghtcta"
+                                  onClick={(e) => setCurrentProject(course.id)}
                                 >
                                   Enquire
                                 </a>
@@ -391,6 +482,7 @@ const Listing = (props) => {
                     role="dialog"
                     aria-labelledby="exampleModalEnquirenowTitle3"
                     aria-hidden="true"
+                    data-backdrop={backdrop}
                   >
                     <div
                       className="modal-dialog modal-dialog-centered   jncustm trasntypes"
@@ -408,67 +500,67 @@ const Listing = (props) => {
                           </button>
 
                           <div className="basicenqforms">
-                            <div className="row">
-                              <div className="col-lg-12 mx-auto">
-                                <h3>Enquire Now !</h3>
-                                <div className="form-groupsets">
-                                  <label>Name</label>
-                                  <input
-                                    type="text"
-                                    className="form-control"
-                                    placeholder=""
-                                  />
+                            <form onSubmit={handleSubmit}>
+                              <div className="row">
+                                <div className="col-lg-12 mx-auto">
+                                  <h3>Enquire Now !</h3>
+                                  <div className="form-groupsets">
+                                    <label>Name</label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      placeholder=""
+                                      value={name}
+                                      onChange={(e) => setName(e.target.value)}
+                                    />
+                                  </div>
+
+                                  <div className="form-groupsets">
+                                    <label>Email id</label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      placeholder=""
+                                      value={email}
+                                      onChange={(e) => setEmail(e.target.value)}
+                                    />
+                                  </div>
+
+                                  <div className="form-groupsets">
+                                    <label>Mobile No.</label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      placeholder=""
+                                      value={mobileNo}
+                                      onChange={(e) =>
+                                        setMobileNo(e.target.value)
+                                      }
+                                    />
+                                  </div>
+
+                                  <div className="form-groupsets">
+                                    <label>Query</label>
+                                    <textarea
+                                      type="text"
+                                      className="form-control"
+                                      placeholder=""
+                                      value={query}
+                                      onChange={(e) => setQuery(e.target.value)}
+                                    ></textarea>
+                                  </div>
                                 </div>
 
-                                <div className="form-groupsets">
-                                  <label>Email id</label>
-                                  <input
-                                    type="email"
-                                    className="form-control"
-                                    placeholder=""
-                                  />
-                                </div>
-
-                                <div className="form-groupsets">
-                                  <label>Phone No.</label>
-                                  <input
-                                    type="text"
-                                    className="form-control"
-                                    placeholder=""
-                                  />
-                                </div>
-
-                                <div className="form-groupsets">
-                                  <label>Course</label>
-                                  <select
-                                    className="selectpicker"
-                                    data-show-subtext="true"
-                                    data-live-search="true"
-                                    data-live-search-placeholder="Sort By Tag"
+                                <div className="col-lg-12 text-center roundbotms">
+                                  <button
+                                    type="submit"
+                                    className="orangectadms"
                                   >
-                                    <option value="hide">---</option>
-                                    <option value="2010">Course 1</option>
-                                    <option value="2011">Course 2</option>
-                                    <option value="2012">Course 3</option>
-                                    <option value="2013">Course 4</option>
-                                    <option value="2014">Course 5</option>
-                                  </select>
-                                </div>
-
-                                <div className="form-groupsets">
-                                  <label>How We can Help</label>
-                                  <textarea
-                                    type="text"
-                                    className="form-control"
-                                    placeholder=""
-                                  ></textarea>
+                                    Submit
+                                  </button>
                                 </div>
                               </div>
-
-                              <div className="col-lg-12 text-center roundbotms">
-                                <button className="orangectadms">Submit</button>
-                              </div>
-                            </div>
+                            </form>
                           </div>
                         </div>
                       </div>

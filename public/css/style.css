@@ -39,6 +39,11 @@
     display: none;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
+
 body{
 	font-family: 'Gilroy';
 	padding-top: 75px;
@@ -1282,6 +1287,7 @@ footer.stfooter .collapse:not(.show) {
     padding: 6px;
     color: #676d76;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .blulghtcta {

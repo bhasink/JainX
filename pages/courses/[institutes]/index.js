@@ -20,19 +20,12 @@ import ContentLoader from 'react-content-loader'
 
 const Institutes = () => {
   const [institute, setInstitute] = useState({})
-  const [loader, setLoader] = useState(false)
   const router = useRouter()
   const institutes = router.query.institutes
 
   useEffect(() => {
         
     if(!router.isReady) return;
-
-
-    setLoader(true)
-
-    setTimeout(() => setLoader(false), 1000);
-
 
     getInstitute()
 
@@ -70,50 +63,14 @@ const Institutes = () => {
     <Nav />
 
 
-    {loader ? (
-                    <ContentLoader
-                    backgroundColor="#f5f5f5"
-                    foregroundColor="#dbdbdb"
-                      viewBox="0 0 900 400"
-                      height={400}
-                      width={900}
-                      speed={1}
-                    >
-                      <rect
-                        x="0"
-                        y="0"
-                        rx="0"
-                        ry="0"
-                        width="280"
-                        height="400"
-                      />
-                      <rect
-                        x="310"
-                        y="0"
-                        rx="0"
-                        ry="0"
-                        width="280"
-                        height="400"
-                      />
-                      <rect
-                        x="620"
-                        y="0"
-                        rx="0"
-                        ry="0"
-                        width="280"
-                        height="400"
-                      />
-                    </ContentLoader>
-                  ) : (  
 
-                    <>
   <section className="pageinforhd pt-5 pb-5 nohdleftbrdcm">
     <div className="container">
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
           <li className="breadcrumb-item"><a href="#">Home</a></li>
           <li className="breadcrumb-item"><a href="#">All Course</a></li>
-          <li className="breadcrumb-item active" aria-current="page">Institute Page</li>
+          <li className="breadcrumb-item active" aria-current="page">{institute && institute.name}</li>
         </ol>
       </nav>
     </div>
@@ -448,9 +405,7 @@ const Institutes = () => {
       </div>
     </div>
   </section>
-  </>
 
-                  )}
      
      <Footer/>
 

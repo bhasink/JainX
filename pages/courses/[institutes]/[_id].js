@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
@@ -15,10 +15,22 @@ import dynamic from 'next/dynamic'
 const OwlCarousel = dynamic(() => import('react-owl-carousel'), {
   ssr: false,
 })
+import { useToasts } from 'react-toast-notifications'
+
 
 const CourseDetails = () => {
   const [courseDetails, setCourseDetails] = useState({})
   const [keyHighlights, setKeyHighlightss] = useState([])
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [mobileNo, setMobileNo] = useState('')
+  const [query, setQuery] = useState('')
+  
+  
+  const myRef = useRef(null)
+  const { addToast } = useToasts()
+  const executeScroll = () => myRef.current.scrollIntoView()    
+
 
   const router = useRouter()
   const _id = router.query._id
@@ -59,6 +71,77 @@ const CourseDetails = () => {
     }
   }
 
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    if (name == '') {
+      addToast('Please enter the name!', { appearance: 'error' })
+
+      return false
+    }
+
+    if (email == '') {
+      addToast('Please enter the email!', { appearance: 'error' })
+      return false
+    }
+
+    if (IsEmail(email) == false) {
+      addToast('Incorrect email!', { appearance: 'error' })
+
+      return false
+    }
+
+    if (mobileNo == '') {
+      addToast('Please enter the mobile number!', { appearance: 'error' })
+      return false
+    }
+
+    if (mobileNo.length != 10) {
+      addToast('Mobile number must be of ten digits!', { appearance: 'error' })
+      return false
+    }
+
+    if (query == '') {
+      addToast('Please enter the query!', { appearance: 'error' })
+      return false
+    }
+    
+
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+    $("#exampleModalEnquirenow").hide()
+
+
+    try {
+      const data = await axios.post(`https://phplaravel-709751-2547471.cloudwaysapps.com/api/course-leads`,{
+          "name":name,
+          "email":email,
+          "mobile_no":mobileNo,
+          "query":query,
+          "course_id":courseDetails.id,
+      });
+  
+      if(data.status == 200){
+        addToast("Success!", { appearance: 'success' });
+        router.push("/thanks");
+      }
+
+      //
+    } catch (err) {
+      console.log(err)
+      addToast('Invalid! Please try again.', { appearance: 'error' })
+    }
+  }
+
+  const IsEmail = (email) => {
+    let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
+    if (!regex.test(email)) {
+      return false
+    } else {
+      return true
+    }
+  }
+
   return (
     <>
       <Nav />
@@ -92,7 +175,7 @@ const CourseDetails = () => {
                 <h4 className="insnames">{courseDetails && courseDetails.institute && courseDetails.institute.name}</h4>
                 <p>{courseDetails && courseDetails.short_desc}</p>
                 <div className="dtlsctaviews desktopcopy">
-                  <a href="#" className="grylghtcta">
+                  <a onClick={executeScroll} className="grylghtcta">
                     Apply Now
                   </a>
                   <a href="#" className="blulghtcta">
@@ -700,17 +783,19 @@ const CourseDetails = () => {
           </div>
         </div>
       </section>
-      <section className="tpcateg contlast">
+      <section className="tpcateg contlast" ref={myRef}>
         <div className="container">
           <div className="row">
             <div className="col-md-6 col-lg-6">
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="customfrms lssmg">
                   <div className="form-group">
                     <input
                       type="textr"
                       className="form-control"
-                      placeholder="First Name"
+                      placeholder="Name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
                     />
                   </div>
                   <div className="form-group">
@@ -718,17 +803,32 @@ const CourseDetails = () => {
                       type="email"
                       className="form-control"
                       placeholder="Email Id"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
                   <div className="form-group">
                     <input
                       type="text"
                       className="form-control"
-                      placeholder="Phone Number"
+                      placeholder="Mobile No."
+                      value={mobileNo}
+                      onChange={(e) =>setMobileNo(e.target.value)}
                     />
                   </div>
+
+                  <div className="form-group">
+                                    <textarea
+                                      type="text"
+                                      className="form-control"
+                                      placeholder="Query"
+                                      value={query}
+                                      onChange={(e) => setQuery(e.target.value)}
+                                    ></textarea>
+                                  </div>
+
                   <div className="form-group text-center">
-                    <button>Submit</button>
+                    <button type="submit">Submit</button>
                   </div>
                 </div>
               </form>

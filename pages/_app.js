@@ -1,4 +1,5 @@
 import Head from "next/head";
+import {ToastProvider} from "react-toast-notifications";
 // import "bootstrap/dist/css/bootstrap.min.css";
 
 function MyApp({ Component, pageProps }) {
@@ -17,7 +18,14 @@ function MyApp({ Component, pageProps }) {
             <link rel="stylesheet" type="text/css" href="/css/style.css" />
         </Head>
         
+        <ToastProvider
+            autoDismiss={true}
+            autoDismissTimeout="2000"
+            placement="bottom-right"
+            style={{zIndex:"2000"}}
+        >
         <Component {...pageProps} />
+        </ToastProvider>
     </>
         
     );

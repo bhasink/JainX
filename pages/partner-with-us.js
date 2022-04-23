@@ -3,7 +3,7 @@ import AOS from 'aos'
 import Nav from '../components/header/Nav'
 import Footer from '../components/footer/Footer'
 
-const About = () => {
+const PartnerWithUs = () => {
   useEffect(() => {
     AOS.init({
       duration: 2000,
@@ -148,4 +148,4 @@ const About = () => {
   )
 }
 
-export default About
+export default PartnerWithUs
