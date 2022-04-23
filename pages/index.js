@@ -511,7 +511,8 @@ const Home = () => {
         </div>
       </section>
 
-    
+      {courses.length && (
+
         <section className="featuredcls">
           <div className="container">
             <div className="text-center hdingst">
@@ -519,6 +520,9 @@ const Home = () => {
             </div>
             <div className="coursespanels">
               {/* {JSON.stringify(courses,null,2)} */}
+
+
+
               <OwlCarousel
                 className="featuredslide owl-theme owl-carousel"
                 loop
@@ -556,13 +560,18 @@ const Home = () => {
                   </div>
                 ))}
               </OwlCarousel>
+            
+              
             </div>
           </div>
         </section>
+
+)}
     
 
-
-        <section className="tpcateg">
+ {categories.length && (
+      
+      <section className="tpcateg">
           <div className="container">
             <div className="text-center hdingst whtxt">
               <h2 className="mainhds">Top Categories</h2>
@@ -590,6 +599,8 @@ const Home = () => {
             </OwlCarousel>
           </div>
         </section>
+
+)}
       
 
       <section className="testimoniapn">
