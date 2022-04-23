@@ -26,18 +26,22 @@ const Home = () => {
   const [catSelected, setCatSelected] = useState('')
   const [courseMode, setCourseMode] = useState('Hybrid')
   const [courses, setCourses] = useState([])
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter()
 
   useEffect(() => {
-    AOS.init({
-      duration: 2000,
-    })
+
+    setLoading(true);
 
     getCities()
     getCourseCategory()
     getFeaturedCourses()
-  }, [router.pathname])
+
+    AOS.init({
+      duration: 2000,
+    })
+  }, [])
 
   const [value, setValue] = useState('')
   const [suggestions, setSuggestions] = useState([])
@@ -133,6 +137,8 @@ const Home = () => {
       )
       const get_categories = data.get_course_category
       setCategories(get_categories)
+      setLoading(true);
+
     } catch (err) {
       console.log(err)
     }
@@ -329,7 +335,11 @@ const Home = () => {
       <Nav />
 
       {/* {courseMode} */}
-      {/* {JSON.stringify(selectedCity,null,2)} */}
+      {/* {JSON.stringify(courses,null,2)} */}
+      
+      {loading && (
+
+        <>
 
       <section className="homemainbanner">
         <div className="container">
@@ -501,7 +511,7 @@ const Home = () => {
         </div>
       </section>
 
-      {courses && (
+    
         <section className="featuredcls">
           <div className="container">
             <div className="text-center hdingst">
@@ -549,9 +559,9 @@ const Home = () => {
             </div>
           </div>
         </section>
-      )}
+    
 
-      {categories && (
+
         <section className="tpcateg">
           <div className="container">
             <div className="text-center hdingst whtxt">
@@ -580,7 +590,7 @@ const Home = () => {
             </OwlCarousel>
           </div>
         </section>
-      )}
+      
 
       <section className="testimoniapn">
         <div className="container">
@@ -760,6 +770,10 @@ const Home = () => {
           </OwlCarousel>
         </div>
       </section>
+
+      </>
+
+)}
 
       <Footer />
     </>
