@@ -22,7 +22,7 @@ useEffect(() => {
 
     const getCourseName = async () => {
         try {
-          const { data } = await axios.get(`https://phplaravel-709751-2547471.cloudwaysapps.com/api/get-course-name`)
+          const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API}/get-course-name`)
           const get_course_name = data.get_course_name;
           setCourseName(get_course_name.map(opt => ({ label: opt.name, value: opt.id })));
     
@@ -33,7 +33,7 @@ useEffect(() => {
     
     const getCourseMode = async () => {
       try {
-        const { data } = await axios.get(`https://phplaravel-709751-2547471.cloudwaysapps.com/api/get-course-mode`)
+        const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API}/get-course-mode`)
         const get_course_mode = data.get_course_mode;
         setCourseMode(get_course_mode.map(opt => ({ label: opt.name, value: opt.id })));
     
@@ -44,7 +44,7 @@ useEffect(() => {
     
     const getInstitutes = async () => {
       try {
-        const { data } = await axios.get(`https://phplaravel-709751-2547471.cloudwaysapps.com/api/get-institutes`)
+        const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API}/get-institutes`)
         const get_institutes = data.get_institutes;
         setInstitutes(get_institutes.map(opt => ({ label: opt.name, value: opt.id })));
     
@@ -56,7 +56,7 @@ useEffect(() => {
     
     const getCities = async () => {
       try {
-        const { data } = await axios.get(`https://phplaravel-709751-2547471.cloudwaysapps.com/api/get-cities`)
+        const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API}/get-cities`)
         const get_cities = data.get_cities;
         setCities(get_cities.map(opt => ({ label: opt.name, value: opt.id })));
     
@@ -89,7 +89,7 @@ useEffect(() => {
     <>
      <div className=" mobsonly">
               <button className=" collapsed ctfiljxs nobgtr" data-toggle="modal" data-target="#exampleModalCenter5">
-                <img src="./images/sortby.png" />	
+                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/sortby.png`} />	
               </button>
               <button className=" collapsed ctfiljxs" data-toggle="modal" data-target="#exampleModalCenter1">
                 Course Name
@@ -101,7 +101,7 @@ useEffect(() => {
                 City
               </button>
               <button className=" collapsed ctfiljxs nobgtr" data-toggle="modal" data-target="#exampleModalCenter">
-                <img src="./images/filterbys.png" />	
+                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/filterbys.png`} />	
               </button>
               <button className=" collapsed ctfiljxs" data-toggle="modal" data-target="#exampleModalCenter4">
                 Select Institute
@@ -176,7 +176,7 @@ useEffect(() => {
                       <div className="coursetype row">
                         <div className="col-lg-6 col-6">
                           <div className="crdcourse">
-                            <img src="./images/hybridicon.png" />
+                            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/hybridicon.png`} />
                             <div className="custom-control custom-radio">
                               <input type="radio" id="customRadio8" name="customRadio" className="custom-control-input" />
                               <label className="custom-control-label" htmlFor="customRadio8">Hybrid</label>
@@ -185,7 +185,7 @@ useEffect(() => {
                         </div>
                         <div className="col-lg-6 col-6">
                           <div className="crdcourse">
-                            <img src="./images/onlinecrsicon.png" />
+                            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/onlinecrsicon.png`} />
                             <div className="custom-control custom-radio">
                               <input type="radio" id="customRadio7" name="customRadio" className="custom-control-input" />
                               <label className="custom-control-label" htmlFor="customRadio7">Online</label>
@@ -194,7 +194,7 @@ useEffect(() => {
                         </div>
                         <div className="col-lg-6 col-6 mx-auto">
                           <div className="crdcourse">
-                            <img src="./images/teachingicon.png" />
+                            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/teachingicon.png`} />
                             <div className="custom-control custom-radio">
                               <input type="radio" id="customRadio9" name="customRadio" className="custom-control-input" />
                               <label className="custom-control-label" htmlFor="customRadio9">Offline</label>

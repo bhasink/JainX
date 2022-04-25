@@ -256,7 +256,7 @@ const Footer = () => {
           <li>
           <Link href="/courses">
             <a>
-              <img src={`/images/allcourses.png`} />
+              <img src={`${process.env.NEXT_PUBLIC_B_API}/images/allcourses.png`} />
               <span>
                 All Courses
                 <span />
