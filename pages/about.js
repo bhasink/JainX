@@ -59,7 +59,7 @@ const About = () => {
 
 
     try {
-      const data = await axios.post(`https://phplaravel-709751-2547471.cloudwaysapps.com/api/contact-us`,{
+      const data = await axios.post(`${process.env.NEXT_PUBLIC_API}/contact-us`,{
           "name":name,
           "email":email,
           "mobile_no":mobileNo,
@@ -111,7 +111,7 @@ const About = () => {
       <section className="aboutlayouts">
         <div className="container">
           <div className="pgbanners">
-            <img src="./images/aboutbanner.jpg" className="fllimg" />
+            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/aboutbanner.jpg`} className="fllimg" />
           </div>
           <div className="contentares  pt-5 pb-lg-5">
             <div className="text-center hdingst">
@@ -122,8 +122,8 @@ const About = () => {
             <div className="row  pt-5 pb-5">
               <div className="col-md-6 col-lg-6 pb-5 pb-lg-1">
                 <div className="vdthmbs">
-                  <img src="./images/playicon.png" className="plicon" />
-                  <img src="./images/aboutthumb.jpg" className="fllimg" />
+                  <img src={`${process.env.NEXT_PUBLIC_B_API}/images/playicon.png`} className="plicon" />
+                  <img src={`${process.env.NEXT_PUBLIC_B_API}/images/aboutthumb.jpg`} className="fllimg" />
                 </div>
               </div>
               <div className="col-md-6 col-lg-6 align-self-center">
@@ -168,14 +168,14 @@ const About = () => {
           </div>
           <div className="row text-center pt-5">
             <div className="col-lg-4 col-md-6">
-              <img src="./images/jnadicon/1.png" />
+              <img src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/1.png`} />
               <h4>Crafted Carefully</h4>
               <p>
                 Each course handpicked to enhance your knowledge and skills.
               </p>
             </div>
             <div className="col-lg-4 col-md-6">
-              <img src="./images/jnadicon/2.png" />
+              <img src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/2.png`} />
               <h4>Expert Facilitators</h4>
               <p>
                 Learn from passionate and industry experienced subject matter
@@ -183,7 +183,7 @@ const About = () => {
               </p>
             </div>
             <div className="col-lg-4 col-md-6">
-              <img src="./images/jnadicon/3.png" />
+              <img src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/3.png`} />
               <h4>Get Hands-on Exposure</h4>
               <p>
                 Gain practical experience and skills through industry/in-house
@@ -191,7 +191,7 @@ const About = () => {
               </p>
             </div>
             <div className="col-lg-4 col-md-6">
-              <img src="./images/jnadicon/1.png" />
+              <img src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/1.png`} />
               <h4>Live Projects &amp; Case Studies</h4>
               <p>
                 Gain practical experience and skills through industry /in-house
@@ -199,12 +199,12 @@ const About = () => {
               </p>
             </div>
             <div className="col-lg-4 col-md-6">
-              <img src="./images/jnadicon/2.png" />
+              <img src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/2.png`} />
               <h4>Trending Programs</h4>
               <p>Learn the most trending programs &amp; be industry ready.</p>
             </div>
             <div className="col-lg-4 col-md-6">
-              <img src="./images/jnadicon/3.png" />
+              <img src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/3.png`} />
               <h4>Industry Relevant Curriculum</h4>
               <p>
                 Learn from passionate and industry experienced subject matter
@@ -228,34 +228,30 @@ const About = () => {
             <div className="trustcmpcarso owl-theme owl-carousel">
               <div className="item">
                 <div className="lgocirc">
-                  <img src="./images/client/1.png" />
+                  <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/1.png`} />
                 </div>
               </div>
               <div className="item">
                 <div className="lgocirc">
-                  <img src="./images/client/2.png" />
+                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/2.png`} />
                 </div>
               </div>
               <div className="item">
                 <div className="lgocirc">
-                  <img src="./images/client/3.png" />
+                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/3.png`} />
                 </div>
               </div>
               <div className="item">
                 <div className="lgocirc">
-                  <img src="./images/client/4.png" />
+                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/4.png`} />
                 </div>
               </div>
               <div className="item">
                 <div className="lgocirc">
-                  <img src="./images/client/5.png" />
+                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/5.png`} />
                 </div>
               </div>
-              <div className="item">
-                <div className="lgocirc">
-                  <img src="./images/client/5.png" />
-                </div>
-              </div>
+             
             </div>
           </div>
         </div>

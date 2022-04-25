@@ -59,7 +59,7 @@ const ContactUs = () => {
 
 
     try {
-      const data = await axios.post(`https://phplaravel-709751-2547471.cloudwaysapps.com/api/contact-us`,{
+      const data = await axios.post(`${process.env.NEXT_PUBLIC_API}/contact-us`,{
           "name":name,
           "email":email,
           "mobile_no":mobileNo,

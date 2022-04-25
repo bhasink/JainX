@@ -12,7 +12,7 @@ const Nav = () => {
             <Link href="/">
               <a className="navbar-brand">
                 <img
-                  src="/images/logo.jpg"
+                  src={`${process.env.NEXT_PUBLIC_B_API}/images/logo.jpg`}
                   className="navbar-brand-img"
                   alt="logo"
                 />

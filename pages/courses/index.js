@@ -21,7 +21,6 @@ const Listing = (props) => {
   const [filterData, setfilterData] = useState([])
   const [loader, setLoader] = useState(false)
   const [currentProject, setCurrentProject] = useState("")
-  const [backdrop, setBackdrop] = useState("true")
 
   
 
@@ -60,7 +59,7 @@ const Listing = (props) => {
   const getAllCourses = async () => {
     try {
       const { data } = await axios.get(
-        `https://phplaravel-709751-2547471.cloudwaysapps.com/api/listing`,
+        `${process.env.NEXT_PUBLIC_API}/listing`,
       )
       const getCourses = data.get_courses.data
       // const l_page = data.get_courses.last_page;
@@ -90,7 +89,7 @@ const Listing = (props) => {
   const getAllCourses2 = async () => {
     try {
       const { data } = await axios.get(
-        `https://phplaravel-709751-2547471.cloudwaysapps.com/api/listing?page=${currentPage}`,
+        `${process.env.NEXT_PUBLIC_API}/listing?page=${currentPage}`,
       )
       const getCourses = data.get_courses.data
       const l_page = data.get_courses.last_page
@@ -132,7 +131,7 @@ const Listing = (props) => {
       }
 
       const { data } = await axios.post(
-        `https://phplaravel-709751-2547471.cloudwaysapps.com/api/listingbyfilter`,
+        `${process.env.NEXT_PUBLIC_API}/listingbyfilter`,
         {
           prod_filters: newFilterData,
         },
@@ -231,7 +230,7 @@ const Listing = (props) => {
 
 
     try {
-      const data = await axios.post(`https://phplaravel-709751-2547471.cloudwaysapps.com/api/course-leads`,{
+      const data = await axios.post(`${process.env.NEXT_PUBLIC_API}/course-leads`,{
           "name":name,
           "email":email,
           "mobile_no":mobileNo,
@@ -418,7 +417,7 @@ const Listing = (props) => {
                               <div className="twycol">
                                 <div className="scllogoswr">
                                   <img
-                                    src={`/images/courseslogo/` + course.logo}
+                                    src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/` + course.logo}
                                   />
                                   <a href="compare.html" className="cmprs">
                                     Compare
@@ -438,15 +437,15 @@ const Listing = (props) => {
                               </div>
                               <div className="coursedurtime">
                                 <span>
-                                  <img src="./images/scheduleicon.png" />{' '}
+                                  <img src={`${process.env.NEXT_PUBLIC_B_API}/images/scheduleicon.png`} />{' '}
                                   {course.duration} Months
                                 </span>
                                 <span>
-                                  <img src="./images/ppp.png" /> pgp-courses
+                                  <img src={`${process.env.NEXT_PUBLIC_B_API}/images/ppp.png`} /> pgp-courses
                                 </span>
                               </div>
                               <div className="keydts">
-                                <img src="./images/keychain.png" />
+                                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/keychain.png`} />
                                 <p>
                                   <span>Key Learnings:</span>{' '}
                                   {course.key_learnings}
@@ -482,7 +481,6 @@ const Listing = (props) => {
                     role="dialog"
                     aria-labelledby="exampleModalEnquirenowTitle3"
                     aria-hidden="true"
-                    data-backdrop={backdrop}
                   >
                     <div
                       className="modal-dialog modal-dialog-centered   jncustm trasntypes"

@@ -15,8 +15,6 @@ import dynamic from "next/dynamic";
 const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
     ssr: false,
 });
-import ContentLoader from 'react-content-loader'
-
 
 const Institutes = () => {
   const [institute, setInstitute] = useState({})
@@ -41,7 +39,7 @@ const Institutes = () => {
       }
 
       const { data } = await axios.post(
-        `https://phplaravel-709751-2547471.cloudwaysapps.com/api/get-institute`,
+        `${process.env.NEXT_PUBLIC_API}/get-institute`,
         {
           slug: institutes,
         },
@@ -89,7 +87,7 @@ const Institutes = () => {
           </div>
         </div>
         <div className="col-md-6 col-lg-6 text-center">
-          <img src="/images/courseslogo/deake.png" className="ms" />
+          <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/deake.png`} className="ms" />
         </div>
         {/*<div class="col-md-6 col-lg-6">
 				<div class="dtlsctaviews">
@@ -101,22 +99,22 @@ const Institutes = () => {
       <div className="coursepackdtls">
         <div className="row">
           <div className="col-6 col-lg-3 col-md-3 mx-auto ctypeinl">
-            <img src="/images/courseslogo/courseinf/1.png" />
+            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/courseinf/1.png`} />
             <h6 className="mainhds">Courses</h6>
             <h4 className="insnames">{institute && institute.courses && institute.courses.length}</h4>
           </div>
           <div className="col-6 col-lg-3 col-md-3 mx-auto ctypeinl">
-            <img src="/images/courseslogo/courseinf/7.png" />
+            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/courseinf/7.png`} />
             <h6 className="mainhds">Hours</h6>
             <h4 className="insnames">250</h4>
           </div>
           <div className="col-6 col-lg-3 col-md-3 mx-auto ctypeinl">
-            <img src="/images/courseslogo/courseinf/5.png" />
+            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/courseinf/5.png`} />
             <h6 className="mainhds">Enrolled</h6>
             <h4 className="insnames">{institute && institute.students_enrolled}+ Students</h4>
           </div>
           <div className="col-6 col-lg-3 col-md-3 mx-auto ctypeinl">
-            <img src="/images/courseslogo/courseinf/8.png" />
+            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/courseinf/8.png`} />
             <h6 className="mainhds">Certification</h6>
             <h4 className="insnames">{institute && institute.certifications}</h4>
           </div>
@@ -156,11 +154,11 @@ const Institutes = () => {
                   </p></div>
               </div>
               <div className="coursedurtime">
-                <span><img src="/images/scheduleicon.png" /> {course.duration} Months</span>
-                <span><img src="/images/ppp.png" /> pgp-courses</span>
+                <span><img src={`${process.env.NEXT_PUBLIC_B_API}/images/scheduleicon.png`} /> {course.duration} Months</span>
+                <span><img src={`${process.env.NEXT_PUBLIC_B_API}/images/ppp.png`} /> pgp-courses</span>
               </div>
               <div className="keydts">
-                <img src="/images/keychain.png" />
+                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/keychain.png`} />
                 <p><span>Key Learnings:</span>{course.key_learnings}</p>
               </div>
               <div className="dtlsctaviews">
@@ -193,7 +191,7 @@ const Institutes = () => {
                 ipsum quia dolor sit amet, consectetur
                 adipisci velit</p>
               <div className="usrthmbs">
-                <img src="/images/reviews/1.jpg" />
+                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`} />
               </div>
               <p className="usrnmtst">Neque porro quisquam</p>
             </div>
@@ -204,7 +202,7 @@ const Institutes = () => {
                 ipsum quia dolor sit amet, consectetur
                 adipisci velit</p>
               <div className="usrthmbs">
-                <img src="/images/reviews/3.jpg" />
+                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/3.jpg`} />
               </div>
               <p className="usrnmtst">Neque porro quisquam</p>
             </div>
@@ -215,7 +213,7 @@ const Institutes = () => {
                 ipsum quia dolor sit amet, consectetur
                 adipisci velit</p>
               <div className="usrthmbs">
-                <img src="/images/reviews/3.jpg" />
+                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/3.jpg`} />
               </div>
               <p className="usrnmtst">Neque porro quisquam</p>
             </div>
@@ -226,7 +224,7 @@ const Institutes = () => {
                 ipsum quia dolor sit amet, consectetur
                 adipisci velit</p>
               <div className="usrthmbs">
-                <img src="/images/reviews/2.jpg" />
+                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/2.jpg`} />
               </div>
               <p className="usrnmtst">Neque porro quisquam</p>
             </div>
@@ -244,32 +242,27 @@ const Institutes = () => {
         <div className="trustcmpcarso owl-theme owl-carousel">
           <div className="item">
             <div className="lgocirc">
-              <img src="/images/client/1.png" />
+              <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/1.png`} />
             </div>
           </div>
           <div className="item">
             <div className="lgocirc">
-              <img src="/images/client/2.png" />
+            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/2.png`} />
             </div>
           </div>
           <div className="item">
             <div className="lgocirc">
-              <img src="/images/client/3.png" />
+            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/3.png`} />
             </div>
           </div>
           <div className="item">
             <div className="lgocirc">
-              <img src="/images/client/4.png" />
+            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/4.png`} />
             </div>
           </div>
           <div className="item">
             <div className="lgocirc">
-              <img src="/images/client/5.png" />
-            </div>
-          </div>
-          <div className="item">
-            <div className="lgocirc">
-              <img src="/images/client/5.png" />
+            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/5.png`} />
             </div>
           </div>
         </div>
@@ -284,7 +277,7 @@ const Institutes = () => {
           F<span className="ogx">Asked</span><br />
           Q<span className="ogx">uestions</span>
         </h2>
-        <img src="/images/faqroundimgs.png" className="rouim" />
+        <img src={`${process.env.NEXT_PUBLIC_B_API}/images/faqroundimgs.png`} className="rouim" />
       </div>
       <div id="accordion8">
         <div className="card">

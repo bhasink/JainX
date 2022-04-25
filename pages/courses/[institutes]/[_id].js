@@ -52,7 +52,7 @@ const CourseDetails = () => {
       }
 
       const { data } = await axios.post(
-        `https://phplaravel-709751-2547471.cloudwaysapps.com/api/get-course-details`,
+        `${process.env.NEXT_PUBLIC_API}/get-course-details`,
         {
           slug: _id,
         },
@@ -113,7 +113,7 @@ const CourseDetails = () => {
 
 
     try {
-      const data = await axios.post(`https://phplaravel-709751-2547471.cloudwaysapps.com/api/course-leads`,{
+      const data = await axios.post(`${process.env.NEXT_PUBLIC_API}/course-leads`,{
           "name":name,
           "email":email,
           "mobile_no":mobileNo,
@@ -187,7 +187,7 @@ const CourseDetails = () => {
             <div className="col-md-6 col-lg-6 text-center">
 
               {courseDetails && courseDetails.logo && (
-              <img src={`/images/courseslogo/` + courseDetails.logo} className="ms" />
+              <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/` + courseDetails.logo} className="ms" />
               )}
 
             </div>
@@ -201,32 +201,32 @@ const CourseDetails = () => {
           <div className="coursepackdtls">
             <div className="row">
               <div className="col-6 col-lg-2 col-md-3 mx-auto ctypeinl">
-                <img src="/images/courseslogo/courseinf/1.png" />
+                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/courseinf/1.png`} />
                 <h6 className="mainhds">Delivery Type</h6>
                 <h4 className="insnames">Online</h4>
               </div>
               <div className="col-6 col-lg-2 col-md-3 mx-auto ctypeinl">
-                <img src="/images/courseslogo/courseinf/2.png" />
+                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/courseinf/2.png`} />
                 <h6 className="mainhds">Start Date</h6>
                 <h4 className="insnames">{courseDetails && courseDetails.start_date}</h4>
               </div>
               <div className="col-6 col-lg-2 col-md-3 mx-auto ctypeinl">
-                <img src="/images/courseslogo/courseinf/3.png" />
+                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/courseinf/3.png`} />
                 <h6 className="mainhds">Duration</h6>
                 <h4 className="insnames">{courseDetails && courseDetails.duration} Months</h4>
               </div>
               <div className="col-6 col-lg-2 col-md-3 mx-auto ctypeinl">
-                <img src="/images/courseslogo/courseinf/4.png" />
+                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/courseinf/4.png`} />
                 <h6 className="mainhds">Projects</h6>
                 <h4 className="insnames">{courseDetails && courseDetails.projects}</h4>
               </div>
               <div className="col-6 col-lg-2 col-md-3 mx-auto ctypeinl">
-                <img src="/images/courseslogo/courseinf/5.png" />
+                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/courseinf/5.png`} />
                 <h6 className="mainhds">Enrolled</h6>
                 <h4 className="insnames">{courseDetails && courseDetails.students_enrolled}+ Students</h4>
               </div>
               <div className="col-6 col-lg-2 col-md-3 mx-auto ctypeinl">
-                <img src="/images/courseslogo/courseinf/6.png" />
+                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/courseinf/6.png`} />
                 <h6 className="mainhds">Fee</h6>
                 <h4 className="insnames">{courseDetails && courseDetails.fees}</h4>
               </div>
@@ -342,7 +342,7 @@ const CourseDetails = () => {
               }
             </div> 
             <div className="col-lg-6 col-md-6">
-              <img src="/images/aboutinst.jpg" className="fllimg" />
+              <img src={`${process.env.NEXT_PUBLIC_B_API}/images/aboutinst.jpg`} className="fllimg" />
             </div>
           </div>
         </div>
@@ -437,7 +437,7 @@ const CourseDetails = () => {
                     amet, consectetur adipisci velit
                   </p>
                   <div className="usrthmbs">
-                    <img src="/images/reviews/1.jpg" />
+                    <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`} />
                   </div>
                   <p className="usrnmtst">Neque porro quisquam</p>
                 </div>
@@ -464,34 +464,30 @@ const CourseDetails = () => {
             >
               <div className="item">
                 <div className="lgocirc">
-                  <img src="/images/client/1.png" />
+                  <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/1.png`} />
                 </div>
               </div>
               <div className="item">
                 <div className="lgocirc">
-                  <img src="/images/client/2.png" />
+                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/2.png`} />
                 </div>
               </div>
               <div className="item">
                 <div className="lgocirc">
-                  <img src="/images/client/3.png" />
+                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/3.png`} />
                 </div>
               </div>
               <div className="item">
                 <div className="lgocirc">
-                  <img src="/images/client/4.png" />
+                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/4.png`} />
                 </div>
               </div>
               <div className="item">
                 <div className="lgocirc">
-                  <img src="/images/client/5.png" />
+                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/5.png`} />
                 </div>
               </div>
-              <div className="item">
-                <div className="lgocirc">
-                  <img src="/images/client/5.png" />
-                </div>
-              </div>
+              
             </OwlCarousel>
           </div>
         </div>
@@ -504,7 +500,7 @@ const CourseDetails = () => {
               <br />F<span className="ogx">Asked</span>
               <br />Q<span className="ogx">uestions</span>
             </h2>
-            <img src="/images/faqroundimgs.png" className="rouim" />
+            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/faqroundimgs.png`} className="rouim" />
           </div>
           <div id="accordion8">
             <div className="card">

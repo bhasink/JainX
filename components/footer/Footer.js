@@ -244,7 +244,7 @@ const Footer = () => {
           <Link href="/">
 
             <a>
-              <img src="/images/homeic.png" />
+              <img src={`${process.env.NEXT_PUBLIC_B_API}/images/homeic.png`} />
               <span>
                 Home
                 <span />
@@ -256,7 +256,7 @@ const Footer = () => {
           <li>
           <Link href="/courses">
             <a>
-              <img src="/images/allcourses.png" />
+              <img src={`/images/allcourses.png`} />
               <span>
                 All Courses
                 <span />
@@ -268,7 +268,7 @@ const Footer = () => {
           <Link href="/partner-with-us">
 
             <a>
-              <img src="/images/becomept.png" />
+              <img src={`${process.env.NEXT_PUBLIC_B_API}/images/becomept.png`} />
               <span>
                 Become a partners
                 <span />
@@ -281,7 +281,7 @@ const Footer = () => {
           <Link href="/contact-us">
 
             <a>
-              <img src="/images/contico.png" />
+              <img src={`${process.env.NEXT_PUBLIC_B_API}/images/contico.png`} />
               <span>
                 Contact
                 <span />

@@ -32,7 +32,7 @@ const PartnerWithUs = () => {
           amet, consectetur adipisci velit</p>
         <a href="#" className="blulghtcta">Get Started</a>
       </div><div className="pgbanners">
-        <img src="/images/partnerwitmain.jpg" className="fllimg" />
+        <img src={`${process.env.NEXT_PUBLIC_B_API}/images/partnerwitmain.jpg`} className="fllimg" />
       </div>
     </div>
   </section>
@@ -48,14 +48,14 @@ const PartnerWithUs = () => {
             </div>
           </div>
           <div className="col-lg-6 col-md-6">
-            <img src="/images/partnestats.jpg" className="fllimg" />
+            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/partnestats.jpg`} className="fllimg" />
           </div>
         </div>
       </div>
       <div className="partsetsdipl">
         <div className="row">
           <div className="col-lg-6 col-md-6">
-            <img src="/images/partnerinfo1.jpg" className="fllimg" />
+            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/partnerinfo1.jpg`} className="fllimg" />
           </div>
           <div className="col-lg-6 col-md-6 align-self-center">
             <div className="coursepls">
@@ -80,7 +80,7 @@ const PartnerWithUs = () => {
             </div>
           </div>
           <div className="col-lg-6 col-md-6">
-            <img src="/images/partnerinfo2.jpg" className="fllimg" />
+            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/partnerinfo2.jpg`} className="fllimg" />
           </div>
         </div>
       </div>
@@ -94,7 +94,7 @@ const PartnerWithUs = () => {
       <div className="testnorflow">
         <div className="testipnlpts">
           <div className="usrthmbs">
-            <img src="/images/reviews/1.jpg" />
+            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`} />
           </div>
           <div className="usrrightinfos">
             <p>Neque porro quisquam est qui dolorem
@@ -106,7 +106,7 @@ const PartnerWithUs = () => {
         </div>
         <div className="testipnlpts">
           <div className="usrthmbs">
-            <img src="/images/reviews/3.jpg" />
+            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/3.jpg`} />
           </div>
           <div className="usrrightinfos">
             <p>Neque porro quisquam est qui dolorem
@@ -118,7 +118,7 @@ const PartnerWithUs = () => {
         </div>
         <div className="testipnlpts">
           <div className="usrthmbs">
-            <img src="/images/reviews/2.jpg" />
+            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/2.jpg`} />
           </div>
           <div className="usrrightinfos">
             <p>Neque porro quisquam est qui dolorem
