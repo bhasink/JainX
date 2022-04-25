@@ -16,7 +16,7 @@ const PartnerWithUs = () => {
 
   <section className="pageinforhd pt-5 pb-5 nohdleftbrdcm">
     <div className="container">
-      <nav aria-label="breadcrumb">
+      <nav aria-label="breadcrumb" class="float-lg-right">
         <ol className="breadcrumb">
           <li className="breadcrumb-item"><a href="#">Home</a></li>
           <li className="breadcrumb-item active" aria-current="page">Become Our Skilling Partner</li>

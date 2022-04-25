@@ -244,7 +244,7 @@ const CourseDetails = () => {
                 </div>
               </div>
             </div>
-            <div className="col-md-6 col-lg-6 text-center">
+            <div className="col-md-6 col-lg-6 text-center text-lg-right">
 
               {courseDetails && courseDetails.logo && (
               <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/` + courseDetails.logo} className="ms" />
