@@ -2529,7 +2529,10 @@ h3.mobclick {
 
 
 @media screen and (max-width: 900px) and (min-width: 768px){
-	
+	.testnorflow .testipnlpts{
+        width: 65%;
+    }
+    
 .jnadvts .innerlrs {
     height: 305px;
 }
