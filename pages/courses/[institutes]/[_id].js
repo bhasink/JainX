@@ -502,6 +502,45 @@ const CourseDetails = () => {
                   <p className="usrnmtst">Neque porro quisquam</p>
                 </div>
               </div>
+
+              <div className="item">
+                <div className="testipnlpts">
+                  <p>
+                    Neque porro quisquam est qui dolorem ipsum quia dolor sit
+                    amet, consectetur adipisci velit
+                  </p>
+                  <div className="usrthmbs">
+                    <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`} />
+                  </div>
+                  <p className="usrnmtst">Neque porro quisquam</p>
+                </div>
+              </div>
+
+              <div className="item">
+                <div className="testipnlpts">
+                  <p>
+                    Neque porro quisquam est qui dolorem ipsum quia dolor sit
+                    amet, consectetur adipisci velit
+                  </p>
+                  <div className="usrthmbs">
+                    <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`} />
+                  </div>
+                  <p className="usrnmtst">Neque porro quisquam</p>
+                </div>
+              </div>
+
+              <div className="item">
+                <div className="testipnlpts">
+                  <p>
+                    Neque porro quisquam est qui dolorem ipsum quia dolor sit
+                    amet, consectetur adipisci velit
+                  </p>
+                  <div className="usrthmbs">
+                    <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`} />
+                  </div>
+                  <p className="usrnmtst">Neque porro quisquam</p>
+                </div>
+              </div>
             </OwlCarousel>
           </div>
         </div>
