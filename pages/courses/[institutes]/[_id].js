@@ -142,6 +142,66 @@ const CourseDetails = () => {
     }
   }
 
+  const state = {
+    responsive: {
+      0: {
+        items: 1,
+        nav: true,
+        dots: true,
+        loop: true,
+      },
+      300: {
+        items: 1,
+        nav: true,
+        dots: true,
+        margin: 10,
+        loop: true,
+      },
+
+      766: {
+        items: 2,
+        nav: true,
+        dots: false,
+        loop: true,
+      },
+
+      1200: {
+        items: 4,
+        nav: true,
+        dots: false,
+        loop: true,
+      },
+    },
+    responsive_trust_comp: {
+      0: {
+        items: 1,
+        nav: false,
+        dots: true,
+        loop: true,
+      },
+      300: {
+        items: 3,
+        nav: false,
+        dots: true,
+        loop: true,
+      },
+
+      766: {
+        items: 3,
+        nav: false,
+        dots: false,
+        loop: true,
+      },
+
+      1200: {
+        items: 5,
+        nav: false,
+        dots: true,
+        center: true,
+      },
+    },
+  }
+  
   return (
     <>
       <Nav />
@@ -428,7 +488,7 @@ const CourseDetails = () => {
               nav
               items={3}
               center
-              // responsive={state.responsive}
+              responsive={state.responsive}
             >
               <div className="item">
                 <div className="testipnlpts">
@@ -460,7 +520,7 @@ const CourseDetails = () => {
               margin={40}
               items={5}
               center
-              // responsive={state.responsive}
+              responsive={state.responsive_trust_comp}
             >
               <div className="item">
                 <div className="lgocirc">

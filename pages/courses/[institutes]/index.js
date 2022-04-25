@@ -54,6 +54,67 @@ const Institutes = () => {
     }
   }
 
+  const state = {
+    responsive: {
+      0: {
+        items: 1,
+        nav: true,
+        dots: false,
+        loop: true,
+      },
+      300: {
+        items: 1,
+        nav: true,
+        dots: false,
+        margin: 10,
+        loop: true,
+      },
+
+      766: {
+        items: 2,
+        nav: true,
+        dots: false,
+        loop: true,
+      },
+
+      1200: {
+        items: 4,
+        nav: true,
+        dots: false,
+        loop: true,
+      },
+    },
+    responsive_trust_comp: {
+      0: {
+        items: 1,
+        nav: false,
+        dots: true,
+        loop: true,
+      },
+      300: {
+        items: 3,
+        nav: false,
+        dots: true,
+        loop: true,
+      },
+
+      766: {
+        items: 3,
+        nav: false,
+        dots: false,
+        loop: true,
+      },
+
+      1200: {
+        items: 5,
+        nav: false,
+        dots: true,
+        center: true,
+      },
+    },
+  }
+  
+
 
   return (
     <>
@@ -179,67 +240,120 @@ const Institutes = () => {
     </div>
   </section>
   <section className="testimoniapn">
-    <div className="container">
-      <div className="text-center hdingst">
-        <h2 className="mainhds">What Our Learners Say</h2> 
-      </div>
-      <div className="testimparts">
-        <div className="reviewtestim owl-carousel owl-theme">
-          <div className="item">
-            <div className="testipnlpts">
-              <p>Neque porro quisquam est qui dolorem
-                ipsum quia dolor sit amet, consectetur
-                adipisci velit</p>
-              <div className="usrthmbs">
-                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`} />
-              </div>
-              <p className="usrnmtst">Neque porro quisquam</p>
-            </div>
+        <div className="container">
+          <div className="text-center hdingst">
+            <h2 className="mainhds">What Our Learners Say</h2>
           </div>
-          <div className="item">
-            <div className="testipnlpts">
-              <p>Neque porro quisquam est qui dolorem
-                ipsum quia dolor sit amet, consectetur
-                adipisci velit</p>
-              <div className="usrthmbs">
-                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/3.jpg`} />
+          <div className="testimparts">
+            <OwlCarousel
+              className="reviewtestim owl-theme owl-carousel"
+              loop
+              margin={50}
+              nav
+              items={3}
+              center
+              responsive={state.responsive}
+            >
+              <div className="item">
+                <div className="testipnlpts">
+                  <p>
+                    Neque porro quisquam est qui dolorem ipsum quia dolor sit
+                    amet, consectetur adipisci velit
+                  </p>
+                  <div className="usrthmbs">
+                    <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`} />
+                  </div>
+                  <p className="usrnmtst">Neque porro quisquam</p>
+                </div>
               </div>
-              <p className="usrnmtst">Neque porro quisquam</p>
-            </div>
-          </div>
-          <div className="item">
-            <div className="testipnlpts">
-              <p>Neque porro quisquam est qui dolorem
-                ipsum quia dolor sit amet, consectetur
-                adipisci velit</p>
-              <div className="usrthmbs">
-                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/3.jpg`} />
+
+              <div className="item">
+                <div className="testipnlpts">
+                  <p>
+                    Neque porro quisquam est qui dolorem ipsum quia dolor sit
+                    amet, consectetur adipisci velit
+                  </p>
+                  <div className="usrthmbs">
+                    <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`} />
+                  </div>
+                  <p className="usrnmtst">Neque porro quisquam</p>
+                </div>
               </div>
-              <p className="usrnmtst">Neque porro quisquam</p>
-            </div>
-          </div>
-          <div className="item">
-            <div className="testipnlpts">
-              <p>Neque porro quisquam est qui dolorem
-                ipsum quia dolor sit amet, consectetur
-                adipisci velit</p>
-              <div className="usrthmbs">
-                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/2.jpg`} />
+
+              <div className="item">
+                <div className="testipnlpts">
+                  <p>
+                    Neque porro quisquam est qui dolorem ipsum quia dolor sit
+                    amet, consectetur adipisci velit
+                  </p>
+                  <div className="usrthmbs">
+                    <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`} />
+                  </div>
+                  <p className="usrnmtst">Neque porro quisquam</p>
+                </div>
               </div>
-              <p className="usrnmtst">Neque porro quisquam</p>
-            </div>
+
+              <div className="item">
+                <div className="testipnlpts">
+                  <p>
+                    Neque porro quisquam est qui dolorem ipsum quia dolor sit
+                    amet, consectetur adipisci velit
+                  </p>
+                  <div className="usrthmbs">
+                    <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`} />
+                  </div>
+                  <p className="usrnmtst">Neque porro quisquam</p>
+                </div>
+              </div>
+
+
+              <div className="item">
+                <div className="testipnlpts">
+                  <p>
+                    Neque porro quisquam est qui dolorem ipsum quia dolor sit
+                    amet, consectetur adipisci velit
+                  </p>
+                  <div className="usrthmbs">
+                    <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`} />
+                  </div>
+                  <p className="usrnmtst">Neque porro quisquam</p>
+                </div>
+              </div>
+
+              <div className="item">
+                <div className="testipnlpts">
+                  <p>
+                    Neque porro quisquam est qui dolorem ipsum quia dolor sit
+                    amet, consectetur adipisci velit
+                  </p>
+                  <div className="usrthmbs">
+                    <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`} />
+                  </div>
+                  <p className="usrnmtst">Neque porro quisquam</p>
+                </div>
+              </div>
+
+
+            
+            </OwlCarousel>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
   <section className="whtsects trustbycoms roundicon ">
     <div className="container">
       <div className="text-center hdingst">
         <h2 className="mainhds">Hiring Companies</h2>
       </div>
       <div className="cpmslide">
-        <div className="trustcmpcarso owl-theme owl-carousel">
+
+        <OwlCarousel
+              className="trustcmpcarso owl-theme owl-carousel"
+              loop
+              margin={20}
+              items={5}
+              center
+              responsive={state.responsive_trust_comp}
+            >
           <div className="item">
             <div className="lgocirc">
               <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/1.png`} />
@@ -265,7 +379,10 @@ const Institutes = () => {
             <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/5.png`} />
             </div>
           </div>
-        </div>
+
+
+          </OwlCarousel>
+
       </div>
     </div>
   </section>
