@@ -1836,6 +1836,13 @@ section .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot
 /* Responsive css */
 
 @media screen and (max-width: 767px) and (min-width: 320px){
+    .testnorflow .testipnlpts{
+        width: 91%;
+    }
+
+    .testnorflow .usrthmbs img{
+        width: 49px;
+    }
 
     .partsetsdipl .fllimg {margin-bottom: 40px;}
 
