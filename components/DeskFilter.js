@@ -48,7 +48,7 @@ const DeskFilter = (props) => {
   const getCourseCategory = async () => {
     try {
       const { data } = await axios.get(
-        `https://phplaravel-709751-2547471.cloudwaysapps.com/api/get-categories`,
+        `${process.env.NEXT_PUBLIC_API}/get-categories`,
       )
       const get_categories = data.get_course_category
 
@@ -73,7 +73,7 @@ const DeskFilter = (props) => {
   const getCourseName = async () => {
     try {
       const { data } = await axios.get(
-        `https://phplaravel-709751-2547471.cloudwaysapps.com/api/get-course-name`,
+        `${process.env.NEXT_PUBLIC_API}/get-course-name`,
       )
       const get_course_name = data.get_course_name
       setCourseName(
@@ -91,7 +91,7 @@ const DeskFilter = (props) => {
   const getCourseMode = async () => {
     try {
       const { data } = await axios.get(
-        `https://phplaravel-709751-2547471.cloudwaysapps.com/api/get-course-mode`,
+        `${process.env.NEXT_PUBLIC_API}/get-course-mode`,
       )
       const get_course_mode = data.get_course_mode
       setCourseMode(
@@ -109,7 +109,7 @@ const DeskFilter = (props) => {
   const getInstitutes = async () => {
     try {
       const { data } = await axios.get(
-        `https://phplaravel-709751-2547471.cloudwaysapps.com/api/get-institutes`,
+        `${process.env.NEXT_PUBLIC_API}/get-institutes`,
       )
       const get_institutes = data.get_institutes
       setInstitutes(
@@ -127,7 +127,7 @@ const DeskFilter = (props) => {
   const getCities = async () => {
     try {
       const { data } = await axios.get(
-        `https://phplaravel-709751-2547471.cloudwaysapps.com/api/get-cities`,
+        `${process.env.NEXT_PUBLIC_API}/get-cities`,
       )
       const get_cities = data.get_cities
       setCities(

@@ -1,14 +1,91 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import AOS from 'aos'
 import Nav from '../components/header/Nav'
 import Footer from '../components/footer/Footer'
+import axios from 'axios'
+import { useRouter } from 'next/router'
+import { useToasts } from 'react-toast-notifications'
 
 const About = () => {
+
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [mobileNo, setMobileNo] = useState('')
+  const [query, setQuery] = useState('')
+  const router = useRouter()
+  const { addToast } = useToasts()
+
   useEffect(() => {
     AOS.init({
       duration: 2000,
     })
   }, [])
+
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    if (name == '') {
+      addToast('Please enter the name!', { appearance: 'error' })
+
+      return false
+    }
+
+    if (email == '') {
+      addToast('Please enter the email!', { appearance: 'error' })
+      return false
+    }
+
+    if (IsEmail(email) == false) {
+      addToast('Incorrect email!', { appearance: 'error' })
+
+      return false
+    }
+
+    if (mobileNo == '') {
+      addToast('Please enter the mobile number!', { appearance: 'error' })
+      return false
+    }
+
+    if (mobileNo.length != 10) {
+      addToast('Mobile number must be of ten digits!', { appearance: 'error' })
+      return false
+    }
+
+    if (query == '') {
+      addToast('Please enter the query!', { appearance: 'error' })
+      return false
+    }
+
+
+    try {
+      const data = await axios.post(`${process.env.NEXT_PUBLIC_API}/contact-us`,{
+          "name":name,
+          "email":email,
+          "mobile_no":mobileNo,
+          "query":query,
+      });
+  
+      if(data.status == 200){
+        addToast("Success!", { appearance: 'success' });
+        router.push("/thanks");
+      }
+
+      //
+    } catch (err) {
+      console.log(err)
+      addToast('Invalid! Please try again.', { appearance: 'error' })
+    }
+  }
+
+  const IsEmail = (email) => {
+    let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
+    if (!regex.test(email)) {
+      return false
+    } else {
+      return true
+    }
+  }
 
   return (
     <>
@@ -34,7 +111,7 @@ const About = () => {
       <section className="aboutlayouts">
         <div className="container">
           <div className="pgbanners">
-            <img src="./images/aboutbanner.jpg" className="fllimg" />
+            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/aboutbanner.jpg`} className="fllimg" />
           </div>
           <div className="contentares  pt-5 pb-lg-5">
             <div className="text-center hdingst">
@@ -45,8 +122,8 @@ const About = () => {
             <div className="row  pt-5 pb-5">
               <div className="col-md-6 col-lg-6 pb-5 pb-lg-1">
                 <div className="vdthmbs">
-                  <img src="./images/playicon.png" className="plicon" />
-                  <img src="./images/aboutthumb.jpg" className="fllimg" />
+                  <img src={`${process.env.NEXT_PUBLIC_B_API}/images/playicon.png`} className="plicon" />
+                  <img src={`${process.env.NEXT_PUBLIC_B_API}/images/aboutthumb.jpg`} className="fllimg" />
                 </div>
               </div>
               <div className="col-md-6 col-lg-6 align-self-center">
@@ -91,14 +168,14 @@ const About = () => {
           </div>
           <div className="row text-center pt-5">
             <div className="col-lg-4 col-md-6">
-              <img src="./images/jnadicon/1.png" />
+              <img src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/1.png`} />
               <h4>Crafted Carefully</h4>
               <p>
                 Each course handpicked to enhance your knowledge and skills.
               </p>
             </div>
             <div className="col-lg-4 col-md-6">
-              <img src="./images/jnadicon/2.png" />
+              <img src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/2.png`} />
               <h4>Expert Facilitators</h4>
               <p>
                 Learn from passionate and industry experienced subject matter
@@ -106,7 +183,7 @@ const About = () => {
               </p>
             </div>
             <div className="col-lg-4 col-md-6">
-              <img src="./images/jnadicon/3.png" />
+              <img src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/3.png`} />
               <h4>Get Hands-on Exposure</h4>
               <p>
                 Gain practical experience and skills through industry/in-house
@@ -114,7 +191,7 @@ const About = () => {
               </p>
             </div>
             <div className="col-lg-4 col-md-6">
-              <img src="./images/jnadicon/1.png" />
+              <img src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/1.png`} />
               <h4>Live Projects &amp; Case Studies</h4>
               <p>
                 Gain practical experience and skills through industry /in-house
@@ -122,12 +199,12 @@ const About = () => {
               </p>
             </div>
             <div className="col-lg-4 col-md-6">
-              <img src="./images/jnadicon/2.png" />
+              <img src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/2.png`} />
               <h4>Trending Programs</h4>
               <p>Learn the most trending programs &amp; be industry ready.</p>
             </div>
             <div className="col-lg-4 col-md-6">
-              <img src="./images/jnadicon/3.png" />
+              <img src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/3.png`} />
               <h4>Industry Relevant Curriculum</h4>
               <p>
                 Learn from passionate and industry experienced subject matter
@@ -151,34 +228,30 @@ const About = () => {
             <div className="trustcmpcarso owl-theme owl-carousel">
               <div className="item">
                 <div className="lgocirc">
-                  <img src="./images/client/1.png" />
+                  <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/1.png`} />
                 </div>
               </div>
               <div className="item">
                 <div className="lgocirc">
-                  <img src="./images/client/2.png" />
+                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/2.png`} />
                 </div>
               </div>
               <div className="item">
                 <div className="lgocirc">
-                  <img src="./images/client/3.png" />
+                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/3.png`} />
                 </div>
               </div>
               <div className="item">
                 <div className="lgocirc">
-                  <img src="./images/client/4.png" />
+                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/4.png`} />
                 </div>
               </div>
               <div className="item">
                 <div className="lgocirc">
-                  <img src="./images/client/5.png" />
+                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/5.png`} />
                 </div>
               </div>
-              <div className="item">
-                <div className="lgocirc">
-                  <img src="./images/client/5.png" />
-                </div>
-              </div>
+             
             </div>
           </div>
         </div>
@@ -194,34 +267,51 @@ const About = () => {
               <br />
               consectetur, adipisci velit...
             </p>
-            <form>
-              <div className="form-row customfrms">
-                <div className="form-group col-md-6">
-                  <input
-                    type="textr"
-                    className="form-control"
-                    placeholder="First Name"
-                  />
+            <form onSubmit={handleSubmit}>
+                <div className="customfrms lssmg">
+                  <div className="form-group">
+                    <input
+                      type="textr"
+                      className="form-control"
+                      placeholder="First Name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Email Id"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Mobile Number"
+                      value={mobileNo}
+                      onChange={(e) =>setMobileNo(e.target.value)}
+                    />
+                  </div>
+
+                  <div className="form-group">
+                                    <textarea
+                                      type="text"
+                                      className="form-control"
+                                      placeholder="Query"
+                                      value={query}
+                                      onChange={(e) => setQuery(e.target.value)}
+                                    ></textarea>
+                                  </div>
+
+                  <div className="form-group text-center">
+                    <button type='submit'>Submit</button>
+                  </div>
                 </div>
-                <div className="form-group col-md-6">
-                  <input
-                    type="email"
-                    className="form-control"
-                    placeholder="Email Id"
-                  />
-                </div>
-                <div className="form-group col-md-6">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Phone Number"
-                  />
-                </div>
-                <div className="form-group col-md-6">
-                  <button>Submit</button>
-                </div>
-              </div>
-            </form>
+              </form>
           </div>
         </div>
       </section>

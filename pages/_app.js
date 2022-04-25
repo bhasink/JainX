@@ -1,4 +1,5 @@
 import Head from "next/head";
+import {ToastProvider} from "react-toast-notifications";
 // import "bootstrap/dist/css/bootstrap.min.css";
 
 function MyApp({ Component, pageProps }) {
@@ -14,10 +15,17 @@ function MyApp({ Component, pageProps }) {
             <link href="https://kit-pro.fontawesome.com/releases/v5.11.2/css/pro.min.css?ver=5.3.2" rel="stylesheet" type="text/css" />
             <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-            <link rel="stylesheet" type="text/css" href="/css/style.css" />
+            <link rel="stylesheet" type="text/css" href={`${process.env.NEXT_PUBLIC_B_API}/css/style.css`} />
         </Head>
         
+        <ToastProvider
+            autoDismiss={true}
+            autoDismissTimeout="2000"
+            placement="bottom-right"
+            style={{zIndex:"2000"}}
+        >
         <Component {...pageProps} />
+        </ToastProvider>
     </>
         
     );

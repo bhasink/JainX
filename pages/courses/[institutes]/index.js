@@ -15,24 +15,15 @@ import dynamic from "next/dynamic";
 const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
     ssr: false,
 });
-import ContentLoader from 'react-content-loader'
-
 
 const Institutes = () => {
   const [institute, setInstitute] = useState({})
-  const [loader, setLoader] = useState(false)
   const router = useRouter()
   const institutes = router.query.institutes
 
   useEffect(() => {
         
     if(!router.isReady) return;
-
-
-    setLoader(true)
-
-    setTimeout(() => setLoader(false), 1000);
-
 
     getInstitute()
 
@@ -48,7 +39,7 @@ const Institutes = () => {
       }
 
       const { data } = await axios.post(
-        `https://phplaravel-709751-2547471.cloudwaysapps.com/api/get-institute`,
+        `${process.env.NEXT_PUBLIC_API}/get-institute`,
         {
           slug: institutes,
         },
@@ -63,6 +54,67 @@ const Institutes = () => {
     }
   }
 
+  const state = {
+    responsive: {
+      0: {
+        items: 1,
+        nav: true,
+        dots: false,
+        loop: true,
+      },
+      300: {
+        items: 1,
+        nav: true,
+        dots: false,
+        margin: 10,
+        loop: true,
+      },
+
+      766: {
+        items: 2,
+        nav: true,
+        dots: false,
+        loop: true,
+      },
+
+      1200: {
+        items: 4,
+        nav: true,
+        dots: false,
+        loop: true,
+      },
+    },
+    responsive_trust_comp: {
+      0: {
+        items: 1,
+        nav: false,
+        dots: true,
+        loop: true,
+      },
+      300: {
+        items: 3,
+        nav: false,
+        dots: true,
+        loop: true,
+      },
+
+      766: {
+        items: 3,
+        nav: false,
+        dots: false,
+        loop: true,
+      },
+
+      1200: {
+        items: 5,
+        nav: false,
+        dots: true,
+        center: true,
+      },
+    },
+  }
+  
+
 
   return (
     <>
@@ -70,50 +122,14 @@ const Institutes = () => {
     <Nav />
 
 
-    {loader ? (
-                    <ContentLoader
-                    backgroundColor="#f5f5f5"
-                    foregroundColor="#dbdbdb"
-                      viewBox="0 0 900 400"
-                      height={400}
-                      width={900}
-                      speed={1}
-                    >
-                      <rect
-                        x="0"
-                        y="0"
-                        rx="0"
-                        ry="0"
-                        width="280"
-                        height="400"
-                      />
-                      <rect
-                        x="310"
-                        y="0"
-                        rx="0"
-                        ry="0"
-                        width="280"
-                        height="400"
-                      />
-                      <rect
-                        x="620"
-                        y="0"
-                        rx="0"
-                        ry="0"
-                        width="280"
-                        height="400"
-                      />
-                    </ContentLoader>
-                  ) : (  
 
-                    <>
   <section className="pageinforhd pt-5 pb-5 nohdleftbrdcm">
     <div className="container">
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
           <li className="breadcrumb-item"><a href="#">Home</a></li>
           <li className="breadcrumb-item"><a href="#">All Course</a></li>
-          <li className="breadcrumb-item active" aria-current="page">Institute Page</li>
+          <li className="breadcrumb-item active" aria-current="page">{institute && institute.name}</li>
         </ol>
       </nav>
     </div>
@@ -132,7 +148,7 @@ const Institutes = () => {
           </div>
         </div>
         <div className="col-md-6 col-lg-6 text-center">
-          <img src="/images/courseslogo/deake.png" className="ms" />
+          <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/deake.png`} className="ms" />
         </div>
         {/*<div class="col-md-6 col-lg-6">
 				<div class="dtlsctaviews">
@@ -144,22 +160,22 @@ const Institutes = () => {
       <div className="coursepackdtls">
         <div className="row">
           <div className="col-6 col-lg-3 col-md-3 mx-auto ctypeinl">
-            <img src="/images/courseslogo/courseinf/1.png" />
+            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/courseinf/1.png`} />
             <h6 className="mainhds">Courses</h6>
             <h4 className="insnames">{institute && institute.courses && institute.courses.length}</h4>
           </div>
           <div className="col-6 col-lg-3 col-md-3 mx-auto ctypeinl">
-            <img src="/images/courseslogo/courseinf/7.png" />
+            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/courseinf/7.png`} />
             <h6 className="mainhds">Hours</h6>
             <h4 className="insnames">250</h4>
           </div>
           <div className="col-6 col-lg-3 col-md-3 mx-auto ctypeinl">
-            <img src="/images/courseslogo/courseinf/5.png" />
+            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/courseinf/5.png`} />
             <h6 className="mainhds">Enrolled</h6>
             <h4 className="insnames">{institute && institute.students_enrolled}+ Students</h4>
           </div>
           <div className="col-6 col-lg-3 col-md-3 mx-auto ctypeinl">
-            <img src="/images/courseslogo/courseinf/8.png" />
+            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/courseinf/8.png`} />
             <h6 className="mainhds">Certification</h6>
             <h4 className="insnames">{institute && institute.certifications}</h4>
           </div>
@@ -199,11 +215,11 @@ const Institutes = () => {
                   </p></div>
               </div>
               <div className="coursedurtime">
-                <span><img src="/images/scheduleicon.png" /> {course.duration} Months</span>
-                <span><img src="/images/ppp.png" /> pgp-courses</span>
+                <span><img src={`${process.env.NEXT_PUBLIC_B_API}/images/scheduleicon.png`} /> {course.duration} Months</span>
+                <span><img src={`${process.env.NEXT_PUBLIC_B_API}/images/ppp.png`} /> pgp-courses</span>
               </div>
               <div className="keydts">
-                <img src="/images/keychain.png" />
+                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/keychain.png`} />
                 <p><span>Key Learnings:</span>{course.key_learnings}</p>
               </div>
               <div className="dtlsctaviews">
@@ -224,98 +240,149 @@ const Institutes = () => {
     </div>
   </section>
   <section className="testimoniapn">
-    <div className="container">
-      <div className="text-center hdingst">
-        <h2 className="mainhds">What Our Learners Say</h2> 
-      </div>
-      <div className="testimparts">
-        <div className="reviewtestim owl-carousel owl-theme">
-          <div className="item">
-            <div className="testipnlpts">
-              <p>Neque porro quisquam est qui dolorem
-                ipsum quia dolor sit amet, consectetur
-                adipisci velit</p>
-              <div className="usrthmbs">
-                <img src="/images/reviews/1.jpg" />
-              </div>
-              <p className="usrnmtst">Neque porro quisquam</p>
-            </div>
+        <div className="container">
+          <div className="text-center hdingst">
+            <h2 className="mainhds">What Our Learners Say</h2>
           </div>
-          <div className="item">
-            <div className="testipnlpts">
-              <p>Neque porro quisquam est qui dolorem
-                ipsum quia dolor sit amet, consectetur
-                adipisci velit</p>
-              <div className="usrthmbs">
-                <img src="/images/reviews/3.jpg" />
+          <div className="testimparts">
+            <OwlCarousel
+              className="reviewtestim owl-theme owl-carousel"
+              loop
+              margin={50}
+              nav
+              items={3}
+              center
+              responsive={state.responsive}
+            >
+              <div className="item">
+                <div className="testipnlpts">
+                  <p>
+                    Neque porro quisquam est qui dolorem ipsum quia dolor sit
+                    amet, consectetur adipisci velit
+                  </p>
+                  <div className="usrthmbs">
+                    <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`} />
+                  </div>
+                  <p className="usrnmtst">Neque porro quisquam</p>
+                </div>
               </div>
-              <p className="usrnmtst">Neque porro quisquam</p>
-            </div>
-          </div>
-          <div className="item">
-            <div className="testipnlpts">
-              <p>Neque porro quisquam est qui dolorem
-                ipsum quia dolor sit amet, consectetur
-                adipisci velit</p>
-              <div className="usrthmbs">
-                <img src="/images/reviews/3.jpg" />
+
+              <div className="item">
+                <div className="testipnlpts">
+                  <p>
+                    Neque porro quisquam est qui dolorem ipsum quia dolor sit
+                    amet, consectetur adipisci velit
+                  </p>
+                  <div className="usrthmbs">
+                    <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`} />
+                  </div>
+                  <p className="usrnmtst">Neque porro quisquam</p>
+                </div>
               </div>
-              <p className="usrnmtst">Neque porro quisquam</p>
-            </div>
-          </div>
-          <div className="item">
-            <div className="testipnlpts">
-              <p>Neque porro quisquam est qui dolorem
-                ipsum quia dolor sit amet, consectetur
-                adipisci velit</p>
-              <div className="usrthmbs">
-                <img src="/images/reviews/2.jpg" />
+
+              <div className="item">
+                <div className="testipnlpts">
+                  <p>
+                    Neque porro quisquam est qui dolorem ipsum quia dolor sit
+                    amet, consectetur adipisci velit
+                  </p>
+                  <div className="usrthmbs">
+                    <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`} />
+                  </div>
+                  <p className="usrnmtst">Neque porro quisquam</p>
+                </div>
               </div>
-              <p className="usrnmtst">Neque porro quisquam</p>
-            </div>
+
+              <div className="item">
+                <div className="testipnlpts">
+                  <p>
+                    Neque porro quisquam est qui dolorem ipsum quia dolor sit
+                    amet, consectetur adipisci velit
+                  </p>
+                  <div className="usrthmbs">
+                    <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`} />
+                  </div>
+                  <p className="usrnmtst">Neque porro quisquam</p>
+                </div>
+              </div>
+
+
+              <div className="item">
+                <div className="testipnlpts">
+                  <p>
+                    Neque porro quisquam est qui dolorem ipsum quia dolor sit
+                    amet, consectetur adipisci velit
+                  </p>
+                  <div className="usrthmbs">
+                    <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`} />
+                  </div>
+                  <p className="usrnmtst">Neque porro quisquam</p>
+                </div>
+              </div>
+
+              <div className="item">
+                <div className="testipnlpts">
+                  <p>
+                    Neque porro quisquam est qui dolorem ipsum quia dolor sit
+                    amet, consectetur adipisci velit
+                  </p>
+                  <div className="usrthmbs">
+                    <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`} />
+                  </div>
+                  <p className="usrnmtst">Neque porro quisquam</p>
+                </div>
+              </div>
+
+
+            
+            </OwlCarousel>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
   <section className="whtsects trustbycoms roundicon ">
     <div className="container">
       <div className="text-center hdingst">
         <h2 className="mainhds">Hiring Companies</h2>
       </div>
       <div className="cpmslide">
-        <div className="trustcmpcarso owl-theme owl-carousel">
+
+        <OwlCarousel
+              className="trustcmpcarso owl-theme owl-carousel"
+              loop
+              margin={20}
+              items={5}
+              center
+              responsive={state.responsive_trust_comp}
+            >
           <div className="item">
             <div className="lgocirc">
-              <img src="/images/client/1.png" />
+              <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/1.png`} />
             </div>
           </div>
           <div className="item">
             <div className="lgocirc">
-              <img src="/images/client/2.png" />
+            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/2.png`} />
             </div>
           </div>
           <div className="item">
             <div className="lgocirc">
-              <img src="/images/client/3.png" />
+            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/3.png`} />
             </div>
           </div>
           <div className="item">
             <div className="lgocirc">
-              <img src="/images/client/4.png" />
+            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/4.png`} />
             </div>
           </div>
           <div className="item">
             <div className="lgocirc">
-              <img src="/images/client/5.png" />
+            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/5.png`} />
             </div>
           </div>
-          <div className="item">
-            <div className="lgocirc">
-              <img src="/images/client/5.png" />
-            </div>
-          </div>
-        </div>
+
+
+          </OwlCarousel>
+
       </div>
     </div>
   </section>
@@ -327,7 +394,7 @@ const Institutes = () => {
           F<span className="ogx">Asked</span><br />
           Q<span className="ogx">uestions</span>
         </h2>
-        <img src="/images/faqroundimgs.png" className="rouim" />
+        <img src={`${process.env.NEXT_PUBLIC_B_API}/images/faqroundimgs.png`} className="rouim" />
       </div>
       <div id="accordion8">
         <div className="card">
@@ -448,9 +515,7 @@ const Institutes = () => {
       </div>
     </div>
   </section>
-  </>
 
-                  )}
      
      <Footer/>
 
