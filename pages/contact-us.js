@@ -111,7 +111,7 @@ const ContactUs = () => {
       <section className="aboutlayouts">
         <div className="container">
           <div className="pgbanners">
-            <img src="./images/contactbanner.jpg" className="fllimg" />
+            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/contactbanner.jpg`} className="fllimg" />
           </div>
           <div className="contentares  pt-5 pb-5">
             <div className="text-center hdingst">
@@ -125,14 +125,14 @@ const ContactUs = () => {
             <div className="contactcrds">
               <div className="row">
                 <div className="col-md-6 col-lg-8  mx-auto text-center">
-                  <img src="./images/location.png" />
+                  <img src={`${process.env.NEXT_PUBLIC_B_API}/images/location.png`} />
                   <p>
                     #18/3, 9th Main, 3rd Block, Jayanagar, Bangalore,
                     <br /> Karnataka-560011
                   </p>
                 </div>
                 <div className="col-md-6 col-lg-8  mx-auto text-center">
-                  <img src="./images/maitlocta.png" />
+                  <img src={`${process.env.NEXT_PUBLIC_B_API}/images/maitlocta.png`} />
                   <a href="mailto:enquiry@jainxacademy.com">
                     enquiry@jainxacademy.com
                   </a>

@@ -25,7 +25,7 @@ const Thanks = () => {
         <h2 className="mainhds">Thanks!</h2> 
         <p>Form has been submitted successfully! <br/> we'll get back to you ASAP</p>
       </div><div className="pgbanners">
-        <img src="/images/partnerwitmain.jpg" className="fllimg" />
+        <img src={`${process.env.NEXT_PUBLIC_B_API}/images/partnerwitmain.jpg`} className="fllimg" />
       </div>
     </div>
   </section>
