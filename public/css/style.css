@@ -1,7 +1,12 @@
 @font-face {
     font-family: 'Gilroy';
+<<<<<<< HEAD
     src: url('https://www.sociowash.in/fonts/Gilroy-Regular.woff2') format('woff2'),
         url('https://www.sociowash.in/fonts/Gilroy-Regular.woff') format('woff');
+=======
+    src: url('../fonts/Gilroy-Regular.woff2') format('woff2'),
+        url('../fonts/Gilroy-Regular.woff') format('woff');
+>>>>>>> 66926a523bcbcb29fa6bf1a21adb1ba258d1051e
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -9,8 +14,13 @@
 
 @font-face {
     font-family: 'Gilroy';
+<<<<<<< HEAD
     src: url('https://www.sociowash.in/fonts/Gilroy-Bold.woff2') format('woff2'),
         url('https://www.sociowash.in/fonts/Gilroy-Bold.woff') format('woff');
+=======
+    src: url('../fonts/Gilroy-Bold.woff2') format('woff2'),
+        url('../fonts/Gilroy-Bold.woff') format('woff');
+>>>>>>> 66926a523bcbcb29fa6bf1a21adb1ba258d1051e
     font-weight: bold;
     font-style: normal;
     font-display: swap;
@@ -18,8 +28,13 @@
 
 @font-face {
     font-family: 'Gilroy';
+<<<<<<< HEAD
     src: url('https://www.sociowash.in/fonts/Gilroy-ExtraBold.woff2') format('woff2'),
         url('https://www.sociowash.in/fonts/Gilroy-ExtraBold.woff') format('woff');
+=======
+    src: url('../fonts/Gilroy-ExtraBold.woff2') format('woff2'),
+        url('../fonts/Gilroy-ExtraBold.woff') format('woff');
+>>>>>>> 66926a523bcbcb29fa6bf1a21adb1ba258d1051e
     font-weight: bold;
     font-style: normal;
     font-display: swap;
@@ -27,8 +42,13 @@
 
 @font-face {
     font-family: 'Gilroy';
+<<<<<<< HEAD
     src: url('/fonts/Gilroy-SemiBold.woff2') format('woff2'),
         url('/fonts/Gilroy-SemiBold.woff') format('woff');
+=======
+    src: url('../fonts/Gilroy-SemiBold.woff2') format('woff2'),
+        url('../fonts/Gilroy-SemiBold.woff') format('woff');
+>>>>>>> 66926a523bcbcb29fa6bf1a21adb1ba258d1051e
     font-weight: 600;
     font-style: normal;
     font-display: swap;
@@ -39,11 +59,14 @@
     display: none;
 }
 
+<<<<<<< HEAD
 html {
     scroll-behavior: smooth;
 }
 
 
+=======
+>>>>>>> 66926a523bcbcb29fa6bf1a21adb1ba258d1051e
 body{
 	font-family: 'Gilroy';
 	padding-top: 75px;
@@ -1287,7 +1310,10 @@ footer.stfooter .collapse:not(.show) {
     padding: 6px;
     color: #676d76;
     text-decoration: none;
+<<<<<<< HEAD
     cursor: pointer;
+=======
+>>>>>>> 66926a523bcbcb29fa6bf1a21adb1ba258d1051e
 }
 
 .blulghtcta {
@@ -1842,6 +1868,16 @@ section .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot
 /* Responsive css */
 
 @media screen and (max-width: 767px) and (min-width: 320px){
+<<<<<<< HEAD
+=======
+    .testnorflow .testipnlpts{
+        width: 91%;
+    }
+
+    .testnorflow .usrthmbs img{
+        width: 49px;
+    }
+>>>>>>> 66926a523bcbcb29fa6bf1a21adb1ba258d1051e
 
     .partsetsdipl .fllimg {margin-bottom: 40px;}
 
@@ -2528,7 +2564,14 @@ h3.mobclick {
 
 
 @media screen and (max-width: 900px) and (min-width: 768px){
+<<<<<<< HEAD
 	
+=======
+	.testnorflow .testipnlpts{
+        width: 65%;
+    }
+    
+>>>>>>> 66926a523bcbcb29fa6bf1a21adb1ba258d1051e
 .jnadvts .innerlrs {
     height: 305px;
 }
