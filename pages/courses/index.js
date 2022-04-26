@@ -20,9 +20,7 @@ const Listing = (props) => {
   const [courseName, setCourseName] = useState([])
   const [filterData, setfilterData] = useState([])
   const [loader, setLoader] = useState(false)
-  const [currentProject, setCurrentProject] = useState("")
-
-  
+  const [currentProject, setCurrentProject] = useState('')
 
   const [hasMore, setHasMore] = useState(true)
   const [currentPage, setCurrentPage] = useState(2)
@@ -38,7 +36,6 @@ const Listing = (props) => {
   const [query, setQuery] = useState('')
 
   const router = useRouter()
-
 
   let ua
 
@@ -58,9 +55,7 @@ const Listing = (props) => {
 
   const getAllCourses = async () => {
     try {
-      const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_API}/listing`,
-      )
+      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API}/listing`)
       const getCourses = data.get_courses.data
       // const l_page = data.get_courses.last_page;
       setLastPage(data.get_courses.last_page)
@@ -222,25 +217,26 @@ const Listing = (props) => {
       addToast('Please enter the query!', { appearance: 'error' })
       return false
     }
-    
 
-    $('body').removeClass('modal-open');
-    $('.modal-backdrop').remove();
-    $("#exampleModalEnquirenow").hide()
-
+    $('body').removeClass('modal-open')
+    $('.modal-backdrop').remove()
+    $('#exampleModalEnquirenow').hide()
 
     try {
-      const data = await axios.post(`${process.env.NEXT_PUBLIC_API}/course-leads`,{
-          "name":name,
-          "email":email,
-          "mobile_no":mobileNo,
-          "query":query,
-          "course_id":currentProject,
-      });
-  
-      if(data.status == 200){
-        addToast("Success!", { appearance: 'success' });
-        router.push("/thanks");
+      const data = await axios.post(
+        `${process.env.NEXT_PUBLIC_API}/course-leads`,
+        {
+          name: name,
+          email: email,
+          mobile_no: mobileNo,
+          query: query,
+          course_id: currentProject,
+        },
+      )
+
+      if (data.status == 200) {
+        addToast('Success!', { appearance: 'success' })
+        router.push('/thanks')
       }
 
       //
@@ -258,14 +254,14 @@ const Listing = (props) => {
       return true
     }
   }
-  
 
   return (
     <>
       <Nav />
 
-
       {/* {JSON.stringify(currentProject,null,2)} */}
+
+      {/* <Range /> */}
 
       <style
         dangerouslySetInnerHTML={{
@@ -418,7 +414,10 @@ const Listing = (props) => {
                               <div className="twycol">
                                 <div className="scllogoswr">
                                   <img
-                                    src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/` + course.logo}
+                                    src={
+                                      `${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/` +
+                                      course.logo
+                                    }
                                   />
                                   <a href="compare.html" className="cmprs">
                                     Compare
@@ -438,15 +437,22 @@ const Listing = (props) => {
                               </div>
                               <div className="coursedurtime">
                                 <span>
-                                  <img src={`${process.env.NEXT_PUBLIC_B_API}/images/scheduleicon.png`} />{' '}
+                                  <img
+                                    src={`${process.env.NEXT_PUBLIC_B_API}/images/scheduleicon.png`}
+                                  />{' '}
                                   {course.duration} Months
                                 </span>
                                 <span>
-                                  <img src={`${process.env.NEXT_PUBLIC_B_API}/images/ppp.png`} /> pgp-courses
+                                  <img
+                                    src={`${process.env.NEXT_PUBLIC_B_API}/images/ppp.png`}
+                                  />{' '}
+                                  pgp-courses
                                 </span>
                               </div>
                               <div className="keydts">
-                                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/keychain.png`} />
+                                <img
+                                  src={`${process.env.NEXT_PUBLIC_B_API}/images/keychain.png`}
+                                />
                                 <p>
                                   <span>Key Learnings:</span>{' '}
                                   {course.key_learnings}

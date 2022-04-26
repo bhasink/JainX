@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
 import Select from 'react-select'
 import axios from 'axios'
-import Slider, { createSliderWithTooltip } from 'rc-slider';
-import 'rc-slider/assets/index.css';
-const SliderWithTooltip = Slider.createSliderWithTooltip;
+import { Slider } from 'antd'
+
 
 const DeskFilter = (props) => {
   const [courseName, setCourseName] = useState([])
@@ -281,29 +280,23 @@ const DeskFilter = (props) => {
         <div className="grdfiltes" id>
           <h6 className="flxhds">Duration (In Months)</h6>
           <div className="range-slider durnr">
-            {/* <Range
-          min={0}
-          max={10000}
-          onChange={handleDuration}
-          defaultValue={10}
-          tipFormatter={value => <span className="tooltip">{value}€</span>}
-        /> */}
-{/* 
-<SliderWithTooltip
-        min={20}
-        max={120}
-        marks={1}
-        step={1}
-        onChange={handleDuration}
-        value={10}
-      /> */}
 
+          <Slider range defaultValue={[20, 50]} />
 
           </div>
           <h6 className="flxhds">Price Range</h6>
-          <div className="range-slider grad pricerngs"></div>
+
+
+          <div className="range-slider grad pricerngs">
+          <Slider range defaultValue={[20, 50]} />
+
+          </div>
           <h6 className="flxhds">Hours</h6>
-          <div className="range-slider"></div>
+
+          <div className="range-slider">
+          <Slider range defaultValue={[20, 50]} />
+
+          </div>
         </div>
       </div>
     </>

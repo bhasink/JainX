@@ -1,5 +1,7 @@
 import Head from "next/head";
 import {ToastProvider} from "react-toast-notifications";
+import "antd/dist/antd.css";
+
 // import "bootstrap/dist/css/bootstrap.min.css";
 
 function MyApp({ Component, pageProps }) {
