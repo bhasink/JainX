@@ -63,22 +63,22 @@ const Listing = (props) => {
       )
       const getCourses = data.get_courses.data
       // const l_page = data.get_courses.last_page;
-      // setLastPage(data.get_courses.last_page)
+      setLastPage(data.get_courses.last_page)
       setCourses(getCourses)
 
       // console.log(lastPage)
       // console.log(currentPage)
       // console.log(hasMore)
 
-      if (getCourses.length == null) {
+      if (getCourses.length == null || getCourses.length == 0) {
         setHasMore(false)
       }
 
-      if (l_page > currentPage) {
-        setCurrentPage((currentPage = currentPage + 1))
-      } else {
-        setHasMore(false)
-      }
+      // if (l_page > currentPage) {
+      //   setCurrentPage((currentPage = currentPage + 1))
+      // } else {
+      //   setHasMore(false)
+      // }
 
       console.log(data)
     } catch (err) {
