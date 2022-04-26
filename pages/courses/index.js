@@ -279,7 +279,7 @@ const Listing = (props) => {
           <div className="hdingst">
             <h2 className="mainhds">All Courses</h2>
           </div>
-          <nav aria-label="breadcrumb">
+          <nav aria-label="breadcrumb" className="float-lg-right">
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
                 <a href="#">Home</a>

@@ -125,7 +125,7 @@ const Institutes = () => {
 
   <section className="pageinforhd pt-5 pb-5 nohdleftbrdcm">
     <div className="container">
-      <nav aria-label="breadcrumb">
+      <nav aria-label="breadcrumb" className='float-lg-right'>
         <ol className="breadcrumb">
           <li className="breadcrumb-item"><a href="#">Home</a></li>
           <li className="breadcrumb-item"><a href="#">All Course</a></li>
@@ -147,7 +147,7 @@ const Institutes = () => {
 								</div>*/}
           </div>
         </div>
-        <div className="col-md-6 col-lg-6 text-center">
+        <div className="col-md-6 col-lg-6 text-center text-lg-right">
           <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/deake.png`} className="ms" />
         </div>
         {/*<div class="col-md-6 col-lg-6">
