@@ -36,6 +36,39 @@ const DeskFilter = (props) => {
     getFilterData();
   }, [])
 
+  useEffect(() => {
+    if(props.searchfilter.category == null){
+      setSelectedCategory({ label: 'Category' })
+    }else{
+      setSelectedCategory({ label: makeTitle(props.searchfilter.category) })
+    }
+
+    if(props.searchfilter.mode == null){
+      setSelectedCourseMode({ label: 'Course Mode' })
+    }else{
+      setSelectedCourseMode({ label: makeTitle(props.searchfilter.mode).replace(/[0-9]/g, '') })
+    }
+
+    if(props.searchfilter.city == null){
+      setSelectedCity({ label: 'City' })
+    }else{
+      setSelectedCity({ label: makeTitle(props.searchfilter.city).replace(/[0-9]/g, '') })
+    }
+  }, [])
+
+
+
+  const makeTitle = (slug) => {
+    var words = slug.split('-');
+  
+    for (var i = 0; i < words.length; i++) {
+      var word = words[i];
+      words[i] = word.charAt(0).toUpperCase() + word.slice(1);
+    }
+  
+    return words.join(' ');
+  }
+
   // if(props.slctdFiltr){
   //   setSelectedFilters(props.slctdFiltr)
   // }
@@ -258,7 +291,7 @@ const handleFees = (selectedOptions) => {
 
   return (
     <>
-      {/* {JSON.stringify(selectedFilters)} */}
+      {/* {JSON.stringify(props.searchfilter)} */}
 
 
 
@@ -270,7 +303,7 @@ const handleFees = (selectedOptions) => {
               placeholder="Category"
               onChange={handleChangeCategory}
               styles={styles}
-              value={props.resetCat == "reset" ? '' : selectedCategory}
+              value={props.city == "reset" ? '' : selectedCategory}
             />
           </div>
 

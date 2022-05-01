@@ -24,7 +24,7 @@ const Home = () => {
   const [categories, setCategories] = useState([])
   const [selectedCity, setSelectedCity] = useState(null)
   const [catSelected, setCatSelected] = useState('')
-  const [courseMode, setCourseMode] = useState('Hybrid')
+  const [courseMode, setCourseMode] = useState('hybrid-1')
   const [courses, setCourses] = useState([])
   const [loading, setLoading] = useState(false)
 
@@ -88,7 +88,7 @@ const Home = () => {
 
   const renderSuggestion = (suggestion) => (
     <p>
-      <BsSearch size="12px" style={{ marginTop: '-0.4em' }} /> {suggestion.name}
+      <BsSearch size="12px" style={{ marginTop: '-0.4em' }} /> {suggestion.name} 
     </p>
   )
 
@@ -283,13 +283,13 @@ const Home = () => {
       let city = ''
 
       if (selectedCity != null) {
-        city = selectedCity.slug
+        city = selectedCity.slug + '-' + selectedCity.value
       } else {
         city = ''
       }
 
       const slug = convertToSlug(catSelected)
-      const mode = convertToSlug(courseMode)
+      const mode = courseMode;
 
       if (city != '' && slug != '') {
         router.push({
@@ -360,7 +360,7 @@ const Home = () => {
                       <div className="btn-group btn-group-toggle">
                         <label
                           className={
-                            courseMode == 'Hybrid'
+                            courseMode == 'hybrid-1'
                               ? 'btn btn-secondary active'
                               : 'btn btn-secondary'
                           }
@@ -368,14 +368,14 @@ const Home = () => {
                           <input
                             type="radio"
                             name="options"
-                            value="Hybrid"
+                            value="hybrid-1"
                             onChange={(e) => handleMode(e)}
                           />{' '}
                           Hybrid
                         </label>
                         <label
                           className={
-                            courseMode == 'Online'
+                            courseMode == 'online-2'
                               ? 'btn btn-secondary active'
                               : 'btn btn-secondary'
                           }
@@ -383,14 +383,14 @@ const Home = () => {
                           <input
                             type="radio"
                             name="options"
-                            value="Online"
+                            value="online-2"
                             onChange={(e) => handleMode(e)}
                           />{' '}
                           Online
                         </label>
                         <label
                           className={
-                            courseMode == 'Offline'
+                            courseMode == 'offline-3'
                               ? 'btn btn-secondary active'
                               : 'btn btn-secondary'
                           }
@@ -398,7 +398,7 @@ const Home = () => {
                           <input
                             type="radio"
                             name="options"
-                            value="Offline"
+                            value="offline-3"
                             onChange={(e) => handleMode(e)}
                           />{' '}
                           Offline

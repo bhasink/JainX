@@ -22,11 +22,17 @@ const Listing = (props) => {
   const [loader, setLoader] = useState(false)
   const [currentProject, setCurrentProject] = useState('')
  
+
+  // const [searchParams, setSearchParams] = useSearchParams();
+
   const [slctdFilter, setSlctdFilter] = useState([])
 
 
   const [resetCat, setResetCat] = useState('')
   const [chngfltr, setChngfltr] = useState('')
+
+  const [catId, setCatId] = useState('')
+
 
   const [sDuration, setSduration] = useState('')
 
@@ -60,16 +66,17 @@ const Listing = (props) => {
     getAllCoursesByFilter('',sDuration)
   }, [sDuration]);
 
-
-  const router = useRouter()
-
-  let ua
-
   useEffect(() => {
+
     AOS.init({
       duration: 2000,
     })
+
+    if(router.query == null){
+
     getAllCourses()
+
+    }
 
     if (props.uaString) {
       ua = useUserAgent(props.uaString)
@@ -78,6 +85,89 @@ const Listing = (props) => {
     }
     setCheckDevice(ua)
   }, [])
+
+   useEffect(() => {
+    if(router.query != null){
+
+      let city = router.query.city;
+      let category = router.query.category;
+      getCatId(category);
+
+      console.log(city);
+
+      if(typeof(city) !== 'undefined'){
+        city = city.split('-');
+      }
+
+      let mode = router.query.mode;
+      if(mode != undefined){
+
+      mode = mode.split('-');
+      }
+
+      if(typeof(city) !== 'undefined' && typeof(mode) !== 'undefined' && typeof(category) !== 'undefined'){
+
+        const result = [ { "label": `${city[0]}`, "value": `${city[1]}`, "type": "cities_id" },
+        { "label": `${mode[0]}`, "value": `${mode[1]}`, "type": "course_modes_id" },
+        { "label": `${category}`, "value": `${catId}`, "type": "course_categories_id" }
+         ];
+      setSlctdFilter(result)
+      }else if(typeof(mode) !== 'undefined' && typeof(category) !== 'undefined'){
+
+        const result = [ { "label": `${mode[0]}`, "value": `${mode[1]}`, "type": "course_modes_id" },
+        { "label": `${category}`, "value": `${catId}`, "type": "course_categories_id" }
+       ];
+      setSlctdFilter(result)
+    }else if(typeof(city) !== 'undefined' && typeof(mode) !== 'undefined'){
+      const result = [ { "label": `${city[0]}`, "value": `${city[1]}`, "type": "cities_id" },
+      { "label": `${mode[0]}`, "value": `${mode[1]}`, "type": "course_modes_id" }
+       ];
+      setSlctdFilter(result)
+      }else if(typeof(city) !== 'undefined' && typeof(category) !== 'undefined'){
+      const result = [ { "label": `${city[0]}`, "value": `${city[1]}`, "type": "cities_id" },
+        { "label": `${category}`, "value": `${catId}`, "type": "course_categories_id" }
+       ];
+      setSlctdFilter(result)
+      }else{
+        if(typeof(mode) !== 'undefined'){
+        const result = [ { "label": `${mode[0]}`, "value": `${mode[1]}`, "type": "course_modes_id" } ];
+        setSlctdFilter(result)
+        }
+      }
+
+    }
+  }, [catId]);
+
+  
+  const router = useRouter()
+
+  let ua
+
+  const getCatId = async (slug) => {
+
+    try {
+     
+     const config = {
+        headers: { 'Content-Type': 'application/json' },
+      }
+
+      const { data } = await axios.post(
+        `${process.env.NEXT_PUBLIC_API}/get-category_id`,
+        {
+          slug: slug
+        },
+        config,
+      )
+
+      const getCat = data.get_category_id
+
+      console.log(getCat);
+      setCatId(getCat.id)
+
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
 
   // useEffect(() => {
@@ -369,7 +459,7 @@ const Listing = (props) => {
 
       
 
-      {/* {JSON.stringify(sDuration,null,2)} */}
+      {/* {JSON.stringify(catId,null,2)} */}
 
       {/* <Range /> */}
 
@@ -403,9 +493,9 @@ const Listing = (props) => {
             <div className="col-lg-3 col-md-4">
               <div className="custmfiltr">
                 {checkDevice.deviceType ? (
-                  <MobileContent sendData2={getData2} sendData={getData} resetCat={resetCat} chngfltr={chngfltr} />
+                  <MobileContent sendData2={getData2} sendData={getData} searchfilter={router.query}  resetCat={resetCat} chngfltr={chngfltr}  />
                 ) : (
-                  <DesktopContent sendData={getData} resetCat={resetCat} chngfltr={chngfltr} />
+                  <DesktopContent sendData={getData} searchfilter={router.query}  resetCat={resetCat} chngfltr={chngfltr} />
                 )}
               </div>
             </div>
