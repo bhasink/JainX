@@ -10,6 +10,10 @@ const DeskFilter = (props) => {
   const [institutes, setInstitutes] = useState([])
   const [cities, setCities] = useState([])
   const [courseCategory, setCourseCategory] = useState([])
+  const [maxFees, setMaxFees] = useState('')
+  const [getDuration, setGetDuration] = useState('')
+
+  
 
 
   const [selectedOption, setSelectedOption] = useState([])
@@ -28,34 +32,63 @@ const DeskFilter = (props) => {
     AOS.init({
       duration: 2000,
     })
-    getCourseName()
-    getCourseMode()
-    getCities()
-    getInstitutes()
-    getCourseCategory()
+
+    getFilterData();
   }, [])
 
+  // if(props.slctdFiltr){
+  //   setSelectedFilters(props.slctdFiltr)
+  // }
+  
+//   useEffect(() => {
+//     if(props.slctdFiltr){
+//       setSelectedFilters(props.slctdFiltr)
+//     }
+// }, [props])
+
+  
+
   useEffect(() => {
+
+    // console.log(props.chngfltr)
+
+    // if(props.chngfltr != ''){
+
+    //   let indexx = selectedFilters.findIndex(function (pair) {
+    //     return pair.type == props.chngfltr
+    //   })
+
+    //   setSelectedFilters(oldArray => {
+    //     return oldArray.filter((value, i) => i !== indexx)
+    //   })
+
+    // }
+
+
     let pp = selectedFilters.filter(
       (ele, ind) =>
         ind === selectedFilters.findIndex((elem) => elem.type === ele.type),
     )
 
+    // props.chngfltr
+
     props.sendData(pp)
   }, [selectedFilters])
 
-  const getCourseCategory = async () => {
+
+  const getFilterData = async () => {
     try {
       const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_API}/get-categories`,
+        `${process.env.NEXT_PUBLIC_API}/get-filter-data`,
       )
-      const get_categories = data.get_course_category
-
-      // setSelectedOption({
-      //   label: 'Testing',
-      //   value: '2',
-      //   type: 'course_categories_id',
-      // })
+      const get_categories = data.get_course_category;
+      const get_course_name = data.get_course_name;
+      const get_course_mode = data.get_course_mode;
+      const get_institutes = data.get_institutes;
+      const get_cities = data.get_cities;
+      
+      setMaxFees(data.get_max_fees)
+      setGetDuration(data.get_duration)
 
       setCourseCategory(
         get_categories.map((opt) => ({
@@ -63,79 +96,40 @@ const DeskFilter = (props) => {
           value: opt.id,
           type: 'course_categories_id',
         })),
-      )
-    } catch (err) {
-      console.log(err)
-    }
-  }
+      );
 
-  const getCourseName = async () => {
-    try {
-      const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_API}/get-course-name`,
-      )
-      const get_course_name = data.get_course_name
       setCourseName(
         get_course_name.map((opt) => ({
           label: opt.name,
           value: opt.id,
           type: 'course_types_id',
         })),
-      )
-    } catch (err) {
-      console.log(err)
-    }
-  }
+      );
 
-  const getCourseMode = async () => {
-    try {
-      const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_API}/get-course-mode`,
-      )
-      const get_course_mode = data.get_course_mode
       setCourseMode(
         get_course_mode.map((opt) => ({
           label: opt.name,
           value: opt.id,
           type: 'course_modes_id',
         })),
-      )
-    } catch (err) {
-      console.log(err)
-    }
-  }
+      );
 
-  const getInstitutes = async () => {
-    try {
-      const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_API}/get-institutes`,
-      )
-      const get_institutes = data.get_institutes
       setInstitutes(
         get_institutes.map((opt) => ({
           label: opt.name,
           value: opt.id,
           type: 'institute_id',
         })),
-      )
-    } catch (err) {
-      console.log(err)
-    }
-  }
+      );
 
-  const getCities = async () => {
-    try {
-      const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_API}/get-cities`,
-      )
-      const get_cities = data.get_cities
       setCities(
         get_cities.map((opt) => ({
           label: opt.name,
           value: opt.id,
           type: 'cities_id',
         })),
-      )
+      );
+
     } catch (err) {
       console.log(err)
     }
@@ -204,10 +198,43 @@ const DeskFilter = (props) => {
   }
 
   const handleDuration = (selectedOptions) => {
-    console.log(selectedOptions)
+
+    let indexx = selectedFilters.findIndex(function (pair) {
+      return pair.type == 'duration'
+    })
+
+    if (indexx !== -1) {
+      selectedFilters.splice(indexx, 1)
+    }
+
+    const data = {
+      label: `Duration: ${selectedOptions[0]} - ${selectedOptions[1]}`,
+      value: selectedOptions[1],
+      type: 'duration',
+    };
+
+     setSelectedFilters((oldArray) => [...oldArray, data])
+}
+
+const handleFees = (selectedOptions) => {
+
+  let indexx = selectedFilters.findIndex(function (pair) {
+    return pair.type == 'fees'
+  })
+
+  if (indexx !== -1) {
+    selectedFilters.splice(indexx, 1)
   }
 
-  const [value2, setValue2] = useState(75)
+  const data = {
+    label: `Price: ${selectedOptions[0]} - ${selectedOptions[1]}`,
+    value: selectedOptions[1],
+    type: 'fees',
+  };
+
+   setSelectedFilters((oldArray) => [...oldArray, data])
+}
+
 
   const styles = {
     menuList: (base) => ({
@@ -233,6 +260,8 @@ const DeskFilter = (props) => {
     <>
       {/* {JSON.stringify(selectedFilters)} */}
 
+
+
       <div className="deskfilteronly">
         <div className="deskserachflls">
           <div className="deskserachflls">
@@ -241,7 +270,7 @@ const DeskFilter = (props) => {
               placeholder="Category"
               onChange={handleChangeCategory}
               styles={styles}
-              value={selectedOption}
+              value={props.resetCat == "reset" ? '' : selectedCategory}
             />
           </div>
 
@@ -250,6 +279,7 @@ const DeskFilter = (props) => {
             placeholder="Course Type"
             onChange={handleChangeCourseName}
             styles={styles}
+            value={selectedCourseName}
           />
         </div>
 
@@ -259,6 +289,7 @@ const DeskFilter = (props) => {
             placeholder="Course Mode"
             onChange={handleChangeCourseMode}
             styles={styles}
+            value={selectedCourseMode}
           />
         </div>
         <div className="deskserachflls">
@@ -267,6 +298,7 @@ const DeskFilter = (props) => {
             placeholder="City"
             onChange={handleCity}
             styles={styles}
+            value={selectedCity}
           />
         </div>
         <div className="deskserachflls">
@@ -275,28 +307,33 @@ const DeskFilter = (props) => {
             placeholder="Institute"
             onChange={handleInstitute}
             styles={styles}
+            value={selectedInstitute}
           />
         </div>
         <div className="grdfiltes" id>
           <h6 className="flxhds">Duration (In Months)</h6>
           <div className="range-slider durnr">
 
-          <Slider range defaultValue={[20, 50]} />
+           
+
+          {getDuration != 0 && (
+          <Slider range defaultValue={[0, getDuration]} max={getDuration} min={0}  onAfterChange={handleDuration}  />
+          ) }
 
           </div>
           <h6 className="flxhds">Price Range</h6>
 
 
           <div className="range-slider grad pricerngs">
-          <Slider range defaultValue={[20, 50]} />
+
+          {maxFees != 0 && (
+
+          <Slider range defaultValue={[0, maxFees]} min={0} max={maxFees}  onAfterChange={handleFees} />
+
+          ) }
 
           </div>
-          <h6 className="flxhds">Hours</h6>
-
-          <div className="range-slider">
-          <Slider range defaultValue={[20, 50]} />
-
-          </div>
+         
         </div>
       </div>
     </>

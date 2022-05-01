@@ -21,6 +21,14 @@ const Listing = (props) => {
   const [filterData, setfilterData] = useState([])
   const [loader, setLoader] = useState(false)
   const [currentProject, setCurrentProject] = useState('')
+ 
+  const [slctdFilter, setSlctdFilter] = useState([])
+
+
+  const [resetCat, setResetCat] = useState('')
+  const [chngfltr, setChngfltr] = useState('')
+
+  const [sDuration, setSduration] = useState('')
 
   const [hasMore, setHasMore] = useState(true)
   const [currentPage, setCurrentPage] = useState(2)
@@ -34,6 +42,24 @@ const Listing = (props) => {
   const [email, setEmail] = useState('')
   const [mobileNo, setMobileNo] = useState('')
   const [query, setQuery] = useState('')
+
+  const [sort] = useState([
+    { id: "1", value: "p_low_to_high", label: "Price: Low to High" },
+    { id: "2", value: "p_high_to_low", label: "Price: High to Low" },
+    { id: "3", value: "d_low_to_high", label: "Duration: Low to High" },
+    { id: "4", value: "d_high_to_low", label: "Duration: High to Low" }
+  ]);
+
+  
+  useEffect(() => {
+    getAllCoursesByFilter(slctdFilter,'')
+  }, [slctdFilter]);
+
+
+  useEffect(() => {
+    getAllCoursesByFilter('',sDuration)
+  }, [sDuration]);
+
 
   const router = useRouter()
 
@@ -53,6 +79,12 @@ const Listing = (props) => {
     setCheckDevice(ua)
   }, [])
 
+
+  // useEffect(() => {
+  //   setSlctdFilter(slctdFilter);
+  // }, [slctdFilter])
+
+
   const getAllCourses = async () => {
     try {
       const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API}/listing`)
@@ -60,6 +92,7 @@ const Listing = (props) => {
       // const l_page = data.get_courses.last_page;
       setLastPage(data.get_courses.last_page)
       setCourses(getCourses)
+     
 
       // console.log(lastPage)
       // console.log(currentPage)
@@ -111,7 +144,7 @@ const Listing = (props) => {
     }
   }
 
-  const getAllCoursesByFilter = async (value) => {
+  const getAllCoursesByFilter = async (value,sort_d) => {
     setLoader(true)
 
     try {
@@ -119,7 +152,15 @@ const Listing = (props) => {
       //   `https://phplaravel-709751-2547471.cloudwaysapps.com/api/listingbyfilter?filters=${querystring.stringify(filterData)}`,
       // )
 
-      const newFilterData = JSON.stringify(value)
+      const newFilterData = JSON.stringify(slctdFilter)
+
+      let selectedSort;
+
+      // if(sort_d != null){
+      //   selectedSort = sort_d;
+      // }else{
+      //   selectedSort = sDuration;
+      // }
 
       const config = {
         headers: { 'Content-Type': 'application/json' },
@@ -129,6 +170,7 @@ const Listing = (props) => {
         `${process.env.NEXT_PUBLIC_API}/listingbyfilter`,
         {
           prod_filters: newFilterData,
+          sort: sDuration
         },
         config,
       )
@@ -159,9 +201,22 @@ const Listing = (props) => {
     console.log(value)
     if (value.length > 0) {
       setfilterData(value)
-      getAllCoursesByFilter(value)
+      setSlctdFilter(value)
     }
   }
+
+  const getData2 = (value) => {
+    console.log(value)
+
+    setSduration(value)
+
+    // if (value.length > 0) {
+    //   setfilterData(value)
+    //   setSlctdFilter(value)
+    // }
+  }
+
+
 
   const styles = {
     menuList: (base) => ({
@@ -255,11 +310,66 @@ const Listing = (props) => {
     }
   }
 
+  const removeFilter = (value) => {
+
+
+    // setChngfltr(value);
+
+    // const index = slctdFilter.findIndex(prod => prod.id === value); //use id instead of index
+    // if (index > -1) { //make sure you found it
+    //   setSlctdFilter(prevState => prevState.splice(index, 1));
+    // }   
+
+    // var array = [slctdFilter]; 
+
+    // if(value == "course_categories_id"){
+    //   setResetCat('reset');
+    // }
+
+    // let indexx = slctdFilter.findIndex(function (pair) {
+    //   return pair.type == value
+    // })
+
+
+    // if (indexx !== -1) {
+    //   slctdFilter.splice(indexx, 1)
+    // }
+
+    // setSlctdFilter(oldArray => {
+    //   return oldArray.filter((value, i) => i !== indexx)
+    // })
+
+    // console.log(slctdFilter);
+
+    // setSlctdFilter(slctdFilter)
+
+  }
+
+  const handleSort = (selectedOptions) => {
+
+    // console.log(selectedOptions.label);
+
+    setSduration(selectedOptions.value)
+
+    // getAllCoursesByFilter('',selectedOptions.value);
+    // setSelectedCourseName(selectedOptions)
+    // let index = selectedFilters.findIndex(function (pair) {
+    //   return pair.type == 'course_types_id'
+    // })
+
+    // if (index !== -1) {
+    //   selectedFilters.splice(index, 1)
+    // }
+    // setSelectedFilters((oldArray) => [...oldArray, selectedOptions])
+  }
+
   return (
     <>
       <Nav />
 
-      {/* {JSON.stringify(currentProject,null,2)} */}
+      
+
+      {/* {JSON.stringify(sDuration,null,2)} */}
 
       {/* <Range /> */}
 
@@ -293,9 +403,9 @@ const Listing = (props) => {
             <div className="col-lg-3 col-md-4">
               <div className="custmfiltr">
                 {checkDevice.deviceType ? (
-                  <MobileContent />
+                  <MobileContent sendData2={getData2} sendData={getData} resetCat={resetCat} chngfltr={chngfltr} />
                 ) : (
-                  <DesktopContent sendData={getData} />
+                  <DesktopContent sendData={getData} resetCat={resetCat} chngfltr={chngfltr} />
                 )}
               </div>
             </div>
@@ -304,30 +414,22 @@ const Listing = (props) => {
                 <div className="tgselectdata">
                   {/* {JSON.stringify(filterData)} */}
 
-                  {filterData &&
-                    filterData.map((filter, key) => (
+                  {slctdFilter &&
+                    slctdFilter.map((filter, key) => (
                       <div className="ttpattrib">
                         <p>
-                          {filter.label} <span>x</span>
+                          {filter.label} <span onClick={(e) => removeFilter(filter.type)}  style={{cursor:"pointer"}}>x</span>
                         </p>
                       </div>
                     ))}
                 </div>
-                <div className="sotfllshw" style={{ width: '20%' }}>
+                <div className="sotfllshw" style={{ width: '28%' }}>
                   <Select
-                    options={courseName}
+                    options={sort}
                     placeholder="Sort By:"
                     styles={styles}
+                    onChange={handleSort}
                   />
-
-                  {/* <select className="selectpicker" data-show-subtext="true" data-live-search="true" data-live-search-placeholder="Sort By Tag">
-                <option value="hide">Sort By:</option>
-                <option value={2010}>Price: Low to High</option>
-                <option value={2011}>Price: High to Low</option>
-                <option value={2012}>Duration</option>
-                <option value={2013}>Popularity</option>
-                <option value={2014}>City</option>
-              </select> */}
                 </div>
               </div>
               <div className="dtabasedcateg dvv">
@@ -480,7 +582,6 @@ const Listing = (props) => {
                     </InfiniteScroll>
                   )}
 
-                  {/* Modal */}
                   <div
                     className="modal fade"
                     id="exampleModalEnquirenow"
