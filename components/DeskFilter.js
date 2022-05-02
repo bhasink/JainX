@@ -3,7 +3,6 @@ import Select from 'react-select'
 import axios from 'axios'
 import { Slider } from 'antd'
 
-
 const DeskFilter = (props) => {
   const [courseName, setCourseName] = useState([])
   const [courseMode, setCourseMode] = useState([])
@@ -13,12 +12,7 @@ const DeskFilter = (props) => {
   const [maxFees, setMaxFees] = useState('')
   const [getDuration, setGetDuration] = useState('')
 
-  
-
-
   const [selectedOption, setSelectedOption] = useState([])
-
-  
 
   const [selectedCourseName, setSelectedCourseName] = useState(null)
   const [selectedCourseMode, setSelectedCourseMode] = useState(null)
@@ -33,98 +27,65 @@ const DeskFilter = (props) => {
       duration: 2000,
     })
 
-    getFilterData();
+    getFilterData()
   }, [])
 
   useEffect(() => {
-    if(props.searchfilter.category == null){
+    if (props.searchfilter.category == null) {
       setSelectedCategory({ label: 'Category' })
-    }else{
+    } else {
       setSelectedCategory({ label: makeTitle(props.searchfilter.category) })
     }
 
-    if(props.searchfilter.mode == null){
+    if (props.searchfilter.mode == null) {
       setSelectedCourseMode({ label: 'Course Mode' })
-    }else{
-      setSelectedCourseMode({ label: makeTitle(props.searchfilter.mode).replace(/[0-9]/g, '') })
+    } else {
+      setSelectedCourseMode({
+        label: makeTitle(props.searchfilter.mode).replace(/[0-9]/g, ''),
+      })
     }
 
-    if(props.searchfilter.city == null){
+    if (props.searchfilter.city == null) {
       setSelectedCity({ label: 'City' })
-    }else{
-      setSelectedCity({ label: makeTitle(props.searchfilter.city).replace(/[0-9]/g, '') })
+    } else {
+      setSelectedCity({
+        label: makeTitle(props.searchfilter.city).replace(/[0-9]/g, ''),
+      })
     }
   }, [])
 
-
-
   const makeTitle = (slug) => {
-    var words = slug.split('-');
-  
+    var words = slug.split('-')
+
     for (var i = 0; i < words.length; i++) {
-      var word = words[i];
-      words[i] = word.charAt(0).toUpperCase() + word.slice(1);
+      var word = words[i]
+      words[i] = word.charAt(0).toUpperCase() + word.slice(1)
     }
-  
-    return words.join(' ');
+
+    return words.join(' ')
   }
 
-  // if(props.slctdFiltr){
-  //   setSelectedFilters(props.slctdFiltr)
-  // }
-  
-//   useEffect(() => {
-//     if(props.slctdFiltr){
-//       setSelectedFilters(props.slctdFiltr)
-//     }
-// }, [props])
-
-// useEffect(() => {
-
-//   setSelectedFilters(props.chngfltr)
-// }, [])
-
-
   useEffect(() => {
-
-
-    // console.log(props.chngfltr)
-
-    // if(props.chngfltr != ''){
-
-    //   let indexx = selectedFilters.findIndex(function (pair) {
-    //     return pair.type == props.chngfltr
-    //   })
-
-    //   setSelectedFilters(oldArray => {
-    //     return oldArray.filter((value, i) => i !== indexx)
-    //   })
-
-    // }
-
-
+   
     let pp = selectedFilters.filter(
       (ele, ind) =>
         ind === selectedFilters.findIndex((elem) => elem.type === ele.type),
     )
 
-    // props.chngfltr
-
     props.sendData(pp)
   }, [selectedFilters])
-
 
   const getFilterData = async () => {
     try {
       const { data } = await axios.get(
         `${process.env.NEXT_PUBLIC_API}/get-filter-data`,
       )
-      const get_categories = data.get_course_category;
-      const get_course_name = data.get_course_name;
-      const get_course_mode = data.get_course_mode;
-      const get_institutes = data.get_institutes;
-      const get_cities = data.get_cities;
-      
+      const get_categories = data.get_course_category
+      const get_course_name = data.get_course_name
+      const get_course_mode = data.get_course_mode
+      const get_institutes = data.get_institutes
+      const get_cities = data.get_cities
+
       setMaxFees(data.get_max_fees)
       setGetDuration(data.get_duration)
 
@@ -134,7 +95,7 @@ const DeskFilter = (props) => {
           value: opt.id,
           type: 'course_categories_id',
         })),
-      );
+      )
 
       setCourseName(
         get_course_name.map((opt) => ({
@@ -142,7 +103,7 @@ const DeskFilter = (props) => {
           value: opt.id,
           type: 'course_types_id',
         })),
-      );
+      )
 
       setCourseMode(
         get_course_mode.map((opt) => ({
@@ -150,7 +111,7 @@ const DeskFilter = (props) => {
           value: opt.id,
           type: 'course_modes_id',
         })),
-      );
+      )
 
       setInstitutes(
         get_institutes.map((opt) => ({
@@ -158,7 +119,7 @@ const DeskFilter = (props) => {
           value: opt.id,
           type: 'institute_id',
         })),
-      );
+      )
 
       setCities(
         get_cities.map((opt) => ({
@@ -166,8 +127,7 @@ const DeskFilter = (props) => {
           value: opt.id,
           type: 'cities_id',
         })),
-      );
-
+      )
     } catch (err) {
       console.log(err)
     }
@@ -248,7 +208,6 @@ const DeskFilter = (props) => {
   const handleDuration = (selectedOptions) => {
     setSelectedFilters(props.chngfltr)
 
-
     let indexx = selectedFilters.findIndex(function (pair) {
       return pair.type == 'duration'
     })
@@ -261,32 +220,30 @@ const DeskFilter = (props) => {
       label: `Duration: ${selectedOptions[0]} - ${selectedOptions[1]}`,
       value: selectedOptions[1],
       type: 'duration',
-    };
+    }
 
-     setSelectedFilters((oldArray) => [...oldArray, data])
-}
-
-const handleFees = (selectedOptions) => {
-  setSelectedFilters(props.chngfltr)
-
-
-  let indexx = selectedFilters.findIndex(function (pair) {
-    return pair.type == 'fees'
-  })
-
-  if (indexx !== -1) {
-    selectedFilters.splice(indexx, 1)
+    setSelectedFilters((oldArray) => [...oldArray, data])
   }
 
-  const data = {
-    label: `Price: ${selectedOptions[0]} - ${selectedOptions[1]}`,
-    value: selectedOptions[1],
-    type: 'fees',
-  };
+  const handleFees = (selectedOptions) => {
+    setSelectedFilters(props.chngfltr)
 
-   setSelectedFilters((oldArray) => [...oldArray, data])
-}
+    let indexx = selectedFilters.findIndex(function (pair) {
+      return pair.type == 'fees'
+    })
 
+    if (indexx !== -1) {
+      selectedFilters.splice(indexx, 1)
+    }
+
+    const data = {
+      label: `Price: ${selectedOptions[0]} - ${selectedOptions[1]}`,
+      value: selectedOptions[1],
+      type: 'fees',
+    }
+
+    setSelectedFilters((oldArray) => [...oldArray, data])
+  }
 
   const styles = {
     menuList: (base) => ({
@@ -310,9 +267,6 @@ const handleFees = (selectedOptions) => {
 
   return (
     <>
-      {/* {JSON.stringify(props.resetType)} */}
-
-
 
       <div className="deskfilteronly">
         <div className="deskserachflls">
@@ -322,7 +276,7 @@ const handleFees = (selectedOptions) => {
               placeholder="Category"
               onChange={handleChangeCategory}
               styles={styles}
-              value={props.resetCat == "reset" ? '' : selectedCategory}
+              value={props.resetCat == 'reset' ? '' : selectedCategory}
             />
           </div>
 
@@ -331,7 +285,7 @@ const handleFees = (selectedOptions) => {
             placeholder="Course Type"
             onChange={handleChangeCourseName}
             styles={styles}
-            value={props.resetType == "reset" ? '' : selectedCourseName}
+            value={props.resetType == 'reset' ? '' : selectedCourseName}
           />
         </div>
 
@@ -341,8 +295,7 @@ const handleFees = (selectedOptions) => {
             placeholder="Course Mode"
             onChange={handleChangeCourseMode}
             styles={styles}
-            value={props.resetMode == "reset" ? '' : selectedCourseMode}
-
+            value={props.resetMode == 'reset' ? '' : selectedCourseMode}
           />
         </div>
         <div className="deskserachflls">
@@ -351,8 +304,7 @@ const handleFees = (selectedOptions) => {
             placeholder="City"
             onChange={handleCity}
             styles={styles}
-            value={props.resetCity == "reset" ? '' : selectedCity}
-
+            value={props.resetCity == 'reset' ? '' : selectedCity}
           />
         </div>
         <div className="deskserachflls">
@@ -361,34 +313,35 @@ const handleFees = (selectedOptions) => {
             placeholder="Institute"
             onChange={handleInstitute}
             styles={styles}
-            value={props.resetInstitute == "reset" ? '' : selectedInstitute}
-
+            value={props.resetInstitute == 'reset' ? '' : selectedInstitute}
           />
         </div>
         <div className="grdfiltes" id>
           <h6 className="flxhds">Duration (In Months)</h6>
           <div className="range-slider durnr">
-
-           
-
-          {getDuration != 0 && (
-          <Slider range defaultValue={[0, getDuration]} max={getDuration} min={0}  onAfterChange={handleDuration}  />
-          ) }
-
+            {getDuration != 0 && (
+              <Slider
+                range
+                defaultValue={[0, getDuration]}
+                max={getDuration}
+                min={0}
+                onAfterChange={handleDuration}
+              />
+            )}
           </div>
           <h6 className="flxhds">Price Range</h6>
 
-
           <div className="range-slider grad pricerngs">
-
-          {maxFees != 0 && (
-
-          <Slider range defaultValue={[0, maxFees]} min={0} max={maxFees}  onAfterChange={handleFees} />
-
-          ) }
-
+            {maxFees != 0 && (
+              <Slider
+                range
+                defaultValue={[0, maxFees]}
+                min={0}
+                max={maxFees}
+                onAfterChange={handleFees}
+              />
+            )}
           </div>
-         
         </div>
       </div>
     </>

@@ -51,13 +51,7 @@ const Home = () => {
         `${process.env.NEXT_PUBLIC_API}/get-featured-course`,
       )
       const getCourses = data.get_courses
-      // const l_page = data.get_courses.last_page;
-      // setLastPage(data.get_courses.last_page)
       setCourses(getCourses)
-
-      // console.log(lastPage)
-      // console.log(currentPage)
-      // console.log(hasMore)
 
       console.log(data)
     } catch (err) {
@@ -88,7 +82,7 @@ const Home = () => {
 
   const renderSuggestion = (suggestion) => (
     <p>
-      <BsSearch size="12px" style={{ marginTop: '-0.4em' }} /> {suggestion.name} 
+      <BsSearch size="12px" style={{ marginTop: '-0.4em' }} /> {suggestion.name}
     </p>
   )
 
@@ -96,7 +90,6 @@ const Home = () => {
     const inputValue = value.trim().toLowerCase()
     const inputLength = inputValue.length
 
-    // Here I get data from cities.json
     return inputLength === 0
       ? []
       : categories
@@ -289,7 +282,7 @@ const Home = () => {
       }
 
       const slug = convertToSlug(catSelected)
-      const mode = courseMode;
+      const mode = courseMode
 
       if (city != '' && slug != '') {
         router.push({
@@ -331,9 +324,6 @@ const Home = () => {
   return (
     <>
       <Nav />
-
-      {/* {courseMode} */}
-      {/* {JSON.stringify(courses,null,2)} */}
 
       {loading && (
         <>
@@ -436,13 +426,7 @@ const Home = () => {
                   </div>
                 </div>
                 <div className="col-md-6 col-lg-5 text-center">
-                  {/* <select className="form-control locationslcts">
-            <option>Delhi</option>
-            <option>Mumbai</option>
-            <option>Chennai</option>
-            <option>Kolkata</option>
-          </select> */}
-
+          
                   <img
                     src={`${process.env.NEXT_PUBLIC_B_API}/images/rightviewmain.png`}
                     className="rgtmds"
@@ -463,8 +447,14 @@ const Home = () => {
                   data-aos-easing="ease-in-sine"
                 >
                   <div className="vdthmbs">
-                    <img src={`${process.env.NEXT_PUBLIC_B_API}/images/playicon.png`} className="plicon" />
-                    <img src={`${process.env.NEXT_PUBLIC_B_API}/images/about.jpg`} className="fllimg" />
+                    <img
+                      src={`${process.env.NEXT_PUBLIC_B_API}/images/playicon.png`}
+                      className="plicon"
+                    />
+                    <img
+                      src={`${process.env.NEXT_PUBLIC_B_API}/images/about.jpg`}
+                      className="fllimg"
+                    />
                   </div>
                 </div>
                 <div
@@ -518,7 +508,6 @@ const Home = () => {
                   <h2 className="mainhds">Featured Courses</h2>
                 </div>
                 <div className="coursespanels">
-                  {/* {JSON.stringify(courses,null,2)} */}
 
                   <OwlCarousel
                     className="featuredslide owl-theme owl-carousel"
@@ -532,7 +521,10 @@ const Home = () => {
                       <div className="item">
                         <div className="panelcards">
                           <img
-                            src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/` + coursesData.logo}
+                            src={
+                              `${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/` +
+                              coursesData.logo
+                            }
                             className="fllimg"
                           />
                           <h5 className="csnms">{coursesData.name}</h5>
@@ -571,8 +563,6 @@ const Home = () => {
                 <div className="text-center hdingst whtxt">
                   <h2 className="mainhds">Top Categories</h2>
                 </div>
-
-                {/* {JSON.stringify(categories,null,2)} */}
 
                 <OwlCarousel
                   className="categchecks userreview owl-theme owl-carousel"
@@ -617,7 +607,9 @@ const Home = () => {
                         sit amet, consectetur adipisci velit
                       </p>
                       <div className="usrthmbs">
-                        <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`} />
+                        <img
+                          src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`}
+                        />
                       </div>
                       <p className="usrnmtst">Neque porro quisquam</p>
                     </div>
@@ -629,7 +621,9 @@ const Home = () => {
                         sit amet, consectetur adipisci velit
                       </p>
                       <div className="usrthmbs">
-                        <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/3.jpg`} />
+                        <img
+                          src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/3.jpg`}
+                        />
                       </div>
                       <p className="usrnmtst">Neque porro quisquam</p>
                     </div>
@@ -641,7 +635,9 @@ const Home = () => {
                         sit amet, consectetur adipisci velit
                       </p>
                       <div className="usrthmbs">
-                        <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/3.jpg`} />
+                        <img
+                          src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/3.jpg`}
+                        />
                       </div>
                       <p className="usrnmtst">Neque porro quisquam</p>
                     </div>
@@ -653,7 +649,9 @@ const Home = () => {
                         sit amet, consectetur adipisci velit
                       </p>
                       <div className="usrthmbs">
-                        <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/2.jpg`} />
+                        <img
+                          src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/2.jpg`}
+                        />
                       </div>
                       <p className="usrnmtst">Neque porro quisquam</p>
                     </div>
@@ -678,27 +676,37 @@ const Home = () => {
                 >
                   <div className="item">
                     <div className="lgocirc">
-                      <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/1.png`} />
+                      <img
+                        src={`${process.env.NEXT_PUBLIC_B_API}/images/client/1.png`}
+                      />
                     </div>
                   </div>
                   <div className="item">
                     <div className="lgocirc">
-                    <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/2.png`} />
+                      <img
+                        src={`${process.env.NEXT_PUBLIC_B_API}/images/client/2.png`}
+                      />
                     </div>
                   </div>
                   <div className="item">
                     <div className="lgocirc">
-                    <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/3.png`} />
+                      <img
+                        src={`${process.env.NEXT_PUBLIC_B_API}/images/client/3.png`}
+                      />
                     </div>
                   </div>
                   <div className="item">
                     <div className="lgocirc">
-                    <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/4.png`} />
+                      <img
+                        src={`${process.env.NEXT_PUBLIC_B_API}/images/client/4.png`}
+                      />
                     </div>
                   </div>
                   <div className="item">
                     <div className="lgocirc">
-                    <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/5.png`} />
+                      <img
+                        src={`${process.env.NEXT_PUBLIC_B_API}/images/client/5.png`}
+                      />
                     </div>
                   </div>
                 </OwlCarousel>
@@ -721,14 +729,18 @@ const Home = () => {
                 responsive={state.responsive_top_cat}
               >
                 <div className="item">
-                  <img src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/1.png`} />
+                  <img
+                    src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/1.png`}
+                  />
                   <h4>Crafted Carefully</h4>
                   <p>
                     Each course handpicked to enhance your knowledge and skills.
                   </p>
                 </div>
                 <div className="item">
-                  <img src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/2.png`} />
+                  <img
+                    src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/2.png`}
+                  />
                   <h4>Expert Facilitators</h4>
                   <p>
                     Learn from passionate and industry experienced subject
@@ -736,7 +748,9 @@ const Home = () => {
                   </p>
                 </div>
                 <div className="item">
-                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/3.png`} />
+                  <img
+                    src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/3.png`}
+                  />
                   <h4>Get Hands-on Exposure</h4>
                   <p>
                     Gain practical experience and skills through
@@ -744,14 +758,18 @@ const Home = () => {
                   </p>
                 </div>
                 <div className="item">
-                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/1.png`} />
+                  <img
+                    src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/1.png`}
+                  />
                   <h4>Crafted Carefully</h4>
                   <p>
                     Each course handpicked to enhance your knowledge and skills.
                   </p>
                 </div>
                 <div className="item">
-                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/2.png`} />
+                  <img
+                    src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/2.png`}
+                  />
                   <h4>Expert Facilitators</h4>
                   <p>
                     Learn from passionate and industry experienced subject
@@ -759,7 +777,9 @@ const Home = () => {
                   </p>
                 </div>
                 <div className="item">
-                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/3.png`} />
+                  <img
+                    src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/3.png`}
+                  />
                   <h4>Get Hands-on Exposure</h4>
                   <p>
                     Gain practical experience and skills through

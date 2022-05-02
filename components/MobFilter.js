@@ -1,10 +1,9 @@
-import { useEffect,useState } from "react";
-import Select from 'react-select';
+import { useEffect, useState } from 'react'
+import Select from 'react-select'
 import axios from 'axios'
 import { Slider } from 'antd'
 
 const MobFilter = (props) => {
-
   const [courseName, setCourseName] = useState([])
   const [courseMode, setCourseMode] = useState([])
   const [institutes, setInstitutes] = useState([])
@@ -13,12 +12,7 @@ const MobFilter = (props) => {
   const [maxFees, setMaxFees] = useState('')
   const [getDuration, setGetDuration] = useState('')
 
-  
-
-
   const [selectedOption, setSelectedOption] = useState([])
-
-  
 
   const [selectedCourseName, setSelectedCourseName] = useState(null)
   const [selectedCourseMode, setSelectedCourseMode] = useState(null)
@@ -30,557 +24,597 @@ const MobFilter = (props) => {
 
   const [sDuration, setSduration] = useState('')
 
-
   const [sort] = useState([
-    { id: "1", value: "p_low_to_high", label: "Price: Low to High" },
-    { id: "2", value: "p_high_to_low", label: "Price: High to Low" },
-    { id: "3", value: "d_low_to_high", label: "Duration: Low to High" },
-    { id: "4", value: "d_high_to_low", label: "Duration: High to Low" }
-  ]);
+    { id: '1', value: 'p_low_to_high', label: 'Price: Low to High' },
+    { id: '2', value: 'p_high_to_low', label: 'Price: High to Low' },
+    { id: '3', value: 'd_low_to_high', label: 'Duration: Low to High' },
+    { id: '4', value: 'd_high_to_low', label: 'Duration: High to Low' },
+  ])
 
+  useEffect(() => {
+    AOS.init({
+      duration: 2000,
+    })
 
-useEffect(() => {
-  AOS.init({
-    duration: 2000,
-  })
+    getFilterData()
+  }, [])
 
-  getFilterData();
-}, [])
+  const getFilterData = async () => {
+    try {
+      const { data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_API}/get-filter-data`,
+      )
+      const get_categories = data.get_course_category
+      const get_course_name = data.get_course_name
+      const get_course_mode = data.get_course_mode
+      const get_institutes = data.get_institutes
+      const get_cities = data.get_cities
 
-// useEffect(() => {
+      setMaxFees(data.get_max_fees)
+      setGetDuration(data.get_duration)
 
-//   // console.log(props.chngfltr)
+      setCourseCategory(
+        get_categories.map((opt) => ({
+          label: opt.name,
+          value: opt.id,
+          type: 'course_categories_id',
+        })),
+      )
 
-//   // if(props.chngfltr != ''){
+      setCourseName(
+        get_course_name.map((opt) => ({
+          label: opt.name,
+          value: opt.id,
+          type: 'course_types_id',
+        })),
+      )
 
-//   //   let indexx = selectedFilters.findIndex(function (pair) {
-//   //     return pair.type == props.chngfltr
-//   //   })
+      setCourseMode(
+        get_course_mode.map((opt) => ({
+          label: opt.name,
+          value: opt.id,
+          type: 'course_modes_id',
+        })),
+      )
 
-//   //   setSelectedFilters(oldArray => {
-//   //     return oldArray.filter((value, i) => i !== indexx)
-//   //   })
+      setInstitutes(
+        get_institutes.map((opt) => ({
+          label: opt.name,
+          value: opt.id,
+          type: 'institute_id',
+        })),
+      )
 
-//   // }
+      setCities(
+        get_cities.map((opt) => ({
+          label: opt.name,
+          value: opt.id,
+          type: 'cities_id',
+        })),
+      )
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
+  const handleChangeCourseName = (selectedOptions) => {
+    setSelectedCourseName(selectedOptions)
+    let index = selectedFilters.findIndex(function (pair) {
+      return pair.type == 'course_types_id'
+    })
 
-//   let pp = selectedFilters.filter(
-//     (ele, ind) =>
-//       ind === selectedFilters.findIndex((elem) => elem.type === ele.type),
-//   )
+    if (index !== -1) {
+      selectedFilters.splice(index, 1)
+    }
+    setSelectedFilters((oldArray) => [...oldArray, selectedOptions])
+  }
 
-//   // props.chngfltr
+  const handleChangeCategory = (selectedOptions) => {
+    setSelectedCategory(selectedOptions)
 
-//   props.sendData(pp)
-// }, [selectedFilters])
+    let index = selectedFilters.findIndex(function (pair) {
+      return pair.type == 'course_categories_id'
+    })
 
-const getFilterData = async () => {
-  try {
-    const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_API}/get-filter-data`,
+    if (index !== -1) {
+      selectedFilters.splice(index, 1)
+    }
+
+    setSelectedFilters((oldArray) => [...oldArray, selectedOptions])
+  }
+
+  const handleChangeCourseMode = (selectedOptions) => {
+    setSelectedCourseMode(selectedOptions)
+    let index = selectedFilters.findIndex(function (pair) {
+      return pair.type == 'course_modes_id'
+    })
+
+    if (index !== -1) {
+      selectedFilters.splice(index, 1)
+    }
+    setSelectedFilters((oldArray) => [...oldArray, selectedOptions])
+  }
+
+  const handleCity = (selectedOptions) => {
+    setSelectedCity(selectedOptions)
+    let index = selectedFilters.findIndex(function (pair) {
+      return pair.type == 'cities_id'
+    })
+
+    if (index !== -1) {
+      selectedFilters.splice(index, 1)
+    }
+    setSelectedFilters((oldArray) => [...oldArray, selectedOptions])
+  }
+
+  const handleInstitute = (selectedOptions) => {
+    setSelectedInstitute(selectedOptions)
+    let index = selectedFilters.findIndex(function (pair) {
+      return pair.type == 'institute_id'
+    })
+
+    if (index !== -1) {
+      selectedFilters.splice(index, 1)
+    }
+    setSelectedFilters((oldArray) => [...oldArray, selectedOptions])
+  }
+
+  const handleDuration = (selectedOptions) => {
+    let indexx = selectedFilters.findIndex(function (pair) {
+      return pair.type == 'duration'
+    })
+
+    if (indexx !== -1) {
+      selectedFilters.splice(indexx, 1)
+    }
+
+    const data = {
+      label: `Duration: ${selectedOptions[0]} - ${selectedOptions[1]}`,
+      value: selectedOptions[1],
+      type: 'duration',
+    }
+
+    setSelectedFilters((oldArray) => [...oldArray, data])
+  }
+
+  const handleFees = (selectedOptions) => {
+    let indexx = selectedFilters.findIndex(function (pair) {
+      return pair.type == 'fees'
+    })
+
+    if (indexx !== -1) {
+      selectedFilters.splice(indexx, 1)
+    }
+
+    const data = {
+      label: `Price: ${selectedOptions[0]} - ${selectedOptions[1]}`,
+      value: selectedOptions[1],
+      type: 'fees',
+    }
+
+    setSelectedFilters((oldArray) => [...oldArray, data])
+  }
+
+  const styles = {
+    menuList: (base) => ({
+      ...base,
+
+      '::-webkit-scrollbar': {
+        width: '4px',
+        height: '0px',
+      },
+      '::-webkit-scrollbar-track': {
+        background: '#f1f1f1',
+      },
+      '::-webkit-scrollbar-thumb': {
+        background: '#888',
+      },
+      '::-webkit-scrollbar-thumb:hover': {
+        background: '#555',
+      },
+    }),
+  }
+
+  const handleSort = (selectedOptions) => {
+    setSduration(selectedOptions.value)
+  }
+
+  const apply = () => {
+    $('body').removeClass('modal-open')
+    $('.modal-backdrop').remove()
+    $('#exampleModalCenter11').hide()
+    $('#exampleModalCenter1').hide()
+    $('#exampleModalCenter2').hide()
+    $('#exampleModalCenter3').hide()
+    $('#exampleModalCenter4').hide()
+    $('#exampleModalCenter5').hide()
+    $('#exampleModalCenter').hide()
+
+    let pp = selectedFilters.filter(
+      (ele, ind) =>
+        ind === selectedFilters.findIndex((elem) => elem.type === ele.type),
     )
-    const get_categories = data.get_course_category;
-    const get_course_name = data.get_course_name;
-    const get_course_mode = data.get_course_mode;
-    const get_institutes = data.get_institutes;
-    const get_cities = data.get_cities;
-    
-    setMaxFees(data.get_max_fees)
-    setGetDuration(data.get_duration)
-
-    setCourseCategory(
-      get_categories.map((opt) => ({
-        label: opt.name,
-        value: opt.id,
-        type: 'course_categories_id',
-      })),
-    );
-
-    setCourseName(
-      get_course_name.map((opt) => ({
-        label: opt.name,
-        value: opt.id,
-        type: 'course_types_id',
-      })),
-    );
-
-    setCourseMode(
-      get_course_mode.map((opt) => ({
-        label: opt.name,
-        value: opt.id,
-        type: 'course_modes_id',
-      })),
-    );
-
-    setInstitutes(
-      get_institutes.map((opt) => ({
-        label: opt.name,
-        value: opt.id,
-        type: 'institute_id',
-      })),
-    );
-
-    setCities(
-      get_cities.map((opt) => ({
-        label: opt.name,
-        value: opt.id,
-        type: 'cities_id',
-      })),
-    );
-
-  } catch (err) {
-    console.log(err)
-  }
-}
-
-const handleChangeCourseName = (selectedOptions) => {
-  setSelectedCourseName(selectedOptions)
-  let index = selectedFilters.findIndex(function (pair) {
-    return pair.type == 'course_types_id'
-  })
-
-  if (index !== -1) {
-    selectedFilters.splice(index, 1)
-  }
-  setSelectedFilters((oldArray) => [...oldArray, selectedOptions])
-}
-
-const handleChangeCategory = (selectedOptions) => {
-  setSelectedCategory(selectedOptions)
-
-  let index = selectedFilters.findIndex(function (pair) {
-    return pair.type == 'course_categories_id'
-  })
-
-  if (index !== -1) {
-    selectedFilters.splice(index, 1)
+    props.sendData(pp)
   }
 
-  setSelectedFilters((oldArray) => [...oldArray, selectedOptions])
-}
+  const apply2 = () => {
+    $('body').removeClass('modal-open')
+    $('.modal-backdrop').remove()
+    $('#exampleModalCenter11').hide()
+    $('#exampleModalCenter1').hide()
+    $('#exampleModalCenter2').hide()
+    $('#exampleModalCenter3').hide()
+    $('#exampleModalCenter4').hide()
+    $('#exampleModalCenter5').hide()
+    $('#exampleModalCenter').hide()
 
-const handleChangeCourseMode = (selectedOptions) => {
-  setSelectedCourseMode(selectedOptions)
-  let index = selectedFilters.findIndex(function (pair) {
-    return pair.type == 'course_modes_id'
-  })
-
-  if (index !== -1) {
-    selectedFilters.splice(index, 1)
+    props.sendData2(sDuration)
   }
-  setSelectedFilters((oldArray) => [...oldArray, selectedOptions])
-}
-
-const handleCity = (selectedOptions) => {
-  setSelectedCity(selectedOptions)
-  let index = selectedFilters.findIndex(function (pair) {
-    return pair.type == 'cities_id'
-  })
-
-  if (index !== -1) {
-    selectedFilters.splice(index, 1)
-  }
-  setSelectedFilters((oldArray) => [...oldArray, selectedOptions])
-}
-
-const handleInstitute = (selectedOptions) => {
-  setSelectedInstitute(selectedOptions)
-  let index = selectedFilters.findIndex(function (pair) {
-    return pair.type == 'institute_id'
-  })
-
-  if (index !== -1) {
-    selectedFilters.splice(index, 1)
-  }
-  setSelectedFilters((oldArray) => [...oldArray, selectedOptions])
-}
-
-const handleDuration = (selectedOptions) => {
-
-  let indexx = selectedFilters.findIndex(function (pair) {
-    return pair.type == 'duration'
-  })
-
-  if (indexx !== -1) {
-    selectedFilters.splice(indexx, 1)
-  }
-
-  const data = {
-    label: `Duration: ${selectedOptions[0]} - ${selectedOptions[1]}`,
-    value: selectedOptions[1],
-    type: 'duration',
-  };
-
-   setSelectedFilters((oldArray) => [...oldArray, data])
-}
-
-const handleFees = (selectedOptions) => {
-
-let indexx = selectedFilters.findIndex(function (pair) {
-  return pair.type == 'fees'
-})
-
-if (indexx !== -1) {
-  selectedFilters.splice(indexx, 1)
-}
-
-const data = {
-  label: `Price: ${selectedOptions[0]} - ${selectedOptions[1]}`,
-  value: selectedOptions[1],
-  type: 'fees',
-};
-
- setSelectedFilters((oldArray) => [...oldArray, data])
-}
-
-
-const styles = {
-  menuList: (base) => ({
-    ...base,
-
-    '::-webkit-scrollbar': {
-      width: '4px',
-      height: '0px',
-    },
-    '::-webkit-scrollbar-track': {
-      background: '#f1f1f1',
-    },
-    '::-webkit-scrollbar-thumb': {
-      background: '#888',
-    },
-    '::-webkit-scrollbar-thumb:hover': {
-      background: '#555',
-    },
-  }),
-}
-
-const handleSort = (selectedOptions) => {
-
-  // console.log(selectedOptions.label);
-
-  setSduration(selectedOptions.value)
-
-  // getAllCoursesByFilter('',selectedOptions.value);
-  // setSelectedCourseName(selectedOptions)
-  // let index = selectedFilters.findIndex(function (pair) {
-  //   return pair.type == 'course_types_id'
-  // })
-
-  // if (index !== -1) {
-  //   selectedFilters.splice(index, 1)
-  // }
-  // setSelectedFilters((oldArray) => [...oldArray, selectedOptions])
-}
-
-
-const apply = () => {
-
-  $('body').removeClass('modal-open')
-  $('.modal-backdrop').remove()
-  $('#exampleModalCenter11').hide()
-  $('#exampleModalCenter1').hide()
-  $('#exampleModalCenter2').hide()
-  $('#exampleModalCenter3').hide()
-  $('#exampleModalCenter4').hide()
-  $('#exampleModalCenter5').hide()
-  $('#exampleModalCenter').hide()
-
-  
-
-  let pp = selectedFilters.filter(
-    (ele, ind) =>
-      ind === selectedFilters.findIndex((elem) => elem.type === ele.type),
-  )
-
-  // props.chngfltr
-
-  props.sendData(pp)
-
-}
-
-
-const apply2 = () => {
-
-  $('body').removeClass('modal-open')
-  $('.modal-backdrop').remove()
-  $('#exampleModalCenter11').hide()
-  $('#exampleModalCenter1').hide()
-  $('#exampleModalCenter2').hide()
-  $('#exampleModalCenter3').hide()
-  $('#exampleModalCenter4').hide()
-  $('#exampleModalCenter5').hide()
-  $('#exampleModalCenter').hide()
-
-  
-
-  // let pp = selectedFilters.filter(
-  //   (ele, ind) =>
-  //     ind === selectedFilters.findIndex((elem) => elem.type === ele.type),
-  // )
-
-  // props.chngfltr
-
-  props.sendData2(sDuration)
-
-}
-
 
   return (
     <>
-     <div className=" mobsonly">
-              <button className=" collapsed ctfiljxs nobgtr" data-toggle="modal" data-target="#exampleModalCenter5">
-                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/sortby.png`} />	
-              </button>
+      <div className=" mobsonly">
+        <button
+          className=" collapsed ctfiljxs nobgtr"
+          data-toggle="modal"
+          data-target="#exampleModalCenter5"
+        >
+          <img src={`${process.env.NEXT_PUBLIC_B_API}/images/sortby.png`} />
+        </button>
 
-              <button className=" collapsed ctfiljxs" data-toggle="modal" data-target="#exampleModalCenter11">
-                Category
-              </button>
+        <button
+          className=" collapsed ctfiljxs"
+          data-toggle="modal"
+          data-target="#exampleModalCenter11"
+        >
+          Category
+        </button>
 
-              <button className=" collapsed ctfiljxs" data-toggle="modal" data-target="#exampleModalCenter1">
-                Type
-              </button>
-              <button className=" collapsed ctfiljxs" data-toggle="modal" data-target="#exampleModalCenter2">
-                Course Mode
-              </button>
-              <button className=" collapsed ctfiljxs" data-toggle="modal" data-target="#exampleModalCenter3">
-                City
-              </button>
-              <button className=" collapsed ctfiljxs nobgtr" data-toggle="modal" data-target="#exampleModalCenter">
-                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/filterbys.png`} />	
-              </button>
-              <button className=" collapsed ctfiljxs" data-toggle="modal" data-target="#exampleModalCenter4">
-                Select Institute
-              </button>
+        <button
+          className=" collapsed ctfiljxs"
+          data-toggle="modal"
+          data-target="#exampleModalCenter1"
+        >
+          Type
+        </button>
+        <button
+          className=" collapsed ctfiljxs"
+          data-toggle="modal"
+          data-target="#exampleModalCenter2"
+        >
+          Course Mode
+        </button>
+        <button
+          className=" collapsed ctfiljxs"
+          data-toggle="modal"
+          data-target="#exampleModalCenter3"
+        >
+          City
+        </button>
+        <button
+          className=" collapsed ctfiljxs nobgtr"
+          data-toggle="modal"
+          data-target="#exampleModalCenter"
+        >
+          <img src={`${process.env.NEXT_PUBLIC_B_API}/images/filterbys.png`} />
+        </button>
+        <button
+          className=" collapsed ctfiljxs"
+          data-toggle="modal"
+          data-target="#exampleModalCenter4"
+        >
+          Select Institute
+        </button>
 
-  {/* Modal */}
-  <div className="modal fade" id="exampleModalCenter11" tabIndex={-1} role="dialog" aria-labelledby="exampleModalCenterTitle11" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-centered jncustm trasntypes" role="document">
-                  <div className="modal-content">
-                    <div className="modal-body">
-                      <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                      </button>
-                      <div className="deskserachflls">
-
-                        
-                    
-
-                      <Select
-              options={courseCategory}
-              placeholder="Category"
-              onChange={handleChangeCategory}
-              styles={styles}
-              value={selectedCategory}
-            />
-
-
-                      </div>
-                    </div>
-                    <div className="modal-footer text-center mx-auto">
-                      <button type="button" className="blulghtcta" onClick={apply}>Apply</button>
-                    </div>
-                  </div>
+        {/* Modal */}
+        <div
+          className="modal fade"
+          id="exampleModalCenter11"
+          tabIndex={-1}
+          role="dialog"
+          aria-labelledby="exampleModalCenterTitle11"
+          aria-hidden="true"
+        >
+          <div
+            className="modal-dialog modal-dialog-centered jncustm trasntypes"
+            role="document"
+          >
+            <div className="modal-content">
+              <div className="modal-body">
+                <button
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">×</span>
+                </button>
+                <div className="deskserachflls">
+                  <Select
+                    options={courseCategory}
+                    placeholder="Category"
+                    onChange={handleChangeCategory}
+                    styles={styles}
+                    value={selectedCategory}
+                  />
                 </div>
               </div>
+              <div className="modal-footer text-center mx-auto">
+                <button type="button" className="blulghtcta" onClick={apply}>
+                  Apply
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
 
-              {/* Modal */}
-              <div className="modal fade" id="exampleModalCenter1" tabIndex={-1} role="dialog" aria-labelledby="exampleModalCenterTitle1" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-centered jncustm trasntypes" role="document">
-                  <div className="modal-content">
-                    <div className="modal-body">
-                      <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                      </button>
-                      <div className="deskserachflls">
-
-                        
-                    
-
-                        <Select
-            options={courseName}
-            placeholder="Course Type"
-            onChange={handleChangeCourseName}
-            styles={styles}
-            value={selectedCourseName}
-          />
-
-
-                      </div>
-                    </div>
-                    <div className="modal-footer text-center mx-auto">
-                      <button type="button" className="blulghtcta" onClick={apply}>Apply</button>
-                    </div>
-                  </div>
+        {/* Modal */}
+        <div
+          className="modal fade"
+          id="exampleModalCenter1"
+          tabIndex={-1}
+          role="dialog"
+          aria-labelledby="exampleModalCenterTitle1"
+          aria-hidden="true"
+        >
+          <div
+            className="modal-dialog modal-dialog-centered jncustm trasntypes"
+            role="document"
+          >
+            <div className="modal-content">
+              <div className="modal-body">
+                <button
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">×</span>
+                </button>
+                <div className="deskserachflls">
+                  <Select
+                    options={courseName}
+                    placeholder="Course Type"
+                    onChange={handleChangeCourseName}
+                    styles={styles}
+                    value={selectedCourseName}
+                  />
                 </div>
               </div>
-              {/* Modal */}
-              <div className="modal fade" id="exampleModalCenter" tabIndex={-1} role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-centered jncustm" role="document">
-                  <div className="modal-content">
-                    <div className="modal-body">
-                      <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                      </button>
-                      <h6 className="flxhds">Duration</h6>
-                      <div className="range-slider durnr">
-                        
-                      {getDuration != 0 && (
-          <Slider range defaultValue={[0, getDuration]} max={getDuration} min={0}  onAfterChange={handleDuration}  />
-          ) }
+              <div className="modal-footer text-center mx-auto">
+                <button type="button" className="blulghtcta" onClick={apply}>
+                  Apply
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Modal */}
+        <div
+          className="modal fade"
+          id="exampleModalCenter"
+          tabIndex={-1}
+          role="dialog"
+          aria-labelledby="exampleModalCenterTitle"
+          aria-hidden="true"
+        >
+          <div
+            className="modal-dialog modal-dialog-centered jncustm"
+            role="document"
+          >
+            <div className="modal-content">
+              <div className="modal-body">
+                <button
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">×</span>
+                </button>
+                <h6 className="flxhds">Duration</h6>
+                <div className="range-slider durnr">
+                  {getDuration != 0 && (
+                    <Slider
+                      range
+                      defaultValue={[0, getDuration]}
+                      max={getDuration}
+                      min={0}
+                      onAfterChange={handleDuration}
+                    />
+                  )}
 
-                        <div className="range-slider__progress" />
-                      </div>
-                      <h6 className="flxhds">Price Range</h6>
-                      <div className="range-slider grad pricerngs">
-                      {maxFees != 0 && (
+                  <div className="range-slider__progress" />
+                </div>
+                <h6 className="flxhds">Price Range</h6>
+                <div className="range-slider grad pricerngs">
+                  {maxFees != 0 && (
+                    <Slider
+                      range
+                      defaultValue={[0, maxFees]}
+                      min={0}
+                      max={maxFees}
+                      onAfterChange={handleFees}
+                    />
+                  )}
 
-<Slider range defaultValue={[0, maxFees]} min={0} max={maxFees}  onAfterChange={handleFees} />
-
-) }
-
-                        <div className="range-slider__progress" />
-                      </div>
-                    
-                    </div>
-                    <div className="modal-footer text-center mx-auto">
-                      <button type="button" className="blulghtcta" onClick={apply}>Apply</button>
-                    </div>
-                  </div>
+                  <div className="range-slider__progress" />
                 </div>
               </div>
-              {/* Modal */}
-              <div className="modal fade" id="exampleModalCenter2" tabIndex={-1} role="dialog" aria-labelledby="exampleModalCenterTitle2" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-centered jncustm trasntypes" role="document">
-                  <div className="modal-content">
-                    <div className="modal-body">
-                      <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                      </button>
+              <div className="modal-footer text-center mx-auto">
+                <button type="button" className="blulghtcta" onClick={apply}>
+                  Apply
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Modal */}
+        <div
+          className="modal fade"
+          id="exampleModalCenter2"
+          tabIndex={-1}
+          role="dialog"
+          aria-labelledby="exampleModalCenterTitle2"
+          aria-hidden="true"
+        >
+          <div
+            className="modal-dialog modal-dialog-centered jncustm trasntypes"
+            role="document"
+          >
+            <div className="modal-content">
+              <div className="modal-body">
+                <button
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">×</span>
+                </button>
 
-                      <div className="deskserachflls">
-                      <Select
-            options={courseMode}
-            placeholder="Course Mode"
-            onChange={handleChangeCourseMode}
-            styles={styles}
-            value={selectedCourseMode}
-          />
-</div>
-                      {/* <div className="coursetype row"> */}
-
-                
-                        {/* <div className="col-lg-6 col-6">
-                          <div className="crdcourse">
-                            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/hybridicon.png`} />
-                            <div className="custom-control custom-radio">
-                              <input type="radio" id="customRadio8" name="customRadio" className="custom-control-input" />
-                              <label className="custom-control-label" htmlFor="customRadio8">Hybrid</label>
-                            </div> 
-                          </div>
-                        </div>
-                        <div className="col-lg-6 col-6">
-                          <div className="crdcourse">
-                            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/onlinecrsicon.png`} />
-                            <div className="custom-control custom-radio">
-                              <input type="radio" id="customRadio7" name="customRadio" className="custom-control-input" />
-                              <label className="custom-control-label" htmlFor="customRadio7">Online</label>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-lg-6 col-6 mx-auto">
-                          <div className="crdcourse">
-                            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/teachingicon.png`} />
-                            <div className="custom-control custom-radio">
-                              <input type="radio" id="customRadio9" name="customRadio" className="custom-control-input" />
-                              <label className="custom-control-label" htmlFor="customRadio9">Offline</label>
-                            </div>
-                          </div>
-                        </div> */}
-                      {/* </div> */}
-                    </div>
-                    <div className="modal-footer text-center mx-auto">
-                      <button type="button" className="blulghtcta" onClick={apply}>Apply</button>
-                    </div>
-                  </div>
+                <div className="deskserachflls">
+                  <Select
+                    options={courseMode}
+                    placeholder="Course Mode"
+                    onChange={handleChangeCourseMode}
+                    styles={styles}
+                    value={selectedCourseMode}
+                  />
                 </div>
               </div>
-              {/* Modal */}
-              <div className="modal fade" id="exampleModalCenter3" tabIndex={-1} role="dialog" aria-labelledby="exampleModalCenterTitle3" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-centered jncustm trasntypes" role="document">
-                  <div className="modal-content">
-                    <div className="modal-body">
-                      <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                      </button>
-                      <div className="deskserachflls">
-                      <Select
-            options={cities}
-            placeholder="City"
-            onChange={handleCity}
-            styles={styles}
-            value={selectedCity}
-          />
-                      </div>
-                    </div>
-                    <div className="modal-footer text-center mx-auto">
-                      <button type="button" className="blulghtcta" onClick={apply}>Apply</button>
-                    </div>
-                  </div>
+              <div className="modal-footer text-center mx-auto">
+                <button type="button" className="blulghtcta" onClick={apply}>
+                  Apply
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Modal */}
+        <div
+          className="modal fade"
+          id="exampleModalCenter3"
+          tabIndex={-1}
+          role="dialog"
+          aria-labelledby="exampleModalCenterTitle3"
+          aria-hidden="true"
+        >
+          <div
+            className="modal-dialog modal-dialog-centered jncustm trasntypes"
+            role="document"
+          >
+            <div className="modal-content">
+              <div className="modal-body">
+                <button
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">×</span>
+                </button>
+                <div className="deskserachflls">
+                  <Select
+                    options={cities}
+                    placeholder="City"
+                    onChange={handleCity}
+                    styles={styles}
+                    value={selectedCity}
+                  />
                 </div>
               </div>
-              {/* Modal */}
-              <div className="modal fade" id="exampleModalCenter4" tabIndex={-1} role="dialog" aria-labelledby="exampleModalCenterTitle4" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-centered jncustm trasntypes" role="document">
-                  <div className="modal-content">
-                    <div className="modal-body">
-                      <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                      </button>
-                      <div className="deskserachflls">
-                     
-
-                        <Select
-            options={institutes}
-            placeholder="Institute"
-            onChange={handleInstitute}
-            styles={styles}
-            value={selectedInstitute}
-          />
-
-                      </div>
-                    </div>
-                    <div className="modal-footer text-center mx-auto">
-                      <button type="button" className="blulghtcta" onClick={apply}>Apply</button>
-                    </div>
-                  </div>
+              <div className="modal-footer text-center mx-auto">
+                <button type="button" className="blulghtcta" onClick={apply}>
+                  Apply
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Modal */}
+        <div
+          className="modal fade"
+          id="exampleModalCenter4"
+          tabIndex={-1}
+          role="dialog"
+          aria-labelledby="exampleModalCenterTitle4"
+          aria-hidden="true"
+        >
+          <div
+            className="modal-dialog modal-dialog-centered jncustm trasntypes"
+            role="document"
+          >
+            <div className="modal-content">
+              <div className="modal-body">
+                <button
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">×</span>
+                </button>
+                <div className="deskserachflls">
+                  <Select
+                    options={institutes}
+                    placeholder="Institute"
+                    onChange={handleInstitute}
+                    styles={styles}
+                    value={selectedInstitute}
+                  />
                 </div>
               </div>
-              {/* Modal */}
-              <div className="modal fade" id="exampleModalCenter5" tabIndex={-1} role="dialog" aria-labelledby="exampleModalCenterTitle5" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-centered jncustm trasntypes" role="document">
-                  <div className="modal-content">
-                    <div className="modal-body">
-                      <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                      </button>
-                      <div className="sortbjner">
-                        <h6>Sort By:</h6>
-                        <Select
+              <div className="modal-footer text-center mx-auto">
+                <button type="button" className="blulghtcta" onClick={apply}>
+                  Apply
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Modal */}
+        <div
+          className="modal fade"
+          id="exampleModalCenter5"
+          tabIndex={-1}
+          role="dialog"
+          aria-labelledby="exampleModalCenterTitle5"
+          aria-hidden="true"
+        >
+          <div
+            className="modal-dialog modal-dialog-centered jncustm trasntypes"
+            role="document"
+          >
+            <div className="modal-content">
+              <div className="modal-body">
+                <button
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">×</span>
+                </button>
+                <div className="sortbjner">
+                  <h6>Sort By:</h6>
+                  <Select
                     options={sort}
                     placeholder="Sort By:"
                     styles={styles}
                     onChange={handleSort}
                   />
-                      </div>
-                    </div>
-                    <div className="modal-footer text-center mx-auto">
-                      <button type="button" className="blulghtcta" onClick={apply2}>Apply</button>
-                    </div>
-                  </div>
                 </div>
               </div>
+              <div className="modal-footer text-center mx-auto">
+                <button type="button" className="blulghtcta" onClick={apply2}>
+                  Apply
+                </button>
+              </div>
             </div>
-           
+          </div>
+        </div>
+      </div>
     </>
   )
 }

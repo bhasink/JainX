@@ -22,8 +22,6 @@ const Listing = (props) => {
   const [loader, setLoader] = useState(false)
   const [currentProject, setCurrentProject] = useState('')
 
-  // const [searchParams, setSearchParams] = useSearchParams();
-
   const [slctdFilter, setSlctdFilter] = useState([])
 
   const [resetCat, setResetCat] = useState('')
@@ -189,31 +187,17 @@ const Listing = (props) => {
     }
   }
 
-  // useEffect(() => {
-  //   setSlctdFilter(slctdFilter);
-  // }, [slctdFilter])
-
   const getAllCourses = async () => {
     try {
       const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API}/listing`)
       const getCourses = data.get_courses.data
-      // const l_page = data.get_courses.last_page;
+
       setLastPage(data.get_courses.last_page)
       setCourses(getCourses)
-
-      // console.log(lastPage)
-      // console.log(currentPage)
-      // console.log(hasMore)
 
       if (getCourses.length == null || getCourses.length == 0) {
         setHasMore(false)
       }
-
-      // if (l_page > currentPage) {
-      //   setCurrentPage((currentPage = currentPage + 1))
-      // } else {
-      //   setHasMore(false)
-      // }
 
       console.log(data)
     } catch (err) {
@@ -230,10 +214,6 @@ const Listing = (props) => {
       const l_page = data.get_courses.last_page
       setLastPage(data.get_courses.last_page)
       setCourses((get_course) => [...get_course, ...getCourses])
-
-      // console.log(lastPage)
-      // console.log(currentPage)
-      // console.log(hasMore)
 
       if (getCourses.length == null) {
         setHasMore(false)
@@ -255,19 +235,9 @@ const Listing = (props) => {
     setLoader(true)
 
     try {
-      // const { data } = await axios.get(
-      //   `https://phplaravel-709751-2547471.cloudwaysapps.com/api/listingbyfilter?filters=${querystring.stringify(filterData)}`,
-      // )
-
       const newFilterData = JSON.stringify(slctdFilter)
 
       let selectedSort
-
-      // if(sort_d != null){
-      //   selectedSort = sort_d;
-      // }else{
-      //   selectedSort = sDuration;
-      // }
 
       const config = {
         headers: { 'Content-Type': 'application/json' },
@@ -285,18 +255,12 @@ const Listing = (props) => {
       const getCourses = data.get_courses.data
       setLastPage(data.get_courses.last_page)
 
-      // console.log(lastPage)
-      // console.log(currentPage)
-      // console.log(hasMore)
-
       if (lastPage != currentPage) {
-        // setCurrentPage((currentPage = currentPage + 1))
       } else {
         setHasMore(false)
       }
 
       setCourses(getCourses)
-      // setCourses(getCourses)
 
       setLoader(false)
     } catch (err) {
@@ -316,11 +280,6 @@ const Listing = (props) => {
     console.log(value)
 
     setSduration(value)
-
-    // if (value.length > 0) {
-    //   setfilterData(value)
-    //   setSlctdFilter(value)
-    // }
   }
 
   const styles = {
@@ -418,14 +377,6 @@ const Listing = (props) => {
   const removeFilter = (value) => {
     setChngfltr(value)
 
-    // const index = slctdFilter.findIndex(prod => prod.id === value); //use id instead of index
-    // if (index > -1) { //make sure you found it
-    //   setSlctdFilter(prevState => prevState.splice(index, 1));
-    // }
-
-    // var array = [slctdFilter];
-
-
     if (value == 'course_categories_id') {
       setResetCat('reset')
     }
@@ -458,37 +409,18 @@ const Listing = (props) => {
       return oldArray.filter((value, i) => i !== indexx)
     })
 
-    // console.log(slctdFilter);
-
     setSlctdFilter(slctdFilter)
 
     getAllCoursesByFilter(slctdFilter, '')
   }
 
   const handleSort = (selectedOptions) => {
-    // console.log(selectedOptions.label);
-
     setSduration(selectedOptions.value)
-
-    // getAllCoursesByFilter('',selectedOptions.value);
-    // setSelectedCourseName(selectedOptions)
-    // let index = selectedFilters.findIndex(function (pair) {
-    //   return pair.type == 'course_types_id'
-    // })
-
-    // if (index !== -1) {
-    //   selectedFilters.splice(index, 1)
-    // }
-    // setSelectedFilters((oldArray) => [...oldArray, selectedOptions])
   }
 
   return (
     <>
       <Nav />
-
-      {/* {JSON.stringify(slctdFilter,null,2)} */}
-
-      {/* <Range /> */}
 
       <style
         dangerouslySetInnerHTML={{
@@ -548,8 +480,6 @@ const Listing = (props) => {
             <div className="col-lg-9 col-md-8">
               <div className="sortbyfllnx">
                 <div className="tgselectdata">
-                  {/* {JSON.stringify(filterData)} */}
-
                   {slctdFilter &&
                     slctdFilter.map((filter, key) => (
                       <div className="ttpattrib">

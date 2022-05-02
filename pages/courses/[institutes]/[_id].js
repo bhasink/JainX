@@ -16,8 +16,7 @@ const OwlCarousel = dynamic(() => import('react-owl-carousel'), {
   ssr: false,
 })
 import { useToasts } from 'react-toast-notifications'
-import FileSaver from 'file-saver';
-
+import FileSaver from 'file-saver'
 
 const CourseDetails = () => {
   const [courseDetails, setCourseDetails] = useState({})
@@ -26,18 +25,16 @@ const CourseDetails = () => {
   const [email, setEmail] = useState('')
   const [mobileNo, setMobileNo] = useState('')
   const [query, setQuery] = useState('')
-  
-  
+
   const myRef = useRef(null)
   const { addToast } = useToasts()
-  const executeScroll = () => myRef.current.scrollIntoView()    
-
+  const executeScroll = () => myRef.current.scrollIntoView()
 
   const router = useRouter()
   const _id = router.query._id
 
   useEffect(() => {
-    if(!router.isReady) return;
+    if (!router.isReady) return
 
     getCourseDetails()
 
@@ -61,8 +58,7 @@ const CourseDetails = () => {
       )
 
       const getCoursesDetails = data.get_course_details
-      const keyHlits = getCoursesDetails.key_highlights.split(',');
-
+      const keyHlits = getCoursesDetails.key_highlights.split(',')
 
       setKeyHighlightss(keyHlits)
 
@@ -106,25 +102,26 @@ const CourseDetails = () => {
       addToast('Please enter the query!', { appearance: 'error' })
       return false
     }
-    
 
-    $('body').removeClass('modal-open');
-    $('.modal-backdrop').remove();
-    $("#exampleModalEnquirenow").hide()
-
+    $('body').removeClass('modal-open')
+    $('.modal-backdrop').remove()
+    $('#exampleModalEnquirenow').hide()
 
     try {
-      const data = await axios.post(`${process.env.NEXT_PUBLIC_API}/course-leads`,{
-          "name":name,
-          "email":email,
-          "mobile_no":mobileNo,
-          "query":query,
-          "course_id":courseDetails.id,
-      });
-  
-      if(data.status == 200){
-        addToast("Success!", { appearance: 'success' });
-        router.push("/thanks");
+      const data = await axios.post(
+        `${process.env.NEXT_PUBLIC_API}/course-leads`,
+        {
+          name: name,
+          email: email,
+          mobile_no: mobileNo,
+          query: query,
+          course_id: courseDetails.id,
+        },
+      )
+
+      if (data.status == 200) {
+        addToast('Success!', { appearance: 'success' })
+        router.push('/thanks')
       }
 
       //
@@ -168,31 +165,31 @@ const CourseDetails = () => {
       addToast('Please enter the query!', { appearance: 'error' })
       return false
     }
-    
 
-    $('body').removeClass('modal-open');
-    $('.modal-backdrop').remove();
-    $("#exampleModalEnquirenow").hide()
-
+    $('body').removeClass('modal-open')
+    $('.modal-backdrop').remove()
+    $('#exampleModalEnquirenow').hide()
 
     try {
-      const data = await axios.post(`${process.env.NEXT_PUBLIC_API}/course-leads`,{
-          "name":name,
-          "email":email,
-          "mobile_no":mobileNo,
-          "query":query,
-          "course_id":courseDetails.id,
-      });
-  
-      if(data.status == 200){
+      const data = await axios.post(
+        `${process.env.NEXT_PUBLIC_API}/course-leads`,
+        {
+          name: name,
+          email: email,
+          mobile_no: mobileNo,
+          query: query,
+          course_id: courseDetails.id,
+        },
+      )
 
+      if (data.status == 200) {
         FileSaver.saveAs(
-          process.env.NEXT_PUBLIC_B_API + "/brochure/1639503210_41536.csv",
-          "1639503210_41536.csv"
-        );
+          process.env.NEXT_PUBLIC_B_API + '/brochure/1639503210_41536.csv',
+          '1639503210_41536.csv',
+        )
 
-        addToast("Success!", { appearance: 'success' });
-        router.push("/thanks");
+        addToast('Success!', { appearance: 'success' })
+        router.push('/thanks')
       }
 
       //
@@ -270,12 +267,10 @@ const CourseDetails = () => {
       },
     },
   }
-  
+
   return (
     <>
       <Nav />
-
-      {/* {JSON.stringify(keyHighlights, null, 2)} */}
 
       <section className="pageinforhd pt-5 pb-5 nohdleftbrdcm">
         <div className="container">
@@ -294,78 +289,112 @@ const CourseDetails = () => {
           </nav>
         </div>
       </section>
-      
+
       <section className="coursedetailmain">
         <div className="container">
           <div className="row">
             <div className="col-md-6 col-lg-6">
               <div className="coursepls">
-                <h1 className="mainhds">{courseDetails && courseDetails.name}</h1>
-                <h4 className="insnames">{courseDetails && courseDetails.institute && courseDetails.institute.name}</h4>
+                <h1 className="mainhds">
+                  {courseDetails && courseDetails.name}
+                </h1>
+                <h4 className="insnames">
+                  {courseDetails &&
+                    courseDetails.institute &&
+                    courseDetails.institute.name}
+                </h4>
                 <p>{courseDetails && courseDetails.short_desc}</p>
                 <div className="dtlsctaviews desktopcopy">
                   <a onClick={executeScroll} className="grylghtcta">
                     Apply Now
                   </a>
-                  <a   href="javascript:void(0);"
-                                  data-toggle="modal"
-                                  data-target="#exampleModalEnquirenow" className="blulghtcta">
+                  <a
+                    href="javascript:void(0);"
+                    data-toggle="modal"
+                    data-target="#exampleModalEnquirenow"
+                    className="blulghtcta"
+                  >
                     Download Brochure
                   </a>
                 </div>
               </div>
             </div>
             <div className="col-md-6 col-lg-6 text-center">
-
               {courseDetails && courseDetails.logo && (
-              <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/` + courseDetails.logo} className="ms" />
+                <img
+                  src={
+                    `${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/` +
+                    courseDetails.logo
+                  }
+                  className="ms"
+                />
               )}
-
             </div>
-            {/*<div class="col-md-6 col-lg-6">
-				<div class="dtlsctaviews">
-									<a href="#" class="grylghtcta">Apply Now</a>
-									<a href="#" class="blulghtcta">Download Brochure</a>
-								</div>
-			</div>*/}
           </div>
           <div className="coursepackdtls">
             <div className="row">
               <div className="col-6 col-lg-2 col-md-3 mx-auto ctypeinl">
-                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/courseinf/1.png`} />
+                <img
+                  src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/courseinf/1.png`}
+                />
                 <h6 className="mainhds">Delivery Type</h6>
                 <h4 className="insnames">Online</h4>
               </div>
               <div className="col-6 col-lg-2 col-md-3 mx-auto ctypeinl">
-                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/courseinf/2.png`} />
+                <img
+                  src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/courseinf/2.png`}
+                />
                 <h6 className="mainhds">Start Date</h6>
-                <h4 className="insnames">{courseDetails && courseDetails.start_date}</h4>
+                <h4 className="insnames">
+                  {courseDetails && courseDetails.start_date}
+                </h4>
               </div>
               <div className="col-6 col-lg-2 col-md-3 mx-auto ctypeinl">
-                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/courseinf/3.png`} />
+                <img
+                  src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/courseinf/3.png`}
+                />
                 <h6 className="mainhds">Duration</h6>
-                <h4 className="insnames">{courseDetails && courseDetails.duration} Months</h4>
+                <h4 className="insnames">
+                  {courseDetails && courseDetails.duration} Months
+                </h4>
               </div>
               <div className="col-6 col-lg-2 col-md-3 mx-auto ctypeinl">
-                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/courseinf/4.png`} />
+                <img
+                  src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/courseinf/4.png`}
+                />
                 <h6 className="mainhds">Projects</h6>
-                <h4 className="insnames">{courseDetails && courseDetails.projects}</h4>
+                <h4 className="insnames">
+                  {courseDetails && courseDetails.projects}
+                </h4>
               </div>
               <div className="col-6 col-lg-2 col-md-3 mx-auto ctypeinl">
-                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/courseinf/5.png`} />
+                <img
+                  src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/courseinf/5.png`}
+                />
                 <h6 className="mainhds">Enrolled</h6>
-                <h4 className="insnames">{courseDetails && courseDetails.students_enrolled}+ Students</h4>
+                <h4 className="insnames">
+                  {courseDetails && courseDetails.students_enrolled}+ Students
+                </h4>
               </div>
               <div className="col-6 col-lg-2 col-md-3 mx-auto ctypeinl">
-                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/courseinf/6.png`} />
+                <img
+                  src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/courseinf/6.png`}
+                />
                 <h6 className="mainhds">Fee</h6>
-                <h4 className="insnames">{courseDetails && courseDetails.fees}</h4>
+                <h4 className="insnames">
+                  {courseDetails && courseDetails.fees}
+                </h4>
               </div>
               <div className="dtlsctaviews mobilecopy">
                 <a onClick={executeScroll} className="grylghtcta">
                   Apply Now
                 </a>
-                <a href="#" className="blulghtcta">
+                <a
+                  href="javascript:void(0);"
+                  data-toggle="modal"
+                  data-target="#exampleModalEnquirenow"
+                  className="blulghtcta"
+                >
                   Download Brochure
                 </a>
               </div>
@@ -424,13 +453,8 @@ const CourseDetails = () => {
               <span className="ogx">Key</span> Highlights
             </h4>
             <ul>
-
-            {keyHighlights &&
-                      keyHighlights.map((hilts, key) => (
-              <li>{hilts}</li>
-
-            ))}
-
+              {keyHighlights &&
+                keyHighlights.map((hilts, key) => <li>{hilts}</li>)}
             </ul>
           </div>
         </div>
@@ -448,7 +472,12 @@ const CourseDetails = () => {
               </p>
             </div>
             <div className="col-lg-6 col-md-6 text-center">
-              <a href="#" className="orangejncta">
+              <a
+                href="javascript:void(0);"
+                data-toggle="modal"
+                data-target="#exampleModalEnquirenow"
+                className="orangejncta"
+              >
                 <i className="fas fa-download" /> Download Brochure
               </a>
             </div>
@@ -462,23 +491,26 @@ const CourseDetails = () => {
               <h4 className="mainhds">
                 <span className="ogx">About</span> the institute
               </h4>
-              <p>{courseDetails && courseDetails.institute && courseDetails.institute.about}</p>
+              <p>
+                {courseDetails &&
+                  courseDetails.institute &&
+                  courseDetails.institute.about}
+              </p>
 
-              {courseDetails && courseDetails.institute && 
-                <Link href={'/courses/'+courseDetails.institute.slug}>
-                <a className="orangejncta">
-                  Know More
-                </a>
-              </Link> 
-              }
-            </div> 
+              {courseDetails && courseDetails.institute && (
+                <Link href={'/courses/' + courseDetails.institute.slug}>
+                  <a className="orangejncta">Know More</a>
+                </Link>
+              )}
+            </div>
             <div className="col-lg-6 col-md-6">
-              <img src={`${process.env.NEXT_PUBLIC_B_API}/images/aboutinst.jpg`} className="fllimg" />
+              <img
+                src={`${process.env.NEXT_PUBLIC_B_API}/images/aboutinst.jpg`}
+                className="fllimg"
+              />
             </div>
           </div>
         </div>
-
-
       </section>
       <section className="testimoniapn">
         <div className="container">
@@ -502,7 +534,9 @@ const CourseDetails = () => {
                     amet, consectetur adipisci velit
                   </p>
                   <div className="usrthmbs">
-                    <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`} />
+                    <img
+                      src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`}
+                    />
                   </div>
                   <p className="usrnmtst">Neque porro quisquam</p>
                 </div>
@@ -515,7 +549,9 @@ const CourseDetails = () => {
                     amet, consectetur adipisci velit
                   </p>
                   <div className="usrthmbs">
-                    <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`} />
+                    <img
+                      src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`}
+                    />
                   </div>
                   <p className="usrnmtst">Neque porro quisquam</p>
                 </div>
@@ -528,7 +564,9 @@ const CourseDetails = () => {
                     amet, consectetur adipisci velit
                   </p>
                   <div className="usrthmbs">
-                    <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`} />
+                    <img
+                      src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`}
+                    />
                   </div>
                   <p className="usrnmtst">Neque porro quisquam</p>
                 </div>
@@ -541,7 +579,9 @@ const CourseDetails = () => {
                     amet, consectetur adipisci velit
                   </p>
                   <div className="usrthmbs">
-                    <img src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`} />
+                    <img
+                      src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`}
+                    />
                   </div>
                   <p className="usrnmtst">Neque porro quisquam</p>
                 </div>
@@ -568,30 +608,39 @@ const CourseDetails = () => {
             >
               <div className="item">
                 <div className="lgocirc">
-                  <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/1.png`} />
+                  <img
+                    src={`${process.env.NEXT_PUBLIC_B_API}/images/client/1.png`}
+                  />
                 </div>
               </div>
               <div className="item">
                 <div className="lgocirc">
-                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/2.png`} />
+                  <img
+                    src={`${process.env.NEXT_PUBLIC_B_API}/images/client/2.png`}
+                  />
                 </div>
               </div>
               <div className="item">
                 <div className="lgocirc">
-                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/3.png`} />
+                  <img
+                    src={`${process.env.NEXT_PUBLIC_B_API}/images/client/3.png`}
+                  />
                 </div>
               </div>
               <div className="item">
                 <div className="lgocirc">
-                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/4.png`} />
+                  <img
+                    src={`${process.env.NEXT_PUBLIC_B_API}/images/client/4.png`}
+                  />
                 </div>
               </div>
               <div className="item">
                 <div className="lgocirc">
-                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/client/5.png`} />
+                  <img
+                    src={`${process.env.NEXT_PUBLIC_B_API}/images/client/5.png`}
+                  />
                 </div>
               </div>
-              
             </OwlCarousel>
           </div>
         </div>
@@ -604,7 +653,10 @@ const CourseDetails = () => {
               <br />F<span className="ogx">Asked</span>
               <br />Q<span className="ogx">uestions</span>
             </h2>
-            <img src={`${process.env.NEXT_PUBLIC_B_API}/images/faqroundimgs.png`} className="rouim" />
+            <img
+              src={`${process.env.NEXT_PUBLIC_B_API}/images/faqroundimgs.png`}
+              className="rouim"
+            />
           </div>
           <div id="accordion8">
             <div className="card">
@@ -913,19 +965,19 @@ const CourseDetails = () => {
                       className="form-control"
                       placeholder="Mobile No."
                       value={mobileNo}
-                      onChange={(e) =>setMobileNo(e.target.value)}
+                      onChange={(e) => setMobileNo(e.target.value)}
                     />
                   </div>
 
                   <div className="form-group">
-                                    <textarea
-                                      type="text"
-                                      className="form-control"
-                                      placeholder="Query"
-                                      value={query}
-                                      onChange={(e) => setQuery(e.target.value)}
-                                    ></textarea>
-                                  </div>
+                    <textarea
+                      type="text"
+                      className="form-control"
+                      placeholder="Query"
+                      value={query}
+                      onChange={(e) => setQuery(e.target.value)}
+                    ></textarea>
+                  </div>
 
                   <div className="form-group text-center">
                     <button type="submit">Submit</button>
@@ -951,95 +1003,90 @@ const CourseDetails = () => {
       </section>
 
       <div
-                    className="modal fade"
-                    id="exampleModalEnquirenow"
-                    tabindex="-1"
-                    role="dialog"
-                    aria-labelledby="exampleModalEnquirenowTitle3"
-                    aria-hidden="true"
-                  >
-                    <div
-                      className="modal-dialog modal-dialog-centered   jncustm trasntypes"
-                      role="document"
-                    >
-                      <div className="modal-content">
-                        <div className="modal-body">
-                          <button
-                            type="button"
-                            className="close"
-                            data-dismiss="modal"
-                            aria-label="Close"
-                          >
-                            <span aria-hidden="true">&times;</span>
-                          </button>
+        className="modal fade"
+        id="exampleModalEnquirenow"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalEnquirenowTitle3"
+        aria-hidden="true"
+      >
+        <div
+          className="modal-dialog modal-dialog-centered   jncustm trasntypes"
+          role="document"
+        >
+          <div className="modal-content">
+            <div className="modal-body">
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
 
-                          <div className="basicenqforms">
-                            <form onSubmit={handleSubmit2}>
-                              <div className="row">
-                                <div className="col-lg-12 mx-auto">
-                                  <h3>Download Brochure</h3>
-                                  <div className="form-groupsets">
-                                    <label>Name</label>
-                                    <input
-                                      type="text"
-                                      className="form-control"
-                                      placeholder=""
-                                      value={name}
-                                      onChange={(e) => setName(e.target.value)}
-                                    />
-                                  </div>
+              <div className="basicenqforms">
+                <form onSubmit={handleSubmit2}>
+                  <div className="row">
+                    <div className="col-lg-12 mx-auto">
+                      <h3>Download Brochure</h3>
+                      <div className="form-groupsets">
+                        <label>Name</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder=""
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                        />
+                      </div>
 
-                                  <div className="form-groupsets">
-                                    <label>Email id</label>
-                                    <input
-                                      type="text"
-                                      className="form-control"
-                                      placeholder=""
-                                      value={email}
-                                      onChange={(e) => setEmail(e.target.value)}
-                                    />
-                                  </div>
+                      <div className="form-groupsets">
+                        <label>Email id</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder=""
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                        />
+                      </div>
 
-                                  <div className="form-groupsets">
-                                    <label>Mobile No.</label>
-                                    <input
-                                      type="text"
-                                      className="form-control"
-                                      placeholder=""
-                                      value={mobileNo}
-                                      onChange={(e) =>
-                                        setMobileNo(e.target.value)
-                                      }
-                                    />
-                                  </div>
+                      <div className="form-groupsets">
+                        <label>Mobile No.</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder=""
+                          value={mobileNo}
+                          onChange={(e) => setMobileNo(e.target.value)}
+                        />
+                      </div>
 
-                                  <div className="form-groupsets">
-                                    <label>Query</label>
-                                    <textarea
-                                      type="text"
-                                      className="form-control"
-                                      placeholder=""
-                                      value={query}
-                                      onChange={(e) => setQuery(e.target.value)}
-                                    ></textarea>
-                                  </div>
-                                </div>
-
-                                <div className="col-lg-12 text-center roundbotms">
-                                  <button
-                                    type="submit"
-                                    className="orangectadms"
-                                  >
-                                    Submit
-                                  </button>
-                                </div>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
+                      <div className="form-groupsets">
+                        <label>Query</label>
+                        <textarea
+                          type="text"
+                          className="form-control"
+                          placeholder=""
+                          value={query}
+                          onChange={(e) => setQuery(e.target.value)}
+                        ></textarea>
                       </div>
                     </div>
+
+                    <div className="col-lg-12 text-center roundbotms">
+                      <button type="submit" className="orangectadms">
+                        Submit
+                      </button>
+                    </div>
                   </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <Footer />
     </>
