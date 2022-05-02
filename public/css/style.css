@@ -1870,6 +1870,16 @@ section .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot
 /* Responsive css */
 
 @media screen and (max-width: 767px) and (min-width: 320px){
+
+    .owl-item.active.center .lgocirc{
+        -webkit-transform: scale3d(1.2, 1.2, 1);
+        transform: scale3d(1.2, 1.2, 1);
+    }
+
+    body{
+        padding-top: 65px;
+    }
+
     .testnorflow .testipnlpts{
         width: 91%;
     }
