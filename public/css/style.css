@@ -44,7 +44,7 @@ html {
 }
 
 body{
-	font-family: 'Gilroy';
+	font-family: 'Gilroy' !important;
 	padding-top: 75px;
 }
 
@@ -1760,7 +1760,7 @@ section .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot
     width: 100%;
 }
 
-.srchbar input.react-autosuggest__input {padding: 10px;width: 330px;height: 46px;}
+.srchbar input.react-autosuggest__input {padding: 10px;width: 330px;height: 46px; border: none;}
 
 .react-autosuggest__container {position: relative;}
 
@@ -1835,6 +1835,15 @@ section .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot
     height: 3px;
     border-top: 1px solid #ddd;
     bottom: 9px;
+}
+
+.grdfiltes .ant-slider-track , .grdfiltes .ant-slider:hover .ant-slider-track{background-color: #303158;}
+
+.grdfiltes .ant-slider-handle {border: solid 2px #f89938; background-color: #f89936;}
+
+.grdfiltes .ant-slider-handle.ant-tooltip-open {
+    border-color:#f89936;
+    background-color: #f89936;
 }
 
 /* Responsive css */
