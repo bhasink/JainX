@@ -330,7 +330,7 @@ const Home = () => {
           <section className="homemainbanner">
             <div className="container">
               <div className="row">
-                <div className="col-md-6 col-lg-7 text-center align-self-center">
+                <div className="col-md-6 col-lg-6 text-center align-self-center">
                   <h1
                     className="bnrhd"
                     data-aos="fade-down"
@@ -425,7 +425,7 @@ const Home = () => {
                     </form>
                   </div>
                 </div>
-                <div className="col-md-6 col-lg-5 text-center">
+                <div className="col-md-6 col-lg-6 text-center">
           
                   <img
                     src={`${process.env.NEXT_PUBLIC_B_API}/images/rightviewmain.png`}

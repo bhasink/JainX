@@ -232,7 +232,7 @@ const CourseDetails = () => {
       },
 
       1200: {
-        items: 4,
+        items: 3,
         nav: true,
         dots: false,
         loop: true,
@@ -319,7 +319,7 @@ const CourseDetails = () => {
                 </div>
               </div>
             </div>
-            <div className="col-md-6 col-lg-6 text-center">
+            <div className="col-md-6 col-lg-6 text-center text-lg-right">
               {courseDetails && courseDetails.logo && (
                 <img
                   src={
@@ -523,7 +523,6 @@ const CourseDetails = () => {
               loop
               margin={40}
               nav
-              items={3}
               center
               responsive={state.responsive}
             >
@@ -550,7 +549,7 @@ const CourseDetails = () => {
                   </p>
                   <div className="usrthmbs">
                     <img
-                      src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`}
+                      src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/2.jpg`}
                     />
                   </div>
                   <p className="usrnmtst">Neque porro quisquam</p>
@@ -565,7 +564,7 @@ const CourseDetails = () => {
                   </p>
                   <div className="usrthmbs">
                     <img
-                      src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`}
+                      src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/3.jpg`}
                     />
                   </div>
                   <p className="usrnmtst">Neque porro quisquam</p>
