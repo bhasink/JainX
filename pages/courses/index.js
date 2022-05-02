@@ -593,7 +593,7 @@ const Listing = (props) => {
                                       course.logo
                                     }
                                   />
-                                  <a href="compare.html" className="cmprs">
+                                  <a href="#" className="cmprs">
                                     Compare
                                   </a>
                                 </div>
