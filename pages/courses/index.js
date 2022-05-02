@@ -21,18 +21,20 @@ const Listing = (props) => {
   const [filterData, setfilterData] = useState([])
   const [loader, setLoader] = useState(false)
   const [currentProject, setCurrentProject] = useState('')
- 
 
   // const [searchParams, setSearchParams] = useSearchParams();
 
   const [slctdFilter, setSlctdFilter] = useState([])
 
-
   const [resetCat, setResetCat] = useState('')
+  const [resetType, setResetType] = useState('')
+  const [resetMode, setResetMode] = useState('')
+  const [resetCity, setResetCity] = useState('')
+  const [resetInstitute, setResetInstitute] = useState('')
+
   const [chngfltr, setChngfltr] = useState('')
 
   const [catId, setCatId] = useState('')
-
 
   const [sDuration, setSduration] = useState('')
 
@@ -50,32 +52,27 @@ const Listing = (props) => {
   const [query, setQuery] = useState('')
 
   const [sort] = useState([
-    { id: "1", value: "p_low_to_high", label: "Price: Low to High" },
-    { id: "2", value: "p_high_to_low", label: "Price: High to Low" },
-    { id: "3", value: "d_low_to_high", label: "Duration: Low to High" },
-    { id: "4", value: "d_high_to_low", label: "Duration: High to Low" }
-  ]);
-
-  
-  useEffect(() => {
-    getAllCoursesByFilter(slctdFilter,'')
-  }, [slctdFilter]);
-
+    { id: '1', value: 'p_low_to_high', label: 'Price: Low to High' },
+    { id: '2', value: 'p_high_to_low', label: 'Price: High to Low' },
+    { id: '3', value: 'd_low_to_high', label: 'Duration: Low to High' },
+    { id: '4', value: 'd_high_to_low', label: 'Duration: High to Low' },
+  ])
 
   useEffect(() => {
-    getAllCoursesByFilter('',sDuration)
-  }, [sDuration]);
+    getAllCoursesByFilter(slctdFilter, '')
+  }, [slctdFilter])
 
   useEffect(() => {
+    getAllCoursesByFilter('', sDuration)
+  }, [sDuration])
 
+  useEffect(() => {
     AOS.init({
       duration: 2000,
     })
 
-    if(router.query == null){
-
-    getAllCourses()
-
+    if (router.query == null) {
+      getAllCourses()
     }
 
     if (props.uaString) {
@@ -86,94 +83,115 @@ const Listing = (props) => {
     setCheckDevice(ua)
   }, [])
 
-   useEffect(() => {
-    if(router.query != null){
+  useEffect(() => {
+    if (router.query != null) {
+      let city = router.query.city
+      let category = router.query.category
+      getCatId(category)
 
-      let city = router.query.city;
-      let category = router.query.category;
-      getCatId(category);
+      console.log(city)
 
-      console.log(city);
-
-      if(typeof(city) !== 'undefined'){
-        city = city.split('-');
+      if (typeof city !== 'undefined') {
+        city = city.split('-')
       }
 
-      let mode = router.query.mode;
-      if(mode != undefined){
-
-      mode = mode.split('-');
+      let mode = router.query.mode
+      if (mode != undefined) {
+        mode = mode.split('-')
       }
 
-      if(typeof(city) !== 'undefined' && typeof(mode) !== 'undefined' && typeof(category) !== 'undefined'){
-
-        const result = [ { "label": `${city[0]}`, "value": `${city[1]}`, "type": "cities_id" },
-        { "label": `${mode[0]}`, "value": `${mode[1]}`, "type": "course_modes_id" },
-        { "label": `${category}`, "value": `${catId}`, "type": "course_categories_id" }
-         ];
-      setSlctdFilter(result)
-      }else if(typeof(mode) !== 'undefined' && typeof(category) !== 'undefined'){
-
-        const result = [ { "label": `${mode[0]}`, "value": `${mode[1]}`, "type": "course_modes_id" },
-        { "label": `${category}`, "value": `${catId}`, "type": "course_categories_id" }
-       ];
-      setSlctdFilter(result)
-    }else if(typeof(city) !== 'undefined' && typeof(mode) !== 'undefined'){
-      const result = [ { "label": `${city[0]}`, "value": `${city[1]}`, "type": "cities_id" },
-      { "label": `${mode[0]}`, "value": `${mode[1]}`, "type": "course_modes_id" }
-       ];
-      setSlctdFilter(result)
-      }else if(typeof(city) !== 'undefined' && typeof(category) !== 'undefined'){
-      const result = [ { "label": `${city[0]}`, "value": `${city[1]}`, "type": "cities_id" },
-        { "label": `${category}`, "value": `${catId}`, "type": "course_categories_id" }
-       ];
-      setSlctdFilter(result)
-      }else{
-        if(typeof(mode) !== 'undefined'){
-        const result = [ { "label": `${mode[0]}`, "value": `${mode[1]}`, "type": "course_modes_id" } ];
+      if (
+        typeof city !== 'undefined' &&
+        typeof mode !== 'undefined' &&
+        typeof category !== 'undefined'
+      ) {
+        const result = [
+          { label: `${city[0]}`, value: `${city[1]}`, type: 'cities_id' },
+          { label: `${mode[0]}`, value: `${mode[1]}`, type: 'course_modes_id' },
+          {
+            label: `${category}`,
+            value: `${catId}`,
+            type: 'course_categories_id',
+          },
+        ]
         setSlctdFilter(result)
+      } else if (
+        typeof mode !== 'undefined' &&
+        typeof category !== 'undefined'
+      ) {
+        const result = [
+          { label: `${mode[0]}`, value: `${mode[1]}`, type: 'course_modes_id' },
+          {
+            label: `${category}`,
+            value: `${catId}`,
+            type: 'course_categories_id',
+          },
+        ]
+        setSlctdFilter(result)
+      } else if (typeof city !== 'undefined' && typeof mode !== 'undefined') {
+        const result = [
+          { label: `${city[0]}`, value: `${city[1]}`, type: 'cities_id' },
+          { label: `${mode[0]}`, value: `${mode[1]}`, type: 'course_modes_id' },
+        ]
+        setSlctdFilter(result)
+      } else if (
+        typeof city !== 'undefined' &&
+        typeof category !== 'undefined'
+      ) {
+        const result = [
+          { label: `${city[0]}`, value: `${city[1]}`, type: 'cities_id' },
+          {
+            label: `${category}`,
+            value: `${catId}`,
+            type: 'course_categories_id',
+          },
+        ]
+        setSlctdFilter(result)
+      } else {
+        if (typeof mode !== 'undefined') {
+          const result = [
+            {
+              label: `${mode[0]}`,
+              value: `${mode[1]}`,
+              type: 'course_modes_id',
+            },
+          ]
+          setSlctdFilter(result)
         }
       }
-
     }
-  }, [catId]);
+  }, [catId])
 
-  
   const router = useRouter()
 
   let ua
 
   const getCatId = async (slug) => {
-
     try {
-     
-     const config = {
+      const config = {
         headers: { 'Content-Type': 'application/json' },
       }
 
       const { data } = await axios.post(
         `${process.env.NEXT_PUBLIC_API}/get-category_id`,
         {
-          slug: slug
+          slug: slug,
         },
         config,
       )
 
       const getCat = data.get_category_id
 
-      console.log(getCat);
+      console.log(getCat)
       setCatId(getCat.id)
-
     } catch (err) {
       console.log(err)
     }
   }
 
-
   // useEffect(() => {
   //   setSlctdFilter(slctdFilter);
   // }, [slctdFilter])
-
 
   const getAllCourses = async () => {
     try {
@@ -182,7 +200,6 @@ const Listing = (props) => {
       // const l_page = data.get_courses.last_page;
       setLastPage(data.get_courses.last_page)
       setCourses(getCourses)
-     
 
       // console.log(lastPage)
       // console.log(currentPage)
@@ -234,7 +251,7 @@ const Listing = (props) => {
     }
   }
 
-  const getAllCoursesByFilter = async (value,sort_d) => {
+  const getAllCoursesByFilter = async (value, sort_d) => {
     setLoader(true)
 
     try {
@@ -244,7 +261,7 @@ const Listing = (props) => {
 
       const newFilterData = JSON.stringify(slctdFilter)
 
-      let selectedSort;
+      let selectedSort
 
       // if(sort_d != null){
       //   selectedSort = sort_d;
@@ -260,7 +277,7 @@ const Listing = (props) => {
         `${process.env.NEXT_PUBLIC_API}/listingbyfilter`,
         {
           prod_filters: newFilterData,
-          sort: sDuration
+          sort: sDuration,
         },
         config,
       )
@@ -305,8 +322,6 @@ const Listing = (props) => {
     //   setSlctdFilter(value)
     // }
   }
-
-
 
   const styles = {
     menuList: (base) => ({
@@ -401,42 +416,56 @@ const Listing = (props) => {
   }
 
   const removeFilter = (value) => {
-
-
-    // setChngfltr(value);
+    setChngfltr(value)
 
     // const index = slctdFilter.findIndex(prod => prod.id === value); //use id instead of index
     // if (index > -1) { //make sure you found it
     //   setSlctdFilter(prevState => prevState.splice(index, 1));
-    // }   
-
-    // var array = [slctdFilter]; 
-
-    // if(value == "course_categories_id"){
-    //   setResetCat('reset');
     // }
 
-    // let indexx = slctdFilter.findIndex(function (pair) {
-    //   return pair.type == value
-    // })
+    // var array = [slctdFilter];
 
 
-    // if (indexx !== -1) {
-    //   slctdFilter.splice(indexx, 1)
-    // }
+    if (value == 'course_categories_id') {
+      setResetCat('reset')
+    }
 
-    // setSlctdFilter(oldArray => {
-    //   return oldArray.filter((value, i) => i !== indexx)
-    // })
+    if (value == 'course_types_id') {
+      setResetType('reset')
+    }
+
+    if (value == 'course_modes_id') {
+      setResetMode('reset')
+    }
+
+    if (value == 'cities_id') {
+      setResetCity('reset')
+    }
+
+    if (value == 'institute_id') {
+      setResetInstitute('reset')
+    }
+
+    let indexx = slctdFilter.findIndex(function (pair) {
+      return pair.type == value
+    })
+
+    if (indexx !== -1) {
+      slctdFilter.splice(indexx, 1)
+    }
+
+    setSlctdFilter((oldArray) => {
+      return oldArray.filter((value, i) => i !== indexx)
+    })
 
     // console.log(slctdFilter);
 
-    // setSlctdFilter(slctdFilter)
+    setSlctdFilter(slctdFilter)
 
+    getAllCoursesByFilter(slctdFilter, '')
   }
 
   const handleSort = (selectedOptions) => {
-
     // console.log(selectedOptions.label);
 
     setSduration(selectedOptions.value)
@@ -457,9 +486,7 @@ const Listing = (props) => {
     <>
       <Nav />
 
-      
-
-      {/* {JSON.stringify(catId,null,2)} */}
+      {/* {JSON.stringify(slctdFilter,null,2)} */}
 
       {/* <Range /> */}
 
@@ -493,9 +520,28 @@ const Listing = (props) => {
             <div className="col-lg-3 col-md-4">
               <div className="custmfiltr">
                 {checkDevice.deviceType ? (
-                  <MobileContent sendData2={getData2} sendData={getData} searchfilter={router.query}  resetCat={resetCat} chngfltr={chngfltr}  />
+                  <MobileContent
+                    sendData2={getData2}
+                    sendData={getData}
+                    searchfilter={router.query}
+                    resetCat={resetCat}
+                    resetType={resetType}
+                    resetMode={resetMode}
+                    resetCity={resetCity}
+                    resetInstitute={resetInstitute}
+                    chngfltr={slctdFilter}
+                  />
                 ) : (
-                  <DesktopContent sendData={getData} searchfilter={router.query}  resetCat={resetCat} chngfltr={chngfltr} />
+                  <DesktopContent
+                    sendData={getData}
+                    searchfilter={router.query}
+                    resetCat={resetCat}
+                    resetType={resetType}
+                    resetMode={resetMode}
+                    resetCity={resetCity}
+                    resetInstitute={resetInstitute}
+                    chngfltr={slctdFilter}
+                  />
                 )}
               </div>
             </div>
@@ -508,7 +554,13 @@ const Listing = (props) => {
                     slctdFilter.map((filter, key) => (
                       <div className="ttpattrib">
                         <p>
-                          {filter.label} <span onClick={(e) => removeFilter(filter.type)}  style={{cursor:"pointer"}}>x</span>
+                          {filter.label}{' '}
+                          <span
+                            onClick={(e) => removeFilter(filter.type)}
+                            style={{ cursor: 'pointer' }}
+                          >
+                            x
+                          </span>
                         </p>
                       </div>
                     ))}

@@ -370,7 +370,7 @@ const apply2 = () => {
               placeholder="Category"
               onChange={handleChangeCategory}
               styles={styles}
-              value={props.resetCat == "reset" ? '' : selectedCategory}
+              value={selectedCategory}
             />
 
 

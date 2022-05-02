@@ -244,7 +244,7 @@ const CourseDetails = () => {
                 </div>
               </div>
             </div>
-            <div className="col-md-6 col-lg-6 text-center text-lg-right">
+            <div className="col-md-6 col-lg-6 text-center">
 
               {courseDetails && courseDetails.logo && (
               <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/` + courseDetails.logo} className="ms" />
@@ -291,7 +291,7 @@ const CourseDetails = () => {
                 <h4 className="insnames">{courseDetails && courseDetails.fees}</h4>
               </div>
               <div className="dtlsctaviews mobilecopy">
-                <a href="#" className="grylghtcta">
+                <a onClick={executeScroll} className="grylghtcta">
                   Apply Now
                 </a>
                 <a href="#" className="blulghtcta">

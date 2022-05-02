@@ -79,9 +79,14 @@ const DeskFilter = (props) => {
 //     }
 // }, [props])
 
-  
+// useEffect(() => {
+
+//   setSelectedFilters(props.chngfltr)
+// }, [])
+
 
   useEffect(() => {
+
 
     // console.log(props.chngfltr)
 
@@ -169,6 +174,8 @@ const DeskFilter = (props) => {
   }
 
   const handleChangeCourseName = (selectedOptions) => {
+    setSelectedFilters(props.chngfltr)
+
     setSelectedCourseName(selectedOptions)
     let index = selectedFilters.findIndex(function (pair) {
       return pair.type == 'course_types_id'
@@ -181,6 +188,8 @@ const DeskFilter = (props) => {
   }
 
   const handleChangeCategory = (selectedOptions) => {
+    setSelectedFilters(props.chngfltr)
+
     setSelectedCategory(selectedOptions)
 
     let index = selectedFilters.findIndex(function (pair) {
@@ -195,6 +204,8 @@ const DeskFilter = (props) => {
   }
 
   const handleChangeCourseMode = (selectedOptions) => {
+    setSelectedFilters(props.chngfltr)
+
     setSelectedCourseMode(selectedOptions)
     let index = selectedFilters.findIndex(function (pair) {
       return pair.type == 'course_modes_id'
@@ -207,6 +218,8 @@ const DeskFilter = (props) => {
   }
 
   const handleCity = (selectedOptions) => {
+    setSelectedFilters(props.chngfltr)
+
     setSelectedCity(selectedOptions)
     let index = selectedFilters.findIndex(function (pair) {
       return pair.type == 'cities_id'
@@ -219,6 +232,8 @@ const DeskFilter = (props) => {
   }
 
   const handleInstitute = (selectedOptions) => {
+    setSelectedFilters(props.chngfltr)
+
     setSelectedInstitute(selectedOptions)
     let index = selectedFilters.findIndex(function (pair) {
       return pair.type == 'institute_id'
@@ -231,6 +246,8 @@ const DeskFilter = (props) => {
   }
 
   const handleDuration = (selectedOptions) => {
+    setSelectedFilters(props.chngfltr)
+
 
     let indexx = selectedFilters.findIndex(function (pair) {
       return pair.type == 'duration'
@@ -250,6 +267,8 @@ const DeskFilter = (props) => {
 }
 
 const handleFees = (selectedOptions) => {
+  setSelectedFilters(props.chngfltr)
+
 
   let indexx = selectedFilters.findIndex(function (pair) {
     return pair.type == 'fees'
@@ -291,7 +310,7 @@ const handleFees = (selectedOptions) => {
 
   return (
     <>
-      {/* {JSON.stringify(props.searchfilter)} */}
+      {/* {JSON.stringify(props.resetType)} */}
 
 
 
@@ -303,7 +322,7 @@ const handleFees = (selectedOptions) => {
               placeholder="Category"
               onChange={handleChangeCategory}
               styles={styles}
-              value={props.city == "reset" ? '' : selectedCategory}
+              value={props.resetCat == "reset" ? '' : selectedCategory}
             />
           </div>
 
@@ -312,7 +331,7 @@ const handleFees = (selectedOptions) => {
             placeholder="Course Type"
             onChange={handleChangeCourseName}
             styles={styles}
-            value={selectedCourseName}
+            value={props.resetType == "reset" ? '' : selectedCourseName}
           />
         </div>
 
@@ -322,7 +341,8 @@ const handleFees = (selectedOptions) => {
             placeholder="Course Mode"
             onChange={handleChangeCourseMode}
             styles={styles}
-            value={selectedCourseMode}
+            value={props.resetMode == "reset" ? '' : selectedCourseMode}
+
           />
         </div>
         <div className="deskserachflls">
@@ -331,7 +351,8 @@ const handleFees = (selectedOptions) => {
             placeholder="City"
             onChange={handleCity}
             styles={styles}
-            value={selectedCity}
+            value={props.resetCity == "reset" ? '' : selectedCity}
+
           />
         </div>
         <div className="deskserachflls">
@@ -340,7 +361,8 @@ const handleFees = (selectedOptions) => {
             placeholder="Institute"
             onChange={handleInstitute}
             styles={styles}
-            value={selectedInstitute}
+            value={props.resetInstitute == "reset" ? '' : selectedInstitute}
+
           />
         </div>
         <div className="grdfiltes" id>

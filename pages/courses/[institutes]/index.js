@@ -242,7 +242,10 @@ const Institutes = () => {
   <section className="testimoniapn">
         <div className="container">
           <div className="text-center hdingst">
-            <h2 className="mainhds">What Our Learners Say</h2>
+          <Link href="#second-section" scroll={false}>
+
+            <h2  className="mainhds">What Our Learners Say</h2>
+            </Link>
           </div>
           <div className="testimparts">
             <OwlCarousel
@@ -389,7 +392,7 @@ const Institutes = () => {
   <section className="faqnewtys">
     <div className="container">
       <div className="text-center hdingst midtwhdfq align-self-center">
-        <h2 className="mainhds"> 
+        <h2 className="mainhds" id="second-section"> 
           F<span className="ogx">requently</span><br />
           F<span className="ogx">Asked</span><br />
           Q<span className="ogx">uestions</span>
