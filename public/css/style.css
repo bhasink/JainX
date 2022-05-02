@@ -48,6 +48,9 @@ body{
 	padding-top: 75px;
 }
 
+p{
+    font-size: 16px;  
+}
 
 /* megamenu css */
 
@@ -1853,6 +1856,16 @@ section .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot
     border-color:#f89936;
     background-color: #f89936;
 }
+
+.whtsects.jnadvts .col-lg-4{
+    padding-bottom: 40px;
+}
+
+.whtsects.jnadvts .col-lg-4:hover img {transform: scale(1.2);}
+
+.whtsects.jnadvts .col-lg-4 img {transition: all ease 0.5s;}
+
+.whtsects.jnadvts .col-lg-4:hover h4 {color: #fa9b3a;}
 
 /* Responsive css */
 
