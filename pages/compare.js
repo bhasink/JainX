@@ -27,155 +27,141 @@ const Compare = () => {
   </section>
   <section className="cmparepgds">
     <div className="container">
-      <div className="topproductlisiings">
+
+
+      <div className="compareanadata">
         <div className="row">
-          <div className="col-lg-3">
+          <div className="col-lg-3 blankspcs">
+              <div className="firstembox">
+
+              </div>
+
+              <div className="featureinfossts">
+                <p>Price</p>
+                <p>Duration</p>
+                <p>Key Learnings</p>
+                <p>Delivery Type</p>
+                <p>Start Date</p>
+                <p>Projects</p>
+                <p>Enrolled</p>
+                <div className="bxformts">
+                  
+                </div>
+              </div>
           </div>
-          <div className="col-6 col-lg-3">
-            <div className="coursepls">
-              <img src="./images/courseslogo/deake.png" className="ms fllimg" />
-              <h1 className="mainhds">Sports Management</h1>
-              <p>Master the Trends and Technologies in the Business
-                Side of Sports Management.</p>
-              <div className="dtlsctaviews">
-                <a href="#" className="orangejncta">Apply Now</a>
+
+          <div className="col-4 col-lg-3 actdatacompsets">
+            <div className="firstembox">
+              <div className="coursepls">
+                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/2.jpg`} className="ms fllimg" />
+                <h1 className="mainhds">Sports Management</h1>
+                <p>Master the Trends and Technologies in the Business
+                  Side of Sports Management.</p>
+                <div className="dtlsctaviews">
+                  <a href="#" className="orangejncta">Apply Now</a>
+                </div>
               </div>
             </div>
+
+            <div className="featureinfossts">
+                <p className="bxformts">42,373</p>
+                <p className="bxformts">12 months</p>
+                <p className="bxformts">Basic to Advanced level ready. 250 hours of wisdom by industry experts</p>
+                <p className="bxformts">Online</p>
+                <p className="bxformts">July 2022</p>
+                <p className="bxformts">2 Months Live Projects</p>
+                <p className="bxformts">+ Students</p>
+                <div className="bxformts">
+                  <a href="#" class="orangejncta">Apply Now</a>
+                </div>
+              </div>
+
+
           </div>
-          <div className="col-6 col-lg-3">
-            <div className="coursepls">
-              <img src="./images/courseslogo/2.jpg" className="ms fllimg" />
-              <h1 className="mainhds">Sports Management</h1>
-              <p>Master the Trends and Technologies in the Business
-                Side of Sports Management.</p>
-              <div className="dtlsctaviews">
-                <a href="#" className="orangejncta">Apply Now</a>
+
+          <div className="col-4 col-lg-3 actdatacompsets">
+            <div className="firstembox">
+              <div className="coursepls">
+                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/2.jpg`} className="ms fllimg" />
+                <h1 className="mainhds">Sports Management</h1>
+                <p>Master the Trends and Technologies in the Business
+                  Side of Sports Management.</p>
+                <div className="dtlsctaviews">
+                  <a href="#" className="orangejncta">Apply Now</a>
+                </div>
               </div>
             </div>
+
+            <div className="featureinfossts">
+                <p className="bxformts">42,373</p>
+                <p className="bxformts">12 months</p>
+                <p className="bxformts">Basic to Advanced level ready. 250 hours of wisdom by industry experts</p>
+                <p className="bxformts">Online</p>
+                <p className="bxformts">July 2022</p>
+                <p className="bxformts">2 Months Live Projects</p>
+                <p className="bxformts">+ Students</p>
+                <div className="bxformts">
+                <a href="#" class="grylghtcta">Apply Now</a>
+                </div>
+              </div>
+
+
           </div>
-          <div className="col-lg-3 align-self-center text-center">
-            <a href="#" className="orangejncta">+ Add</a>
+
+
+          <div className="col-4 col-lg-3 actdatacompsets">
+            <div className="firstembox">
+              <div className="coursepls">
+                <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/2.jpg`} className="ms fllimg" />
+                <h1 className="mainhds">Sports Management</h1>
+                <p>Master the Trends and Technologies in the Business
+                  Side of Sports Management.</p>
+                <div className="dtlsctaviews">
+                  <a href="#" className="orangejncta">Apply Now</a>
+                </div>
+              </div>
+            </div>
+
+            <div className="featureinfossts">
+                <p className="bxformts">42,373</p>
+                <p className="bxformts">12 months</p>
+                <p className="bxformts">Basic to Advanced level ready. 250 hours of wisdom by industry experts</p>
+                <p className="bxformts">Online</p>
+                <p className="bxformts">July 2022</p>
+                <p className="bxformts">2 Months Live Projects</p>
+                <p className="bxformts">+ Students</p>
+                <div className="bxformts">
+                  <a href="#" class="orangejncta">Apply Now</a>
+                </div>
+              </div>
+
+
           </div>
+
+          <div className="col-4 col-lg-3 actdatacompsets">
+            <div className="firstembox midonlybox">
+            <a href="#" class="orangejncta">Add+</a>
+            </div>
+
+            <div className="featureinfossts">
+              <p className="bxformts"></p>
+              <p className="bxformts"></p>
+              <p className="bxformts"></p>
+              <p className="bxformts"></p>
+              <p className="bxformts"></p>
+              <p className="bxformts"></p>
+              <p className="bxformts"></p>
+              <p className="bxformts"></p>
+              </div>
+
+            </div>
+
         </div>
       </div>
-      <div className="bottomprdetails">
-        <div className="row">
-          <div className="col-lg-3 text-left">
-            <p className="mnp">Price</p>
-          </div>
-          <div className="col-6 col-lg-3 text-center">
-            <p>42,373</p>
-          </div>
-          <div className="col-6 col-lg-3 text-center">
-            <p>42,373</p>
-          </div>
-          <div className="col-lg-3 align-self-center">
-            <p style={{opacity: 0}}>43,373</p>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-lg-3 text-left">
-            <p className="mnp">Duration</p>
-          </div>
-          <div className="col-6 col-lg-3 text-center">
-            <p>12 months</p>
-          </div>
-          <div className="col-6 col-lg-3 text-center">
-            <p>12 months</p>
-          </div>
-          <div className="col-lg-3 align-self-center">
-            <p style={{opacity: 0}}>43,373</p>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-lg-3 text-left">
-            <p className="mnp">Key Learnings</p>
-          </div>
-          <div className="col-6 col-lg-3 text-center kylr">
-            <p>Basic to Advanced level ready. 250 hours of 
-              wisdom by industry experts</p>
-          </div>
-          <div className="col-6 col-lg-3 text-center kylr">
-            <p>Basic to Advanced level ready. 250 hours of 
-              wisdom by industry experts</p>
-          </div>
-          <div className="col-lg-3 align-self-center kylr">
-            <p style={{opacity: 0}}>43,373</p>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-lg-3 text-left">
-            <p className="mnp">Delivery Type</p>
-          </div>
-          <div className="col-6 col-lg-3 text-center">
-            <p>Online</p>
-          </div>
-          <div className="col-6 col-lg-3 text-center">
-            <p>Online</p>
-          </div>
-          <div className="col-lg-3 align-self-center">
-            <p style={{opacity: 0}}>43,373</p>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-lg-3 text-left">
-            <p className="mnp">Start Date</p>
-          </div>
-          <div className="col-6 col-lg-3 text-center">
-            <p>July 2022</p>
-          </div>
-          <div className="col-6 col-lg-3 text-center">
-            <p>July 2022</p>
-          </div>
-          <div className="col-lg-3 align-self-center">
-            <p style={{opacity: 0}}>43,373</p>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-lg-3 text-left">
-            <p className="mnp">Projects</p>
-          </div>
-          <div className="col-6 col-lg-3 text-center">
-            <p>2 Months Live
-              Projects</p>
-          </div>
-          <div className="col-6 col-lg-3 text-center">
-            <p>2 Months Live
-              Projects</p>
-          </div>
-          <div className="col-lg-3 align-self-center">
-            <p style={{opacity: 0}}>43,373</p>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-lg-3 text-left">
-            <p className="mnp">Enrolled</p>
-          </div>
-          <div className="col-6 col-lg-3 text-center">
-            <p>+ Students</p>
-          </div>
-          <div className="col-6 col-lg-3 text-center">
-            <p>+ Students</p>
-          </div>
-          <div className="col-lg-3 align-self-center">
-            <p style={{opacity: 0}}>43,373</p>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-lg-3 text-left">
-            <p className="mnp" style={{opacity: 0}}>Enrolled</p>
-          </div>
-          <div className="col-6 col-lg-3 text-center">
-            <a href="#" className="orangejncta">Apply Now</a>
-          </div>
-          <div className="col-6 col-lg-3 text-center">
-            <a href="#" className="grylghtcta">Apply Now</a>
-          </div>
-          <div className="col-lg-3 align-self-center">
-            <a href="#" className="grylghtcta" style={{opacity: 0}}>Apply Now</a>
-          </div>
-        </div>
-      </div>
+
+
+ 
+    
     </div>
   </section>
 

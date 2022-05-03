@@ -1910,6 +1910,41 @@ section .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot
 }
 
 
+/* compare page final result */
+
+.firstembox {height: 307px;overflow: hidden;margin-bottom: 40px;background: #2e2d58;padding: 20px;}
+
+.firstembox .coursepls .ms {width: 89px;}
+
+.firstembox .coursepls {text-align: center;background: #fff;padding: 14px;}
+
+.firstembox .coursepls .mainhds {font-size: 21px;}
+
+.actdatacompsets {padding: 0;}
+
+.blankspcs {padding: 0;}
+
+.firstembox .coursepls p {font-size: 13px;}
+
+.featureinfossts p {font-weight: 600;font-size: 15px;border-bottom: 1px solid #ddd;min-height: 65px;margin: 0;padding: 10px;}
+
+.featureinfossts .bxformts {text-align: center;     font-weight: 600;
+    color: #302f59; font-size: 14px;     border-right: 1px solid #ddd;}
+
+.featureinfossts {display: flex;flex-direction: column;}
+
+.blankspcs .featureinfossts p {border-right: 1px solid #ddd;}
+
+.featureinfossts .bxformts a {margin: 20px;}
+
+.compareanadata .row {display: inline-flex;flex-direction: row;margin: 0;flex-wrap: initial;}
+
+.compareanadata {overflow-x: scroll;}
+
+.firstembox.midonlybox {display: inline-flex; width: 300px;}
+
+.firstembox.midonlybox a {margin: auto;}
+
 /* Responsive css */
 
 @media screen and (max-width: 767px) and (min-width: 320px){
