@@ -191,7 +191,7 @@ const About = () => {
               </p>
             </div>
             <div className="col-lg-4 col-md-6">
-              <img src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/1.png`} />
+              <img src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/4.png`} />
               <h4>Live Projects &amp; Case Studies</h4>
               <p>
                 Gain practical experience and skills through industry /in-house
@@ -199,12 +199,12 @@ const About = () => {
               </p>
             </div>
             <div className="col-lg-4 col-md-6">
-              <img src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/2.png`} />
+              <img src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/5.png`} />
               <h4>Trending Programs</h4>
               <p>Learn the most trending programs &amp; be industry ready.</p>
             </div>
             <div className="col-lg-4 col-md-6">
-              <img src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/3.png`} />
+              <img src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/6.png`} />
               <h4>Industry Relevant Curriculum</h4>
               <p>
                 Learn from passionate and industry experienced subject matter

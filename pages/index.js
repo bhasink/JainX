@@ -161,12 +161,18 @@ const Home = () => {
         items: 1,
         nav: true,
         dots: false,
+        autoplay:true,
+        autoplaySpeed: 3000,
+        autoplayHoverPause: true,
         loop: true,
       },
       300: {
         items: 2,
         nav: true,
         dots: false,
+        autoplay:true,
+        autoplaySpeed: 3000,
+        autoplayHoverPause: true,
         margin: 10,
         loop: true,
       },
@@ -181,7 +187,10 @@ const Home = () => {
       1200: {
         items: 4,
         nav: true,
-        dots: false,
+        dots: true,
+        autoplay:true,
+        autoplaySpeed: 3000,
+        autoplayHoverPause: true,
         loop: true,
       },
     },
@@ -190,11 +199,17 @@ const Home = () => {
         items: 1,
         nav: false,
         dots: true,
+        autoplay:true,
+        autoplaySpeed: 3000,
+        autoplayHoverPause: true,
         loop: true,
       },
       300: {
         items: 1,
         nav: true,
+        autoplay:true,
+        autoplaySpeed: 3000,
+        autoplayHoverPause: true,
         dots: false,
         loop: true,
       },
@@ -209,6 +224,9 @@ const Home = () => {
       1200: {
         items: 3,
         nav: true,
+        autoplay:true,
+        autoplaySpeed: 3000,
+        autoplayHoverPause: true,
         dots: true,
       },
     },
@@ -217,12 +235,18 @@ const Home = () => {
         items: 1,
         nav: false,
         dots: true,
+        autoplay:true,
+        autoplaySpeed: 3000,
+        autoplayHoverPause: true,
         loop: true,
       },
       300: {
         items: 1,
         nav: true,
         dots: false,
+        autoplay:true,
+        autoplaySpeed: 3000,
+        autoplayHoverPause: true,
         loop: true,
       },
 
@@ -236,6 +260,9 @@ const Home = () => {
       1200: {
         items: 4,
         nav: false,
+        autoplay:true,
+        autoplaySpeed: 3000,
+        autoplayHoverPause: true,
         dots: true,
       },
     },
@@ -244,12 +271,18 @@ const Home = () => {
         items: 1,
         nav: false,
         dots: true,
+        autoplay:true,
+        autoplaySpeed: 3000,
+        autoplayHoverPause: true,
         loop: true,
       },
       300: {
         items: 3,
         nav: false,
         dots: true,
+        autoplay:true,
+        autoplaySpeed: 3000,
+        autoplayHoverPause: true,
         loop: true,
       },
 
@@ -264,6 +297,9 @@ const Home = () => {
         items: 5,
         nav: false,
         dots: true,
+        autoplay:true,
+        autoplaySpeed: 3000,
+        autoplayHoverPause: true,
         center: true,
       },
     },
@@ -330,7 +366,7 @@ const Home = () => {
           <section className="homemainbanner">
             <div className="container">
               <div className="row">
-                <div className="col-md-6 col-lg-7 text-center align-self-center">
+                <div className="col-md-6 col-lg-6 text-center align-self-center">
                   <h1
                     className="bnrhd"
                     data-aos="fade-down"
@@ -425,7 +461,7 @@ const Home = () => {
                     </form>
                   </div>
                 </div>
-                <div className="col-md-6 col-lg-5 text-center">
+                <div className="col-md-6 col-lg-6 text-center">
           
                   <img
                     src={`${process.env.NEXT_PUBLIC_B_API}/images/rightviewmain.png`}
@@ -759,32 +795,30 @@ const Home = () => {
                 </div>
                 <div className="item">
                   <img
-                    src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/1.png`}
+                    src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/4.png`}
                   />
-                  <h4>Crafted Carefully</h4>
+                  <h4>Live Projects &amp; Case Studies</h4>
                   <p>
-                    Each course handpicked to enhance your knowledge and skills.
+                  Gain practical experience and skills through industry /in-house
+                projects.
                   </p>
                 </div>
                 <div className="item">
                   <img
-                    src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/2.png`}
+                    src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/5.png`}
                   />
-                  <h4>Expert Facilitators</h4>
-                  <p>
-                    Learn from passionate and industry experienced subject
-                    matter experts.
-                  </p>
+                  <h4>Trending Programs</h4>
+                  <p>Learn the most trending programs &amp; be industry ready.</p>
                 </div>
                 <div className="item">
                   <img
-                    src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/3.png`}
+                    src={`${process.env.NEXT_PUBLIC_B_API}/images/jnadicon/6.png`}
                   />
-                  <h4>Get Hands-on Exposure</h4>
-                  <p>
-                    Gain practical experience and skills through
-                    industry/in-house projects.
-                  </p>
+                   <h4>Industry Relevant Curriculum</h4>
+                    <p>
+                      Learn from passionate and industry experienced subject matter
+                      experts.
+                    </p>
                 </div>
               </OwlCarousel>
             </div>

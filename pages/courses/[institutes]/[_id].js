@@ -214,12 +214,18 @@ const CourseDetails = () => {
         items: 1,
         nav: true,
         dots: true,
+        autoplay:true,
+        autoplaySpeed: 3000,
+        autoplayHoverPause: true,
         loop: true,
       },
       300: {
         items: 1,
         nav: true,
         dots: true,
+        autoplay:true,
+        autoplaySpeed: 3000,
+        autoplayHoverPause: true,
         margin: 10,
         loop: true,
       },
@@ -232,9 +238,12 @@ const CourseDetails = () => {
       },
 
       1200: {
-        items: 4,
+        items: 3,
         nav: true,
-        dots: false,
+        dots: true,
+        autoplay:true,
+        autoplaySpeed: 3000,
+        autoplayHoverPause: true,
         loop: true,
       },
     },
@@ -242,12 +251,18 @@ const CourseDetails = () => {
       0: {
         items: 1,
         nav: false,
+        autoplay:true,
+        autoplaySpeed: 3000,
+        autoplayHoverPause: true,
         dots: true,
         loop: true,
       },
       300: {
         items: 3,
         nav: false,
+        autoplay:true,
+        autoplaySpeed: 3000,
+        autoplayHoverPause: true,
         dots: true,
         loop: true,
       },
@@ -263,6 +278,9 @@ const CourseDetails = () => {
         items: 5,
         nav: false,
         dots: true,
+        autoplay:true,
+        autoplaySpeed: 3000,
+        autoplayHoverPause: true,
         center: true,
       },
     },
@@ -319,7 +337,7 @@ const CourseDetails = () => {
                 </div>
               </div>
             </div>
-            <div className="col-md-6 col-lg-6 text-center">
+            <div className="col-md-6 col-lg-6 text-center text-lg-right">
               {courseDetails && courseDetails.logo && (
                 <img
                   src={
@@ -523,7 +541,6 @@ const CourseDetails = () => {
               loop
               margin={40}
               nav
-              items={3}
               center
               responsive={state.responsive}
             >
@@ -550,7 +567,7 @@ const CourseDetails = () => {
                   </p>
                   <div className="usrthmbs">
                     <img
-                      src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`}
+                      src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/2.jpg`}
                     />
                   </div>
                   <p className="usrnmtst">Neque porro quisquam</p>
@@ -565,7 +582,7 @@ const CourseDetails = () => {
                   </p>
                   <div className="usrthmbs">
                     <img
-                      src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/1.jpg`}
+                      src={`${process.env.NEXT_PUBLIC_B_API}/images/reviews/3.jpg`}
                     />
                   </div>
                   <p className="usrnmtst">Neque porro quisquam</p>
