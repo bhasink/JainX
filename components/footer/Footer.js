@@ -101,7 +101,7 @@ const Footer = () => {
                 <div className="col-lg-3 col-md-3">
                   <h4
                     data-toggle="collapse"
-                    data-target="#collapseTwo"
+                    data-target="#collapseTwoft"
                     aria-expanded="false"
                     aria-controls="collapseTwo"
                     className="mobclick collapsed"
@@ -111,7 +111,7 @@ const Footer = () => {
                   </h4>
                   <h4>COURSES &amp; SCHOLARSHIPS</h4>
                   <div
-                    id="collapseTwo"
+                    id="collapseTwoft"
                     className="collapse"
                     aria-labelledby="headingTwo"
                     data-parent="#accordionExample2"
@@ -147,7 +147,7 @@ const Footer = () => {
                 <div className="col-lg-3 col-md-3">
                   <h4
                     data-toggle="collapse"
-                    data-target="#collapseThree"
+                    data-target="#collapseThreeft"
                     aria-expanded="false"
                     aria-controls="collapseThree"
                     className="mobclick collapsed"
@@ -157,7 +157,7 @@ const Footer = () => {
                   </h4>
                   <h4>COURSES &amp; SCHOLARSHIPS</h4>
                   <div
-                    id="collapseThree"
+                    id="collapseThreeft"
                     className="collapse"
                     aria-labelledby="headingThree"
                     data-parent="#accordionExample2"
@@ -193,7 +193,7 @@ const Footer = () => {
                 <div className="col-lg-3 col-md-3">
                   <h4
                     data-toggle="collapse"
-                    data-target="#collapseFour"
+                    data-target="#collapseFourft"
                     aria-expanded="false"
                     aria-controls="collapseFour"
                     className="mobclick collapsed"
@@ -203,7 +203,7 @@ const Footer = () => {
                   </h4>
                   <h4>ABOUT US</h4>
                   <div
-                    id="collapseFour"
+                    id="collapseFourft"
                     className="collapse"
                     aria-labelledby="headingFour"
                     data-parent="#accordionExample2"

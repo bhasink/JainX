@@ -1867,6 +1867,49 @@ section .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot
 
 .whtsects.jnadvts .col-lg-4:hover h4 {color: #fa9b3a;}
 
+.closlefss {margin-bottom: 1rem;}
+
+.compare-cta {text-align: center; padding-top: 15px;}
+
+.compare-cta .blulghtcta {display: inline-block;padding: 6px 20px;border-radius: 0px;}
+
+/* compare page action */
+
+.procmpops {width: 100%;
+    box-shadow: #ccbebe 0px 0px 6px 0px;
+    padding: 20px 0;
+    transition: all ease 0.5s;
+    position: fixed;
+    bottom: 0;
+    z-index: 999999;
+    background: #fff;
+    top: initial;
+    transform: translateY(308px);
+}
+
+.procmpops.showtype{
+    transform: translateY(0px);
+}
+
+.productthubcount {display: flex;}
+
+.couserimages img {width: 100%;}
+
+.couserimages {position: relative;margin-right: 20px;width: 57px;}
+
+.couserimages .delcoursenode {
+    position: absolute;
+    right: -5px;
+    top: -9px;
+    font-size: 16px;
+    background: #ddd;
+    border-radius: 100%;
+    width: 24px;
+    text-align: center;
+    height: 24px;
+}
+
+
 /* Responsive css */
 
 @media screen and (max-width: 767px) and (min-width: 320px){

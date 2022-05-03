@@ -593,7 +593,7 @@ const Listing = (props) => {
                                       course.logo
                                     }
                                   />
-                                  <a href="#" className="cmprs">
+                                  <a href="javascript:void(0);" className="cmprs">
                                     Compare
                                   </a>
                                 </div>
@@ -747,11 +747,59 @@ const Listing = (props) => {
                 </div>
               </div>
 
-              <div class="dvvvvv"></div>
+              <div className="dvvvvv"></div>
             </div>
           </div>
         </div>
       </section>
+
+
+      <section className="procmpops">
+        <div className="container">
+          <div className="closlefss">
+            Close                 
+          </div>
+          
+          <div className="productselect">
+		             <p id="psel">3 Selected</p>
+		         </div>
+
+          <div class="productthubcount" id="pimg">
+                <div className="couserimages">
+                  <div className="delcoursenode">
+                    <i class="fal fa-times"></i>
+                  </div>  
+                  <img src="https://sociowash.in/images/courseslogo/2.jpg" />
+                </div>
+
+                <div className="couserimages">
+                  <div className="delcoursenode">
+                    <i class="fal fa-times"></i>
+                  </div>  
+                  <img src="https://sociowash.in/images/courseslogo/1.jpg" />
+                </div>
+
+
+                <div className="couserimages">
+                  <div className="delcoursenode">
+                    <i class="fal fa-times"></i>
+                  </div>  
+                  <img src="https://sociowash.in/images/courseslogo/2.jpg" />
+                </div>
+          </div>
+
+          <div class="compare-cta">
+          <a href="#"  class="blulghtcta">Compare Courses</a>
+          </div>
+        </div>
+      </section>
+
+      <script>
+    { /*  $(".scllogoswr .cmprs").click(function (e) {
+  e.stopPropagation();
+  $(".procmpops").toggleClass('showtype'); 
+}); */ }
+      </script>
 
       <Footer />
     </>
