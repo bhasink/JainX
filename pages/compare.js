@@ -31,7 +31,7 @@ const Compare = () => {
 
       <div className="compareanadata">
         <div className="row">
-          <div className="col-lg-3 blankspcs">
+          <div className="col-2 col-lg-3 blankspcs">
               <div className="firstembox">
 
               </div>
@@ -140,8 +140,39 @@ const Compare = () => {
 
           <div className="col-4 col-lg-3 actdatacompsets">
             <div className="firstembox midonlybox">
-            <a href="#" class="orangejncta">Add+</a>
+            <a href="javascript:void(0);"
+                                  data-toggle="modal"
+                                  data-target="#exampleModalEnquirenow" class="orangejncta">Add+</a>
             </div>
+
+            <div
+                    className="modal fade"
+                    id="exampleModalEnquirenow"
+                    tabindex="-1"
+                    role="dialog"
+                    aria-labelledby="exampleModalEnquirenowTitle3"
+                    aria-hidden="true"
+                  >
+                    <div
+                      className="modal-dialog modal-dialog-centered   jncustm trasntypes"
+                      role="document"
+                    >
+                      <div className="modal-content">
+                        <div className="modal-body">
+                          <button
+                            type="button"
+                            className="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                          >
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      </div>
+
+                      </div>
+
+                      </div>
 
             <div className="featureinfossts">
               <p className="bxformts"></p>
