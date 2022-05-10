@@ -645,7 +645,7 @@ const Listing = (props) => {
                                       course.logo
                                     }
                                   />
-                                  <a className="cmprs" onClick={() => compareModal(course)} className="cmprs">
+                                  <a  onClick={() => compareModal(course)} className="cmprs">
                                     Compare
                                   </a>
                                 </div>

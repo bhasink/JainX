@@ -1948,6 +1948,35 @@ section .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot
 
 .firstembox.midonlybox a {margin: auto;}
 
+.autocrsserachs {margin-top: 39px;}
+
+.autocrsserachs {display: flex;}
+
+.autocrsserachs button {background: #f5ac52;color: #fff;border: none;padding: 0 12px;}
+
+.autocrsserachs input {width: 100%;border: 1px solid #ddd;padding: 6px 9px;}
+
+.autocrsserachs .react-autosuggest__container {width: 100%;}
+
+.autocrsserachs #react-autowhatever-1 {position: absolute;background: #fff;max-width: 469px;width: 100%;}
+
+.autocrsserachs #react-autowhatever-1 ul {padding: 0px;list-style-type: none;width: 100%;max-width: 500px;}
+
+.autocrsserachs #react-autowhatever-1 ul li p {padding: 9px 11px;margin: 0;}
+
+.firstembox .coursepls {position: relative;}
+
+.firstembox .coursepls .delcoursenode {position: absolute;
+    right: -5px;
+    top: -9px;
+    font-size: 16px;
+    background: #ddd;
+    border-radius: 100%;
+    width: 24px;
+    text-align: center;
+    height: 24px;
+}
+
 /* Responsive css */
 
 @media screen and (max-width: 767px) and (min-width: 320px){
