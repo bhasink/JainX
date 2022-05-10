@@ -59,6 +59,8 @@ h3.mobclick {
 }
 
 
+
+
 .site-header.topmain nav.navbar .navbar-brand{
     width: 95px;
 }
@@ -1208,13 +1210,14 @@ footer.stfooter .collapse:not(.show) {
     width: 111px;
 }
 
+
 .scllogoswr .cmprs {
     position: absolute;
     right: 1px;
     bottom: 0;
     background: #303056;
     border: none;
-    color: #fff;
+    color: #fff !important;
     border-radius: 3px;
 	border-top-left-radius: 14px;
 	padding: 2px 7px;
@@ -1300,7 +1303,7 @@ footer.stfooter .collapse:not(.show) {
     background: #303158;
     border-radius: 19px;
     padding: 6px;
-    color: #ffffff;
+    color: #ffffff !important;
 }
 
 .grylghtcta:hover {

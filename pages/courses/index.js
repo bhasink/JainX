@@ -22,6 +22,12 @@ const Listing = (props) => {
   const [loader, setLoader] = useState(false)
   const [currentProject, setCurrentProject] = useState('')
 
+  const [modal, setModal] = useState('')
+  const [compareArray, setCompareArray] = useState([])
+  const [compareArrayById, setCompareArrayById] = useState([])
+
+  
+
   const [slctdFilter, setSlctdFilter] = useState([])
 
   const [resetCat, setResetCat] = useState('')
@@ -59,6 +65,12 @@ const Listing = (props) => {
   useEffect(() => {
     getAllCoursesByFilter(slctdFilter, '')
   }, [slctdFilter])
+
+  useEffect(() => {
+    setCompareArray(compareArray)
+  }, [compareArray])
+
+  
 
   useEffect(() => {
     getAllCoursesByFilter('', sDuration)
@@ -418,8 +430,48 @@ const Listing = (props) => {
     setSduration(selectedOptions.value)
   }
 
+  const compareModal = (course) => {
+    setModal('showtype');
+
+
+    if(compareArray.length == 3){
+      alert("You can compare max three courses at a time!")
+    }else{
+      setCompareArrayById((oldArray) => [...oldArray, course.id])
+      setCompareArray((oldArray) => [...oldArray, course])
+    }
+    console.log(course);
+
+
+  }
+
+  const closeModal = () => {
+    setModal('');
+  }
+
+  const removeProduct = (key) => {
+    compareArray.splice(key, 1);
+    // alert(key)
+  }
+
+  const compareCourses = () => {
+
+    if(compareArrayById.length < 2){
+      alert('Please select atleast two courses to compare!')
+    }else{
+    router.push({
+      pathname: '/compare',
+      query: { courses: compareArrayById },
+    })
+  }
+  
+  }
+
   return (
     <>
+
+      {JSON.stringify(compareArrayById,null,2)}
+
       <Nav />
 
       <style
@@ -593,7 +645,7 @@ const Listing = (props) => {
                                       course.logo
                                     }
                                   />
-                                  <a href="javascript:void(0);" className="cmprs">
+                                  <a className="cmprs" onClick={() => compareModal(course)} className="cmprs">
                                     Compare
                                   </a>
                                 </div>
@@ -754,42 +806,42 @@ const Listing = (props) => {
       </section>
 
 
-      <section className="procmpops">
+      <section className={`procmpops ${modal}`}>
         <div className="container">
-          <div className="closlefss">
+          <div className="closlefss" onClick={closeModal}>
             Close                 
           </div>
           
           <div className="productselect">
-		             <p id="psel">3 Selected</p>
+		             <p id="psel">{compareArray.length} Selected</p>
 		         </div>
 
           <div class="productthubcount" id="pimg">
+               
+               {compareArray && (
+
+                  compareArray.map((product, key) => (
+
+               
+              <>
                 <div className="couserimages">
-                  <div className="delcoursenode">
+                  <div className="delcoursenode" onClick={() => removeProduct(key)}>
                     <i class="fal fa-times"></i>
                   </div>  
-                  <img src="https://sociowash.in/images/courseslogo/2.jpg" />
-                </div>
 
-                <div className="couserimages">
-                  <div className="delcoursenode">
-                    <i class="fal fa-times"></i>
-                  </div>  
-                  <img src="https://sociowash.in/images/courseslogo/1.jpg" />
+                  <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/` + product.logo} />
                 </div>
+              </>
+                  
+              ))
 
+            )}
 
-                <div className="couserimages">
-                  <div className="delcoursenode">
-                    <i class="fal fa-times"></i>
-                  </div>  
-                  <img src="https://sociowash.in/images/courseslogo/2.jpg" />
-                </div>
+              
           </div>
 
           <div class="compare-cta">
-          <a href="#"  class="blulghtcta">Compare Courses</a>
+          <a onClick={compareCourses}  class="blulghtcta">Compare Courses</a>
           </div>
         </div>
       </section>
