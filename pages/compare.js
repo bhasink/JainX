@@ -162,6 +162,8 @@ const Compare = () => {
                   <div className="col-4 col-lg-3 actdatacompsets">
                     <div className="firstembox">
                       <div className="coursepls">
+                      <div className="delcoursenode"><i className="fal fa-times"></i></div>
+
                         <img
                           className="ms fllimg"
                           src={
@@ -176,7 +178,7 @@ const Compare = () => {
                           <Link
                             href={`courses/${course.institute.slug}/${course.slug}`}
                           >
-                            <a class="orangejncta">Know More</a>
+                            <a className="orangejncta">Know More</a>
                           </Link>
                         </div>
                       </div>
@@ -202,7 +204,7 @@ const Compare = () => {
                         <Link
                           href={`courses/${course.institute.slug}/${course.slug}`}
                         >
-                          <a class="orangejncta">Know More</a>
+                          <a className="orangejncta">Know More</a>
                         </Link>
                       </div>
                     </div>
@@ -216,7 +218,7 @@ const Compare = () => {
                       href="javascript:void(0);"
                       data-toggle="modal"
                       data-target="#exampleModalEnquirenow"
-                      class="orangejncta"
+                      className="orangejncta"
                     >
                       Add+
                     </a>
@@ -245,6 +247,7 @@ const Compare = () => {
                             <span aria-hidden="true">&times;</span>
                           </button>
 
+                          <div className="autocrsserachs">
                           <Autosuggest
                           className="form-control"
                           suggestions={suggestions}
@@ -262,6 +265,7 @@ const Compare = () => {
                         <button type="submit">
                           <i className="far fa-search" />
                         </button>
+                          </div>
 
                         </div>
                       </div>
