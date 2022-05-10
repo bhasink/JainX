@@ -12,11 +12,8 @@ const Compare = () => {
   const [courses, setCourses] = useState([])
   const [value, setValue] = useState('')
   const [suggestions, setSuggestions] = useState([])
-  const [cities, setCities] = useState([])
   const [categories, setCategories] = useState([])
-  const [selectedCity, setSelectedCity] = useState(null)
   const [catSelected, setCatSelected] = useState('')
-  const [courseMode, setCourseMode] = useState('hybrid-1')
   const [loading, setLoading] = useState(false)
 
   const router = useRouter()
