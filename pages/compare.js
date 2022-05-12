@@ -212,7 +212,7 @@ const Compare = () => {
             <div className="compareanadata">
               <div className="row">
                 <>
-                  <div className="col-2 col-lg-3 blankspcs">
+                  <div className="col blankspcs">
                     <div className="firstembox"></div>
 
                     <div className="featureinfossts">
@@ -229,7 +229,7 @@ const Compare = () => {
 
                   {courses &&
                     courses.map((course, key) => (
-                      <div className="col-4 col-lg-3 actdatacompsets">
+                      <div className="col actdatacompsets">
                         <div className="firstembox">
                           <div className="coursepls">
                             <div
@@ -288,7 +288,7 @@ const Compare = () => {
                 </>
 
                 {courses && courses.length < 3 && (
-                  <div className="col-4 col-lg-3 actdatacompsets">
+                  <div className="col actdatacompsets">
                     <div className="firstembox midonlybox">
                       <a
                         href="javascript:void(0);"

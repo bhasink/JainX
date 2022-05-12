@@ -1940,11 +1940,11 @@ section .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot
 
 .featureinfossts .bxformts a {margin: 20px;}
 
-.compareanadata .row {display: inline-flex;flex-direction: row;margin: 0;flex-wrap: initial;}
+.compareanadata .row {flex-direction: row;margin: 0;flex-wrap: initial;}
 
 .compareanadata {overflow-x: scroll;}
 
-.firstembox.midonlybox {display: inline-flex; width: 300px;}
+.firstembox.midonlybox {display: inline-flex; width: 100%;}
 
 .firstembox.midonlybox a {margin: auto;}
 
