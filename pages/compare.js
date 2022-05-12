@@ -59,10 +59,6 @@ const Compare = () => {
         setCourses((oldArray) => [...oldArray, getCourse])
       }
 
-      if(courses == ''){
-        setLoading(true)
-      }
-
       $('body').removeClass('modal-open')
       $('.modal-backdrop').remove()
       $('#exampleModalEnquirenow').hide()
@@ -96,10 +92,10 @@ const Compare = () => {
 
       setCourses(getCourses)
 
-      if(courses == ''){
+      if(getCourses == ''){
         setLoading(true)
       }
-      
+
       console.log(data)
     } catch (err) {
       console.log(err)
