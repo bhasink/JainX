@@ -59,8 +59,9 @@ const Compare = () => {
         setCourses((oldArray) => [...oldArray, getCourse])
       }
 
-      setLoading(true)
-
+      if(courses == ''){
+        setLoading(true)
+      }
 
       $('body').removeClass('modal-open')
       $('.modal-backdrop').remove()
@@ -95,8 +96,10 @@ const Compare = () => {
 
       setCourses(getCourses)
 
-      setLoading(true)
-
+      if(courses == ''){
+        setLoading(true)
+      }
+      
       console.log(data)
     } catch (err) {
       console.log(err)
@@ -186,8 +189,6 @@ const Compare = () => {
 
       <Nav />
 
-      {loading && (
-      <>
       <section className="pageinforhd pt-5 pb-5 nohdleftbrdcm">
         <div className="container">
           <nav aria-label="breadcrumb">
@@ -364,7 +365,7 @@ const Compare = () => {
             </div>
           )}
 
-          {courses == '' && (
+          {loading && (
             <>
 
               <p>Oops! Go back to listing course and compare again!</p>
@@ -375,13 +376,9 @@ const Compare = () => {
             </>
           )}
 
-
+          
         </div>
       </section>
-      
-      </>
-
-      )}
 
       <Footer />
     </>
