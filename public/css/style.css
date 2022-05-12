@@ -1950,7 +1950,7 @@ section .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot
 
 .autocrsserachs {margin-top: 39px;}
 
-.autocrsserachs {display: flex;}
+.autocrsserachs form{display: flex;}
 
 .autocrsserachs button {background: #f5ac52;color: #fff;border: none;padding: 0 12px;}
 
