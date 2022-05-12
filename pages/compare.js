@@ -10,6 +10,8 @@ import { BsSearch } from 'react-icons/bs'
 
 const Compare = () => {
   const [courses, setCourses] = useState([])
+  const [selectedCourses, setSelectedCourses] = useState("")
+
   const [value, setValue] = useState('')
   const [suggestions, setSuggestions] = useState([])
   const [categories, setCategories] = useState([])
@@ -26,6 +28,41 @@ const Compare = () => {
     getCourseCategory()
     getComparedCourses()
   }, [])
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    try {
+      const config = {
+        headers: { 'Content-Type': 'application/json' },
+      }
+
+      const { data } = await axios.post(
+        `${process.env.NEXT_PUBLIC_API}/get-search-courses`,
+        {
+          name: catSelected,
+        },
+        config,
+      )
+
+      const getCourse = data.get_search_courses
+
+      // setSelectedCourses(getCourse)
+
+      setCourses((oldArray) => [...oldArray, getCourse])
+
+
+      $('body').removeClass('modal-open')
+      $('.modal-backdrop').remove()
+      $('#exampleModalEnquirenow').hide()
+
+
+      console.log(data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   const getComparedCourses = async () => {
     try {
@@ -59,9 +96,9 @@ const Compare = () => {
   const getCourseCategory = async () => {
     try {
       const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_API}/get-categories`,
+        `${process.env.NEXT_PUBLIC_API}/get-courses`,
       )
-      const get_categories = data.get_course_category
+      const get_categories = data.get_courses
       setCategories(get_categories)
       setLoading(true)
     } catch (err) {
@@ -112,14 +149,27 @@ const Compare = () => {
           .slice(0, 5)
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    alert('sdf hjdsf')
+
+  const removeProduct = (key,id) => {
+
+    // alert(id)
+
+    console.log(key);
+
+    courses.splice(key, 1);
+
+    setCourses(courses.filter(function(course) { 
+      return course !== key 
+  }));
+
+  // buttonText[id] = null;
+
+
   }
 
   return (
     <>
-      {/* {JSON.stringify(courses, null, 2)} */}
+      {/* {JSON.stringify(selectedCourses, null, 2)} */}
 
       <Nav />
 
@@ -164,7 +214,10 @@ const Compare = () => {
                   <div className="col-4 col-lg-3 actdatacompsets">
                     <div className="firstembox">
                       <div className="coursepls">
-                      <div className="delcoursenode"><i className="fal fa-times"></i></div>
+
+                      <div className="delcoursenode"  onClick={() => removeProduct(key,course.id)}>
+                        <i className="fal fa-times"></i>
+                      </div>
 
                         <img
                           className="ms fllimg"
@@ -212,6 +265,7 @@ const Compare = () => {
                     </div>
                   </div>
                 ))}
+
 
               {courses.length < 3 && (
                 <div className="col-4 col-lg-3 actdatacompsets">
