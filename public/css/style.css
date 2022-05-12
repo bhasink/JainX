@@ -1884,7 +1884,7 @@ section .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot
     transition: all ease 0.5s;
     position: fixed;
     bottom: 0;
-    z-index: 9999;
+    z-index: 999;
     background: #fff;
     top: initial;
     transform: translateY(308px);
