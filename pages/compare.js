@@ -59,6 +59,9 @@ const Compare = () => {
         setCourses((oldArray) => [...oldArray, getCourse])
       }
 
+      setLoading(true)
+
+
       $('body').removeClass('modal-open')
       $('.modal-backdrop').remove()
       $('#exampleModalEnquirenow').hide()
@@ -91,6 +94,8 @@ const Compare = () => {
       const getCourses = data.get_course_by_id
 
       setCourses(getCourses)
+
+      setLoading(true)
 
       console.log(data)
     } catch (err) {
@@ -181,6 +186,8 @@ const Compare = () => {
 
       <Nav />
 
+      {loading && (
+      <>
       <section className="pageinforhd pt-5 pb-5 nohdleftbrdcm">
         <div className="container">
           <nav aria-label="breadcrumb">
@@ -367,8 +374,14 @@ const Compare = () => {
               </Link>
             </>
           )}
+
+
         </div>
       </section>
+      
+      </>
+
+      )}
 
       <Footer />
     </>
