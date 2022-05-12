@@ -9,7 +9,7 @@ import Autosuggest from 'react-autosuggest'
 import { BsSearch } from 'react-icons/bs'
 
 const Compare = () => {
-  const [courses, setCourses] = useState([])
+  const [courses, setCourses] = useState("")
   const [selectedCourses, setSelectedCourses] = useState("")
 
   const [value, setValue] = useState('')
@@ -192,8 +192,15 @@ const Compare = () => {
       </section>
       <section className="cmparepgds">
         <div className="container">
+
+        {courses && (
           <div className="compareanadata">
             <div className="row">
+
+            
+
+              <>
+
               <div className="col-2 col-lg-3 blankspcs">
                 <div className="firstembox"></div>
 
@@ -266,8 +273,12 @@ const Compare = () => {
                   </div>
                 ))}
 
+                </>
 
-              {courses.length < 3 && (
+            
+
+
+              {courses && courses.length < 3 && (
                 <div className="col-4 col-lg-3 actdatacompsets">
                   <div className="firstembox midonlybox">
                     <a
@@ -349,6 +360,8 @@ const Compare = () => {
               )}
             </div>
           </div>
+        )}
+
         </div>
       </section>
 
