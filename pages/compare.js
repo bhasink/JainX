@@ -92,7 +92,7 @@ const Compare = () => {
 
       setCourses(getCourses)
 
-      if(getCourses == ''){
+      if(getCourses == null){
         setLoading(true)
       }
 
