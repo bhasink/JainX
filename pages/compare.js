@@ -7,6 +7,7 @@ import axios from 'axios'
 import Link from 'next/link'
 import Autosuggest from 'react-autosuggest'
 import { BsSearch } from 'react-icons/bs'
+import { useToasts } from 'react-toast-notifications'
 
 const Compare = () => {
   const [courses, setCourses] = useState("")
@@ -19,6 +20,8 @@ const Compare = () => {
   const [loading, setLoading] = useState(false)
 
   const router = useRouter()
+  const { addToast } = useToasts()
+
 
   useEffect(() => {
     AOS.init({
@@ -50,8 +53,11 @@ const Compare = () => {
 
       // setSelectedCourses(getCourse)
 
-      setCourses((oldArray) => [...oldArray, getCourse])
-
+      if(getCourse == null){
+        addToast('Please add the available courses from the list!', { appearance: 'error' })
+      }else{
+        setCourses((oldArray) => [...oldArray, getCourse])
+      }
 
       $('body').removeClass('modal-open')
       $('.modal-backdrop').remove()
@@ -156,11 +162,16 @@ const Compare = () => {
 
     console.log(key);
 
-    courses.splice(key, 1);
+    if(courses.length < 2){
+      addToast('Not allowed! If you want to remove this course add one more then click on remove.', { appearance: 'error' })
+    }else{
 
-    setCourses(courses.filter(function(course) { 
-      return course !== key 
-  }));
+      courses.splice(key, 1);
+
+      setCourses(courses.filter(function(course) { 
+        return course !== key 
+      }));
+    }
 
   // buttonText[id] = null;
 

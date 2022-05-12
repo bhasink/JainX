@@ -437,11 +437,10 @@ const Listing = (props) => {
     // alert(key)
 
     if(compareArray.length == 3){
-      alert("You can compare max three courses at a time!")
+      addToast('You can compare max three courses at a time!', { appearance: 'error' })
     }else{
       setCompareArrayById((oldArray) => [...oldArray, course.id])
       setCompareArray((oldArray) => [...oldArray, course])
-
 
       buttonText[key] = "Added";
     }
@@ -479,7 +478,7 @@ const Listing = (props) => {
   const compareCourses = () => {
 
     if(compareArrayById.length < 2){
-        alert('Please select atleast two courses to compare!')
+        addToast('Please select atleast two courses to compare!', { appearance: 'error' })
     }else{
       router.push({
         pathname: '/compare',
