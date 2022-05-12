@@ -10,8 +10,8 @@ import { BsSearch } from 'react-icons/bs'
 import { useToasts } from 'react-toast-notifications'
 
 const Compare = () => {
-  const [courses, setCourses] = useState("")
-  const [selectedCourses, setSelectedCourses] = useState("")
+  const [courses, setCourses] = useState('')
+  const [selectedCourses, setSelectedCourses] = useState('')
 
   const [value, setValue] = useState('')
   const [suggestions, setSuggestions] = useState([])
@@ -22,7 +22,6 @@ const Compare = () => {
   const router = useRouter()
   const { addToast } = useToasts()
 
-
   useEffect(() => {
     AOS.init({
       duration: 2000,
@@ -31,7 +30,6 @@ const Compare = () => {
     getCourseCategory()
     getComparedCourses()
   }, [])
-
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -53,16 +51,17 @@ const Compare = () => {
 
       // setSelectedCourses(getCourse)
 
-      if(getCourse == null){
-        addToast('Please add the available courses from the list!', { appearance: 'error' })
-      }else{
+      if (getCourse == null) {
+        addToast('Please add the available courses from the list!', {
+          appearance: 'error',
+        })
+      } else {
         setCourses((oldArray) => [...oldArray, getCourse])
       }
 
       $('body').removeClass('modal-open')
       $('.modal-backdrop').remove()
       $('#exampleModalEnquirenow').hide()
-
 
       console.log(data)
     } catch (err) {
@@ -112,8 +111,6 @@ const Compare = () => {
     }
   }
 
-
-
   const onChange = (event, { newValue, method }) => {
     setValue(newValue)
     setCatSelected(newValue)
@@ -155,32 +152,32 @@ const Compare = () => {
           .slice(0, 5)
   }
 
-
-  const removeProduct = (key,id) => {
-
+  const removeProduct = (key, id) => {
     // alert(id)
 
-    console.log(key);
+    console.log(key)
 
-    if(courses.length < 2){
-      addToast('Not allowed! If you want to remove this course add one more then click on remove.', { appearance: 'error' })
-    }else{
+    if (courses.length < 2) {
+      addToast(
+        'Not allowed! If you want to remove this course add one more then click on remove.',
+        { appearance: 'error' },
+      )
+    } else {
+      courses.splice(key, 1)
 
-      courses.splice(key, 1);
-
-      setCourses(courses.filter(function(course) { 
-        return course !== key 
-      }));
+      setCourses(
+        courses.filter(function (course) {
+          return course !== key
+        }),
+      )
     }
 
-  // buttonText[id] = null;
-
-
+    // buttonText[id] = null;
   }
 
   return (
     <>
-      {/* {JSON.stringify(selectedCourses, null, 2)} */}
+      {/* {JSON.stringify(courses, null, 2)} */}
 
       <Nav />
 
@@ -203,176 +200,173 @@ const Compare = () => {
       </section>
       <section className="cmparepgds">
         <div className="container">
+          {courses && (
+            <div className="compareanadata">
+              <div className="row">
+                <>
+                  <div className="col-2 col-lg-3 blankspcs">
+                    <div className="firstembox"></div>
 
-        {courses && (
-          <div className="compareanadata">
-            <div className="row">
+                    <div className="featureinfossts">
+                      <p>Price</p>
+                      <p>Duration</p>
+                      <p>Key Learnings</p>
+                      <p>Delivery Type</p>
+                      <p>Start Date</p>
+                      <p>Projects</p>
+                      <p>Enrolled</p>
+                      <div className="bxformts"></div>
+                    </div>
+                  </div>
 
-            
+                  {courses &&
+                    courses.map((course, key) => (
+                      <div className="col-4 col-lg-3 actdatacompsets">
+                        <div className="firstembox">
+                          <div className="coursepls">
+                            <div
+                              className="delcoursenode"
+                              onClick={() => removeProduct(key, course.id)}
+                            >
+                              <i className="fal fa-times"></i>
+                            </div>
 
-              <>
+                            <img
+                              className="ms fllimg"
+                              src={
+                                `${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/` +
+                                course.logo
+                              }
+                            />
 
-              <div className="col-2 col-lg-3 blankspcs">
-                <div className="firstembox"></div>
+                            <h1 className="mainhds">{course.name}</h1>
+                            <p>{course.short_desc}</p>
+                            <div className="dtlsctaviews">
+                              <Link
+                                href={`courses/${course.institute.slug}/${course.slug}`}
+                              >
+                                <a className="orangejncta">Know More</a>
+                              </Link>
+                            </div>
+                          </div>
+                        </div>
 
-                <div className="featureinfossts">
-                  <p>Price</p>
-                  <p>Duration</p>
-                  <p>Key Learnings</p>
-                  <p>Delivery Type</p>
-                  <p>Start Date</p>
-                  <p>Projects</p>
-                  <p>Enrolled</p>
-                  <div className="bxformts"></div>
-                </div>
-              </div>
-
-              {courses &&
-                courses.map((course, key) => (
-                  <div className="col-4 col-lg-3 actdatacompsets">
-                    <div className="firstembox">
-                      <div className="coursepls">
-
-                      <div className="delcoursenode"  onClick={() => removeProduct(key,course.id)}>
-                        <i className="fal fa-times"></i>
+                        <div className="featureinfossts">
+                          <p className="bxformts">{course.fees}</p>
+                          <p className="bxformts">{course.duration} months</p>
+                          <p className="bxformts">{course.key_learnings}</p>
+                          <p className="bxformts">
+                            {course.course_modes_id == 1
+                              ? 'Hybrid'
+                              : course.course_modes_id == 2
+                              ? 'Online'
+                              : 'Offline'}
+                          </p>
+                          <p className="bxformts">{course.start_date}</p>
+                          <p className="bxformts">{course.projects}</p>
+                          <p className="bxformts">
+                            {course.students_enrolled}+ Students
+                          </p>
+                          <div className="bxformts">
+                            <Link
+                              href={`courses/${course.institute.slug}/${course.slug}`}
+                            >
+                              <a className="orangejncta">Know More</a>
+                            </Link>
+                          </div>
+                        </div>
                       </div>
+                    ))}
+                </>
 
-                        <img
-                          className="ms fllimg"
-                          src={
-                            `${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/` +
-                            course.logo
-                          }
-                        />
+                {courses && courses.length < 3 && (
+                  <div className="col-4 col-lg-3 actdatacompsets">
+                    <div className="firstembox midonlybox">
+                      <a
+                        href="javascript:void(0);"
+                        data-toggle="modal"
+                        data-target="#exampleModalEnquirenow"
+                        className="orangejncta"
+                      >
+                        Add+
+                      </a>
+                    </div>
 
-                        <h1 className="mainhds">{course.name}</h1>
-                        <p>{course.short_desc}</p>
-                        <div className="dtlsctaviews">
-                          <Link
-                            href={`courses/${course.institute.slug}/${course.slug}`}
-                          >
-                            <a className="orangejncta">Know More</a>
-                          </Link>
+                    <div
+                      className="modal fade"
+                      id="exampleModalEnquirenow"
+                      tabindex="-1"
+                      role="dialog"
+                      aria-labelledby="exampleModalEnquirenowTitle3"
+                      aria-hidden="true"
+                    >
+                      <div
+                        className="modal-dialog modal-dialog-centered   jncustm trasntypes"
+                        role="document"
+                      >
+                        <div className="modal-content">
+                          <div className="modal-body">
+                            <button
+                              type="button"
+                              className="close"
+                              data-dismiss="modal"
+                              aria-label="Close"
+                            >
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+
+                            <div className="autocrsserachs">
+                              <form onSubmit={handleSubmit}>
+                                <Autosuggest
+                                  className="form-control"
+                                  suggestions={suggestions}
+                                  onSuggestionsFetchRequested={
+                                    onSuggestionsFetchRequested
+                                  }
+                                  onSuggestionsClearRequested={
+                                    onSuggestionsClearRequested
+                                  }
+                                  getSuggestionValue={getSuggestionValue}
+                                  renderSuggestion={renderSuggestion}
+                                  inputProps={inputProps}
+                                />
+
+                                <button type="submit">
+                                  <i className="far fa-search" />
+                                </button>
+                              </form>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
 
                     <div className="featureinfossts">
-                      <p className="bxformts">{course.fees}</p>
-                      <p className="bxformts">{course.duration} months</p>
-                      <p className="bxformts">{course.key_learnings}</p>
-                      <p className="bxformts">
-                        {course.course_modes_id == 1
-                          ? 'Hybrid'
-                          : course.course_modes_id == 2
-                          ? 'Online'
-                          : 'Offline'}
-                      </p>
-                      <p className="bxformts">{course.start_date}</p>
-                      <p className="bxformts">{course.projects}</p>
-                      <p className="bxformts">
-                        {course.students_enrolled}+ Students
-                      </p>
-                      <div className="bxformts">
-                        <Link
-                          href={`courses/${course.institute.slug}/${course.slug}`}
-                        >
-                          <a className="orangejncta">Know More</a>
-                        </Link>
-                      </div>
+                      <p className="bxformts"></p>
+                      <p className="bxformts"></p>
+                      <p className="bxformts"></p>
+                      <p className="bxformts"></p>
+                      <p className="bxformts"></p>
+                      <p className="bxformts"></p>
+                      <p className="bxformts"></p>
+                      <p className="bxformts"></p>
                     </div>
                   </div>
-                ))}
-
-                </>
-
-            
-
-
-              {courses && courses.length < 3 && (
-                <div className="col-4 col-lg-3 actdatacompsets">
-                  <div className="firstembox midonlybox">
-                    <a
-                      href="javascript:void(0);"
-                      data-toggle="modal"
-                      data-target="#exampleModalEnquirenow"
-                      className="orangejncta"
-                    >
-                      Add+
-                    </a>
-                  </div>
-
-                  <div
-                    className="modal fade"
-                    id="exampleModalEnquirenow"
-                    tabindex="-1"
-                    role="dialog"
-                    aria-labelledby="exampleModalEnquirenowTitle3"
-                    aria-hidden="true"
-                  >
-                    <div
-                      className="modal-dialog modal-dialog-centered   jncustm trasntypes"
-                      role="document"
-                    >
-                      <div className="modal-content">
-                        <div className="modal-body">
-                          <button
-                            type="button"
-                            className="close"
-                            data-dismiss="modal"
-                            aria-label="Close"
-                          >
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-
-                          <div className="autocrsserachs">
-
-                          <form onSubmit={handleSubmit}>
-
-
-                          <Autosuggest
-                          className="form-control"
-                          suggestions={suggestions}
-                          onSuggestionsFetchRequested={
-                            onSuggestionsFetchRequested
-                          }
-                          onSuggestionsClearRequested={
-                            onSuggestionsClearRequested
-                          }
-                          getSuggestionValue={getSuggestionValue}
-                          renderSuggestion={renderSuggestion}
-                          inputProps={inputProps}
-                        />
-
-                        <button type="submit">
-                          <i className="far fa-search" />
-                        </button>
-
-                        </form>
-
-                          </div>
-
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="featureinfossts">
-                    <p className="bxformts"></p>
-                    <p className="bxformts"></p>
-                    <p className="bxformts"></p>
-                    <p className="bxformts"></p>
-                    <p className="bxformts"></p>
-                    <p className="bxformts"></p>
-                    <p className="bxformts"></p>
-                    <p className="bxformts"></p>
-                  </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
+          {courses == '' && (
+            <>
+
+              <p>Oops! Go back to listing course and compare again!</p>
+
+              <Link href="/courses">
+                <a>Find a Course</a>
+              </Link>
+            </>
+          )}
         </div>
       </section>
 
