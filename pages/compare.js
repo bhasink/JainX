@@ -112,6 +112,11 @@ const Compare = () => {
           .slice(0, 5)
   }
 
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    alert('sdf hjdsf')
+  }
+
   return (
     <>
       {/* {JSON.stringify(courses, null, 2)} */}
@@ -245,6 +250,10 @@ const Compare = () => {
                           </button>
 
                           <div className="autocrsserachs">
+
+                          <form onSubmit={handleSubmit}>
+
+
                           <Autosuggest
                           className="form-control"
                           suggestions={suggestions}
@@ -262,6 +271,9 @@ const Compare = () => {
                         <button type="submit">
                           <i className="far fa-search" />
                         </button>
+
+                        </form>
+
                           </div>
 
                         </div>

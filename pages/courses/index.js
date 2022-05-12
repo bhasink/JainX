@@ -25,6 +25,7 @@ const Listing = (props) => {
   const [modal, setModal] = useState('')
   const [compareArray, setCompareArray] = useState([])
   const [compareArrayById, setCompareArrayById] = useState([])
+  const [buttonText, setButtonText] = useState([])
 
   
 
@@ -430,15 +431,19 @@ const Listing = (props) => {
     setSduration(selectedOptions.value)
   }
 
-  const compareModal = (course) => {
+  const compareModal = (course,key) => {
     setModal('showtype');
 
+    // alert(key)
 
     if(compareArray.length == 3){
       alert("You can compare max three courses at a time!")
     }else{
       setCompareArrayById((oldArray) => [...oldArray, course.id])
       setCompareArray((oldArray) => [...oldArray, course])
+
+
+      buttonText[key] = "Added";
     }
     console.log(course);
 
@@ -449,28 +454,43 @@ const Listing = (props) => {
     setModal('');
   }
 
-  const removeProduct = (key) => {
+  const removeProduct = (key,id) => {
+
+    // alert(id)
+
+    console.log(key);
+
     compareArray.splice(key, 1);
-    // alert(key)
+    compareArrayById.splice(key, 1);
+
+    setCompareArray(compareArray.filter(function(course) { 
+      return course !== key 
+  }));
+
+    setCompareArrayById(compareArrayById.filter(function(course) { 
+    return course !== key 
+  }));
+
+  buttonText[id] = null;
+
+
   }
 
   const compareCourses = () => {
 
     if(compareArrayById.length < 2){
-      alert('Please select atleast two courses to compare!')
+        alert('Please select atleast two courses to compare!')
     }else{
-    router.push({
-      pathname: '/compare',
-      query: { courses: compareArrayById },
-    })
-  }
-  
+      router.push({
+        pathname: '/compare',
+        query: { courses: compareArrayById },
+      })
+    }
+
   }
 
   return (
     <>
-
-      {JSON.stringify(compareArrayById,null,2)}
 
       <Nav />
 
@@ -645,9 +665,12 @@ const Listing = (props) => {
                                       course.logo
                                     }
                                   />
-                                  <a  onClick={() => compareModal(course)} className="cmprs">
-                                    Compare
-                                  </a>
+                                  <button  
+                                  disabled={buttonText[course.id] == null ? false : true}
+                                  onClick={() => compareModal(course,course.id)} className="cmprs">
+                                    {buttonText[course.id] == null ? 'Compare' : buttonText[course.id]}
+                                  </button>
+
                                 </div>
                                 <div className="coursecontens">
                                   <h4>{course.name}</h4>
@@ -825,11 +848,12 @@ const Listing = (props) => {
                
               <>
                 <div className="couserimages">
-                  <div className="delcoursenode" onClick={() => removeProduct(key)}>
+                  <div className="delcoursenode" onClick={() => removeProduct(key,product.id)}>
                     <i class="fal fa-times"></i>
                   </div>  
 
                   <img src={`${process.env.NEXT_PUBLIC_B_API}/images/courseslogo/` + product.logo} />
+                  {product.name}
                 </div>
               </>
                   
