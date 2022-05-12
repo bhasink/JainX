@@ -27,9 +27,12 @@ const Compare = () => {
       duration: 2000,
     })
 
+    if(!router.isReady) return;
+    const query = router.query.courses;
+
     getCourseCategory()
-    getComparedCourses()
-  }, [])
+    getComparedCourses(query)
+  }, [router.isReady, router.query])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -69,14 +72,16 @@ const Compare = () => {
     }
   }
 
-  const getComparedCourses = async () => {
+  const getComparedCourses = async (query) => {
     try {
       const config = {
         headers: { 'Content-Type': 'application/json' },
       }
 
       // if (router.query != null) {
-      let ids = router.query.courses
+      // let ids = router.query.courses
+
+      let ids = query;
       //   console.log(ids)
       // }
 
@@ -92,7 +97,7 @@ const Compare = () => {
 
       setCourses(getCourses)
 
-      if(getCourses[0] == null){
+      if(getCourses.length == 0){
         setLoading(true)
       }
 
@@ -109,7 +114,6 @@ const Compare = () => {
       )
       const get_categories = data.get_courses
       setCategories(get_categories)
-      setLoading(true)
     } catch (err) {
       console.log(err)
     }
